@@ -1498,7 +1498,7 @@
                     Parent = Items.InlineMenu;
                     TextColor3 = themes.preset.text_color;
                     BorderColor3 = rgb(0, 0, 0);
-                    Text = Cfg.Name;
+                    Text = "Test";
                     Name = "\0";
                     AutomaticSize = Enum.AutomaticSize.XY;
                     Position = dim2(0, 0, 0, 3);
@@ -3905,8 +3905,8 @@
 
         function Library:Label(properties)
             local Cfg = {
-                Name = properties.Name or "v.1.0",
-
+                Name = properties.Name or "Label",
+                
                 -- Other
                 Items = {};
             }
