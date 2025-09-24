@@ -1809,7 +1809,7 @@
                         TextColor3 = rgb(235, 235, 235);
                         TextStrokeColor3 = rgb(255, 255, 255);
                         Parent = Items.InnerOutline;
-                        Name = "v0.0.1";
+                        Name = "\0";
                         AnchorPoint = vec2(0, 1);
                         BorderSizePixel = 0;
                         BackgroundTransparency = 1;
@@ -3905,7 +3905,7 @@
 
         function Library:Label(properties)
             local Cfg = {
-                Name = properties.Name or "Label",
+                Name = properties.Name or "v.1.0",
 
                 -- Other
                 Items = {};
