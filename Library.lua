@@ -3,14 +3,14 @@
     -> Made by @finobe 
     -> Kind of got bored idk what to do with life
     -> Reason for leak: 
-    User was offered free features when the library was finished as compensation for the wait
+    User was offered free features when the PDP_UILibrary was finished as compensation for the wait
     Then proceeded to ask for more and started harassing other customers and me over petty shit. 
-    Yes this user said the library is TRASH somehow.. sob
+    Yes this user said the PDP_UILibrary is TRASH somehow.. sob
 
-    Anyways bringing u this pretty sexy library I spent like a week on it maybe less. 
+    Anyways bringing u this pretty sexy PDP_UILibrary I spent like a week on it maybe less. 
     Esp preview took me a couple hours to make but holy the amount of bug fixing is insane
 
-    LIBRARY MAY HAVE MISSING OPTIMISATION THAT IS REQUIRED FOR 0 FPS LOSS WHEN DRAGGING / CLOSING THE MENU. 
+    PDP_UILibrary MAY HAVE MISSING OPTIMISATION THAT IS REQUIRED FOR 0 FPS LOSS WHEN DRAGGING / CLOSING THE MENU. 
     ^^ Dont have to be worried about this its pretty darn optimised for the amount of elements I store 
 ]]
 
@@ -23,8 +23,8 @@
     local angle, empty_cfr, cfr = CFrame.Angles, CFrame.new(), CFrame.new
 -- 
 
--- Library init
-    getgenv().PDP_UILibrary = {
+-- PDP_UILibrary init
+    getgenv().PDP_UIPDP_UILibrary = {
         Directory = "pdplus",
         Folders = {
             "/fonts",
@@ -132,15 +132,15 @@
         [Enum.KeyCode.Space] = "SPC",
     }
         
-    Library.__index = Library
+    PDP_UILibrary.__index = PDP_UILibrary
 
-    for _,path in Library.Folders do 
-        makefolder(Library.Directory .. path)
+    for _,path in PDP_UILibrary.Folders do 
+        makefolder(PDP_UILibrary.Directory .. path)
     end
 
-    local Flags = Library.Flags 
-    local ConfigFlags = Library.ConfigFlags
-    local Notifications = Library.Notifications 
+    local Flags = PDP_UILibrary.Flags 
+    local ConfigFlags = PDP_UILibrary.ConfigFlags
+    local Notifications = PDP_UILibrary.Notifications 
 
     local FontNames = {
         ["ProggyClean"] = "ProggyClean.ttf",
@@ -199,9 +199,9 @@
     end
 --
 
--- Library functions 
+-- PDP_UILibrary functions 
     -- Misc functions
-        function Library:GetTransparency(obj)
+        function PDP_UILibrary:GetTransparency(obj)
             if obj:IsA("Frame") then
                 return {"BackgroundTransparency"}
             elseif obj:IsA("TextLabel") or obj:IsA("TextButton") then
@@ -219,14 +219,14 @@
             return nil
         end
 
-        function Library:Tween(Object, Properties, Info)
-            local tween = TweenService:Create(Object, Info or TweenInfo.new(Library.TweeningSpeed, Library.EasingStyle, Enum.EasingDirection.InOut, 0, false, 0), Properties)
+        function PDP_UILibrary:Tween(Object, Properties, Info)
+            local tween = TweenService:Create(Object, Info or TweenInfo.new(PDP_UILibrary.TweeningSpeed, PDP_UILibrary.EasingStyle, Enum.EasingDirection.InOut, 0, false, 0), Properties)
             tween:Play()
             
             return tween
         end
         
-        function Library:Fade(obj, prop, vis, speed)
+        function PDP_UILibrary:Fade(obj, prop, vis, speed)
             if not (obj and prop) then
                 return
             end
@@ -234,9 +234,9 @@
             local OldTransparency = obj[prop]
             obj[prop] = vis and 1 or OldTransparency
 
-            local Tween = Library:Tween(obj, { [prop] = vis and OldTransparency or 1 }, TweenInfo.new(speed or Library.TweeningSpeed, Library.EasingStyle, Enum.EasingDirection.InOut, 0, false, 0))
+            local Tween = PDP_UILibrary:Tween(obj, { [prop] = vis and OldTransparency or 1 }, TweenInfo.new(speed or PDP_UILibrary.TweeningSpeed, PDP_UILibrary.EasingStyle, Enum.EasingDirection.InOut, 0, false, 0))
             
-            Library:Connection(Tween.Completed, function()
+            PDP_UILibrary:Connection(Tween.Completed, function()
                 if not vis then
                     task.wait()
                     obj[prop] = OldTransparency
@@ -246,8 +246,8 @@
             return Tween
         end
 
-        function Library:Resizify(Parent)
-            local Resizing = Library:Create("TextButton", {
+        function PDP_UILibrary:Resizify(Parent)
+            local Resizing = PDP_UILibrary:Create("TextButton", {
                 Position = dim2(1, -10, 1, -10);
                 BorderColor3 = rgb(0, 0, 0);
                 Size = dim2(0, 10, 0, 10);
@@ -277,26 +277,26 @@
                 end
             end)
         
-            Library:Connection(InputService.InputChanged, function(input, game_event) 
+            PDP_UILibrary:Connection(InputService.InputChanged, function(input, game_event) 
                 if IsResizing and input.UserInputType == Enum.UserInputType.MouseMovement then            
-                    Library:Tween(Parent, {
+                    PDP_UILibrary:Tween(Parent, {
                         Size = dim2(
                             Size.X.Scale,
                             math.clamp(Size.X.Offset + (input.Position.X - InputLost.X), ParentSize.X.Offset, Camera.ViewportSize.X), 
                             Size.Y.Scale, 
                             math.clamp(Size.Y.Offset + (input.Position.Y - InputLost.Y), ParentSize.Y.Offset, Camera.ViewportSize.Y)
                         )
-                    }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                    }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
                 end
             end)
         end
         
-        function Library:Hovering(Object)
+        function PDP_UILibrary:Hovering(Object)
             if type(Object) == "table" then 
                 local Pass = false;
 
                 for _,obj in Object do 
-                    if Library:Hovering(obj) then 
+                    if PDP_UILibrary:Hovering(obj) then 
                         Pass = true
                         return Pass
                     end 
@@ -309,14 +309,14 @@
             end 
         end  
 
-        function Library:ConvertHex(color)
+        function PDP_UILibrary:ConvertHex(color)
             local r = math.floor(color.R * 255)
             local g = math.floor(color.G * 255)
             local b = math.floor(color.B * 255)
             return string.format("#%02X%02X%02X", r, g, b)
         end
 
-        function Library:ConvertFromHex(color)
+        function PDP_UILibrary:ConvertFromHex(color)
             color = color:gsub("#", "")
             local r = tonumber(color:sub(1, 2), 16) / 255
             local g = tonumber(color:sub(3, 4), 16) / 255
@@ -324,7 +324,7 @@
             return Color3.new(r, g, b)
         end
 
-        function Library:Draggify(Parent)
+        function PDP_UILibrary:Draggify(Parent)
             local Dragging = false 
             local IntialSize = Parent.Position
             local InitialPosition 
@@ -343,7 +343,7 @@
                 end
             end)
 
-            Library:Connection(InputService.InputChanged, function(Input, game_event) 
+            PDP_UILibrary:Connection(InputService.InputChanged, function(Input, game_event) 
                 if Dragging and Input.UserInputType == Enum.UserInputType.MouseMovement then
                     local Horizontal = Camera.ViewportSize.X
                     local Vertical = Camera.ViewportSize.Y
@@ -363,14 +363,14 @@
                         )
                     )
 
-                    Library:Tween(Parent, {
+                    PDP_UILibrary:Tween(Parent, {
                         Position = NewPosition
-                    }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                    }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
                 end
             end)
         end 
 
-        function Library:Convert(str)
+        function PDP_UILibrary:Convert(str)
             local Values = {}
 
             for Value in string.gmatch(str, "[^,]+") do
@@ -384,13 +384,13 @@
             end
         end
         
-        function Library:Lerp(start, finish, t)
+        function PDP_UILibrary:Lerp(start, finish, t)
             t = t or 1 / 8
 
             return start * (1 - t) + finish * t
         end
 
-        function Library:ConvertEnum(enum)
+        function PDP_UILibrary:ConvertEnum(enum)
             local EnumParts = {}
 
             for _,part in string.gmatch(tostring(enum), "[%w_]+") do
@@ -409,22 +409,22 @@
         end
 
         local ConfigHolder;
-        function Library:UpdateConfigList() 
+        function PDP_UILibrary:UpdateConfigList() 
             if not ConfigHolder then 
                 return 
             end
             
             local List = {}
             
-            for _,file in listfiles(Library.Directory .. "/configs") do
-                local Name = file:gsub(Library.Directory .. "/configs\\", ""):gsub(".cfg", ""):gsub(Library.Directory .. "\\configs\\", "")
+            for _,file in listfiles(PDP_UILibrary.Directory .. "/configs") do
+                local Name = file:gsub(PDP_UILibrary.Directory .. "/configs\\", ""):gsub(".cfg", ""):gsub(PDP_UILibrary.Directory .. "\\configs\\", "")
                 List[#List + 1] = Name
             end
 
             ConfigHolder.RefreshOptions(List)
         end
         
-        function Library:Keypicker(properties) 
+        function PDP_UILibrary:Keypicker(properties) 
             local Cfg = {
                 Name = properties.Name or "Color", 
                 Flag = properties.Flag or properties.Name or "Colorpicker",
@@ -452,16 +452,16 @@
 
             local Items = Cfg.Items; do 
                 -- Component
-                    Items.ColorpickerObject = Library:Create( "TextButton" , {
+                    Items.ColorpickerObject = PDP_UILibrary:Create( "TextButton" , {
                         Name = "\0";
                         Parent = self.Items.Components;
                         BorderColor3 = rgb(0, 0, 0);
                         Size = dim2(0, 20, 0, 12);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.ColorpickerObject, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.ColorpickerObject, "outline", "BackgroundColor3")
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.ColorpickerObject;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -471,7 +471,7 @@
                         BackgroundColor3 = rgb(45, 45, 50)
                     });
 
-                    Items.Outline2 = Library:Create( "Frame" , {
+                    Items.Outline2 = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -479,9 +479,9 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Outline2, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Outline2, "outline", "BackgroundColor3")
 
-                    Items.MainColor = Library:Create( "Frame" , {
+                    Items.MainColor = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Outline2;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -491,7 +491,7 @@
                         BackgroundColor3 = rgb(255, 0, 0)
                     });
 
-                    Items.TransparencyHandler = Library:Create("ImageLabel", {
+                    Items.TransparencyHandler = PDP_UILibrary:Create("ImageLabel", {
                         Parent = Items.MainColor;
                         Image = "rbxassetid://18274452449";
                         ZIndex = 3;
@@ -506,8 +506,8 @@
                 --
                     
                 -- Colorpicker
-                    Items.Colorpicker = Library:Create( "Frame" , {
-                        Parent = Library.Other;
+                    Items.Colorpicker = PDP_UILibrary:Create( "Frame" , {
+                        Parent = PDP_UILibrary.Other;
                         Name = "\0";
                         ZIndex = 999;
                         BorderColor3 = rgb(0, 0, 0);
@@ -515,9 +515,9 @@
                         Visible = false;
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Colorpicker, "outline", "BackgroundColor3"); Library:Resizify(Items.Colorpicker); 
+                    });	PDP_UILibrary:Themify(Items.Colorpicker, "outline", "BackgroundColor3"); PDP_UILibrary:Resizify(Items.Colorpicker); 
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Colorpicker;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -525,9 +525,9 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.inline
-                    }); Library:Themify(Items.Inline, "inline", "BackgroundColor3")
+                    }); PDP_UILibrary:Themify(Items.Inline, "inline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -535,9 +535,9 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.background
-                    }); Library:Themify(Items.Background, "background", "BackgroundColor3")
+                    }); PDP_UILibrary:Themify(Items.Background, "background", "BackgroundColor3")
 
-                    Items.Text = Library:Create( "TextLabel" , {
+                    Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                         Parent = Items.Background;
                         FontFace = Fonts[themes.preset.font];
                         Name = "\0";
@@ -556,12 +556,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Text;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Items.Elements = Library:Create( "Frame" , {
+                    Items.Elements = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Background;
                         Name = "\0";
                         BackgroundTransparency = 1;
@@ -572,7 +572,7 @@
                         BackgroundColor3 = rgb(45, 45, 49)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         FillDirection = Enum.FillDirection.Horizontal;
                         HorizontalFlex = Enum.UIFlexAlignment.Fill;
                         Parent = Items.Elements;
@@ -581,22 +581,22 @@
                         VerticalFlex = Enum.UIFlexAlignment.Fill
                     });
 
-                    local Section = setmetatable(Cfg, Library)
+                    local Section = setmetatable(Cfg, PDP_UILibrary)
 
                     Items.RGB = Section:Textbox({Callback = function(text)
                         if Cfg.Set then 
-                            local r, g, b = Library:Convert(text)
+                            local r, g, b = PDP_UILibrary:Convert(text)
                             Cfg.Set(rgb(r, g, b), a)
                         end
                     end, Flag = "ignore"})
 
                     Items.Hex = Section:Textbox({Callback = function(text)
                         if Cfg.Set then 
-                            Cfg.Set(Library:ConvertFromHex(text), a)
+                            Cfg.Set(PDP_UILibrary:ConvertFromHex(text), a)
                         end 
                     end, Flag = "ignore"})
 
-                    Items.Elements = Library:Create( "Frame" , {
+                    Items.Elements = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Background;
                         Name = "\0";
                         BackgroundTransparency = 1;
@@ -607,7 +607,7 @@
                         BackgroundColor3 = rgb(45, 45, 49)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         FillDirection = Enum.FillDirection.Horizontal;
                         HorizontalFlex = Enum.UIFlexAlignment.Fill;
                         Parent = Items.Elements;
@@ -615,7 +615,7 @@
                         SortOrder = Enum.SortOrder.LayoutOrder;
                     });
 
-                    local Section = setmetatable(Cfg, Library)
+                    local Section = setmetatable(Cfg, PDP_UILibrary)
                     Items.Animations = Section:Dropdown({
                         Options = {"Rainbow", "Breathing"}, 
                         Default = {""}, 
@@ -648,7 +648,7 @@
                         end     
                     end)
 
-                    Items.SatValHolder = Library:Create( "TextButton" , {
+                    Items.SatValHolder = PDP_UILibrary:Create( "TextButton" , {
                         Active = false;
                         BorderColor3 = rgb(0, 0, 0);
                         Parent = Items.Background;
@@ -660,7 +660,7 @@
                         BackgroundColor3 = rgb(45, 45, 49)
                     });
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.SatValHolder;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -670,7 +670,7 @@
                         BackgroundColor3 = rgb(14, 8, 12)
                     });
 
-                    Items.SatValBackground = Library:Create( "Frame" , {
+                    Items.SatValBackground = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -680,7 +680,7 @@
                         BackgroundColor3 = rgb(21, 255, 99)
                     });
 
-                    Items.SatValPicker = Library:Create( "Frame" , {
+                    Items.SatValPicker = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.SatValBackground;
                         Name = "\0";
                         Size = dim2(0, 2, 0, 2);
@@ -690,12 +690,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.SatValPicker;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Items.Saturation = Library:Create( "Frame" , {
+                    Items.Saturation = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.SatValBackground;
                         Name = "\0";
                         Size = dim2(1, 1, 1, 0);
@@ -705,14 +705,14 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIGradient" , {
+                    PDP_UILibrary:Create( "UIGradient" , {
                         Rotation = 270;
                         Transparency = numseq{numkey(0, 0), numkey(1, 1)};
                         Parent = Items.Saturation;
                         Color = rgbseq{rgbkey(0, rgb(0, 0, 0)), rgbkey(1, rgb(0, 0, 0))}
                     });
 
-                    Items.Value = Library:Create( "Frame" , {
+                    Items.Value = PDP_UILibrary:Create( "Frame" , {
                         Rotation = 180;
                         Name = "\0";
                         Parent = Items.SatValBackground;
@@ -722,12 +722,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIGradient" , {
+                    PDP_UILibrary:Create( "UIGradient" , {
                         Parent = Items.Value;
                         Transparency = numseq{numkey(0, 0), numkey(1, 1)}
                     });
 
-                    Items.Hue = Library:Create( "TextButton" , {
+                    Items.Hue = PDP_UILibrary:Create( "TextButton" , {
                         Active = false;
                         BorderColor3 = rgb(0, 0, 0);
                         Parent = Items.Background;
@@ -739,7 +739,7 @@
                         BackgroundColor3 = rgb(45, 45, 49)
                     });
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Hue;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -749,7 +749,7 @@
                         BackgroundColor3 = rgb(14, 8, 12)
                     });
 
-                    Items.HueBackground = Library:Create( "Frame" , {
+                    Items.HueBackground = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -759,12 +759,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIGradient" , {
+                    PDP_UILibrary:Create( "UIGradient" , {
                         Color = rgbseq{rgbkey(0, rgb(255, 0, 0)), rgbkey(0.17, rgb(255, 255, 0)), rgbkey(0.33, rgb(0, 255, 0)), rgbkey(0.5, rgb(0, 255, 255)), rgbkey(0.67, rgb(0, 0, 255)), rgbkey(0.83, rgb(255, 0, 255)), rgbkey(1, rgb(255, 0, 0))};
                         Parent = Items.HueBackground
                     });
 
-                    Items.HuePickerHolder = Library:Create( "Frame" , {
+                    Items.HuePickerHolder = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.HueBackground;
                         Name = "\0";
                         BackgroundTransparency = 1;
@@ -775,7 +775,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.HuePicker = Library:Create( "Frame" , {
+                    Items.HuePicker = PDP_UILibrary:Create( "Frame" , {
                         BorderMode = Enum.BorderMode.Inset;
                         BorderColor3 = rgb(12, 12, 12);
                         AnchorPoint = vec2(1, 0);
@@ -788,12 +788,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.HuePicker;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Items.Alpha = Library:Create( "TextButton" , {
+                    Items.Alpha = PDP_UILibrary:Create( "TextButton" , {
                         Active = false;
                         BorderColor3 = rgb(0, 0, 0);
                         AnchorPoint = vec2(1, 0);
@@ -806,7 +806,7 @@
                         BackgroundColor3 = rgb(45, 45, 49)
                     });
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Alpha;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -816,7 +816,7 @@
                         BackgroundColor3 = rgb(14, 8, 12)
                     });
 
-                    Items.AlphaBackground = Library:Create( "Frame" , {
+                    Items.AlphaBackground = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -826,7 +826,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.AlphaIndicator = Library:Create( "ImageLabel" , {
+                    Items.AlphaIndicator = PDP_UILibrary:Create( "ImageLabel" , {
                         ScaleType = Enum.ScaleType.Tile;
                         BorderColor3 = rgb(0, 0, 0);
                         Parent = Items.AlphaBackground;
@@ -839,7 +839,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.Fading = Library:Create( "Frame" , {
+                    Items.Fading = PDP_UILibrary:Create( "Frame" , {
                         Name = "\0";
                         Parent = Items.AlphaBackground;
                         BorderColor3 = rgb(0, 0, 0);
@@ -848,13 +848,13 @@
                         BackgroundColor3 = rgb(21, 255, 99)
                     });
 
-                    Library:Create( "UIGradient" , {
+                    PDP_UILibrary:Create( "UIGradient" , {
                         Rotation = 90;
                         Transparency = numseq{numkey(0, 1), numkey(1, 0)};
                         Parent = Items.Fading
                     });
 
-                    Items.PickerHolder = Library:Create( "Frame" , {
+                    Items.PickerHolder = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Fading;
                         Name = "\0";
                         BackgroundTransparency = 1;
@@ -865,7 +865,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.AlphaPicker = Library:Create( "Frame" , {
+                    Items.AlphaPicker = PDP_UILibrary:Create( "Frame" , {
                         BorderMode = Enum.BorderMode.Inset;
                         BorderColor3 = rgb(12, 12, 12);
                         AnchorPoint = vec2(0, 1);
@@ -878,7 +878,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.AlphaPicker;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
@@ -905,7 +905,7 @@
 
                 if bool then 
                     Items.Colorpicker.Visible = true
-                    Items.Colorpicker.Parent = Library.Items
+                    Items.Colorpicker.Parent = PDP_UILibrary.Items
                 end
 
                 local Children = Items.Colorpicker:GetDescendants()
@@ -913,7 +913,7 @@
 
                 local Tween;
                 for _,obj in Children do
-                    local Index = Library:GetTransparency(obj)
+                    local Index = PDP_UILibrary:GetTransparency(obj)
 
                     if not Index then 
                         continue 
@@ -921,14 +921,14 @@
 
                     if type(Index) == "table" then
                         for _,prop in Index do
-                            Tween = Library:Fade(obj, prop, bool, Library.TweeningSpeed)
+                            Tween = PDP_UILibrary:Fade(obj, prop, bool, PDP_UILibrary.TweeningSpeed)
                         end
                     else
-                        Tween = Library:Fade(obj, Index, bool, Library.TweeningSpeed)
+                        Tween = PDP_UILibrary:Fade(obj, Index, bool, PDP_UILibrary.TweeningSpeed)
                     end
                 end
 
-                Library:Connection(Tween.Completed, function()
+                PDP_UILibrary:Connection(Tween.Completed, function()
                     Cfg.Tweening = false
                     Items.Colorpicker.Visible = bool
                 end)
@@ -967,17 +967,17 @@
                 Items.TransparencyHandler.ImageTransparency = a
 
                 if Items.Colorpicker.Visible then 
-                    Library:Tween(Items.SatValPicker, {
+                    PDP_UILibrary:Tween(Items.SatValPicker, {
                         Position = dim2(1 - s, 0, 1 - v, 0)
-                    }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                    }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
 
-                    Library:Tween(Items.AlphaPicker, {
+                    PDP_UILibrary:Tween(Items.AlphaPicker, {
                         Position = dim2(0, 1, a, 1)
-                    }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                    }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
 
-                    Library:Tween(Items.HuePicker, {
+                    PDP_UILibrary:Tween(Items.HuePicker, {
                         Position = dim2(h, 1, 0, 1)
-                    }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                    }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
 
                     Items.SatValBackground.BackgroundColor3 = hsv(h, 1, 1)
                     Items.Fading.BackgroundColor3 = hsv(h, 1, 1)
@@ -985,11 +985,11 @@
                     local Color = Items.MainColor.BackgroundColor3 -- Overwriting to format<<
                     
                     if not Items.RGB.Focused then 
-                        Items.RGB.Items.Input.Text = string.format("%s, %s, %s", Library:Round(Color.R * 255), Library:Round(Color.G * 255), Library:Round(Color.B * 255))
+                        Items.RGB.Items.Input.Text = string.format("%s, %s, %s", PDP_UILibrary:Round(Color.R * 255), PDP_UILibrary:Round(Color.G * 255), PDP_UILibrary:Round(Color.B * 255))
                     end 
 
                     if not Items.Hex.Focused then 
-                        Items.Hex.Items.Input.Text = Library:ConvertHex(Color)
+                        Items.Hex.Items.Input.Text = PDP_UILibrary:ConvertHex(Color)
                     end 
                 end 
 
@@ -1014,13 +1014,13 @@
                 end
             end)
 
-            Library:Connection(InputService.InputBegan, function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 and not Library:Hovering({Items.Colorpicker, Items.Animations.Items.DropdownElements}) and Items.Colorpicker.Visible then
+            PDP_UILibrary:Connection(InputService.InputBegan, function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 and not PDP_UILibrary:Hovering({Items.Colorpicker, Items.Animations.Items.DropdownElements}) and Items.Colorpicker.Visible then
                     Cfg.SetVisible(false)
                 end
             end) 
 
-            Library:Connection(InputService.InputEnded, function(input)
+            PDP_UILibrary:Connection(InputService.InputEnded, function(input)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
                     DraggingSat = false
                     DraggingHue = false
@@ -1044,10 +1044,10 @@
             Cfg.SetVisible(false)
             ConfigFlags[Cfg.Flag] = Cfg.Set
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:GetConfig()
+        function PDP_UILibrary:GetConfig()
             local Config = {}
             
             for Idx, Value in Flags do
@@ -1063,7 +1063,7 @@
             return HttpService:JSONEncode(Config)
         end
 
-        function Library:LoadConfig(JSON) 
+        function PDP_UILibrary:LoadConfig(JSON) 
             local Config = HttpService:JSONDecode(JSON)
             
             for Idx, Value in Config do  
@@ -1083,20 +1083,20 @@
             end 
         end 
         
-        function Library:Round(num, float) 
+        function PDP_UILibrary:Round(num, float) 
             local Multiplier = 1 / (float or 1)
             return math.floor(num * Multiplier + 0.5) / Multiplier
         end
 
-        function Library:Themify(instance, theme, property)
+        function PDP_UILibrary:Themify(instance, theme, property)
             table.insert(themes.utility[theme][property], instance)
         end
 
-        function Library:SaveGradient(instance, theme)
+        function PDP_UILibrary:SaveGradient(instance, theme)
             table.insert(themes.gradients[theme], instance)
         end
 
-        function Library:RefreshTheme(theme, color)
+        function PDP_UILibrary:RefreshTheme(theme, color)
             for property,instances in themes.utility[theme] do 
                 for _,object in instances do
                     if object[property] == themes.preset[theme] then 
@@ -1108,23 +1108,23 @@
             themes.preset[theme] = color 
         end 
 
-        function Library:Connection(signal, callback)
+        function PDP_UILibrary:Connection(signal, callback)
             local connection = signal:Connect(callback)
             
-            table.insert(Library.Connections, connection)
+            table.insert(PDP_UILibrary.Connections, connection)
 
             return connection 
         end
 
-        function Library:CloseElement() 
-            local IsMulti = typeof(Library.OpenElement)
+        function PDP_UILibrary:CloseElement() 
+            local IsMulti = typeof(PDP_UILibrary.OpenElement)
 
-            if not Library.OpenElement then 
+            if not PDP_UILibrary.OpenElement then 
                 return 
             end
 
-            for i = 1, #Library.OpenElement do
-                local Data = Library.OpenElement[i]
+            for i = 1, #PDP_UILibrary.OpenElement do
+                local Data = PDP_UILibrary.OpenElement[i]
 
                 if Data.Ignore then 
                     continue 
@@ -1134,10 +1134,10 @@
                 Data.Open = false
             end
 
-            Library.OpenElement = {}
+            PDP_UILibrary.OpenElement = {}
 		end
 
-        function Library:Create(instance, options)
+        function PDP_UILibrary:Create(instance, options)
             local ins = Instance.new(instance) 
 
             for prop, value in options do
@@ -1147,35 +1147,35 @@
             if ins.ClassName == "TextButton" then 
                 ins["AutoButtonColor"] = false 
                 ins["Text"] = ""
-                Library:Themify(ins, "text_color", "TextColor3")
+                PDP_UILibrary:Themify(ins, "text_color", "TextColor3")
             end 
 
             if ins.ClassName == "TextLabel" or ins.ClassName == "TextBox" then 
-                Library:Themify(ins, "text_color", "TextColor3")
-                Library:Themify(ins, "unselected", "TextColor3")
+                PDP_UILibrary:Themify(ins, "text_color", "TextColor3")
+                PDP_UILibrary:Themify(ins, "unselected", "TextColor3")
             end 
 
             return ins 
         end
 
-        function Library:Unload() 
-            if not Library then 
+        function PDP_UILibrary:Unload() 
+            if not PDP_UILibrary then 
                 return 
             end 
 
-            if Library.Items then 
-                Library.Items:Destroy()
+            if PDP_UILibrary.Items then 
+                PDP_UILibrary.Items:Destroy()
             end
 
-            if Library.Other then 
-                Library.Other:Destroy()
+            if PDP_UILibrary.Other then 
+                PDP_UILibrary.Other:Destroy()
             end
 
-            if Library.Elements then 
-                Library.Elements:Destroy()
+            if PDP_UILibrary.Elements then 
+                PDP_UILibrary.Elements:Destroy()
             end 
             
-            for _,connection in Library.Connections do 
+            for _,connection in PDP_UILibrary.Connections do 
                 if not connection then 
                     continue 
                 end 
@@ -1184,16 +1184,16 @@
                 connection = nil 
             end
 
-            if Library.Blur then 
-                Library.Blur:Destroy()
+            if PDP_UILibrary.Blur then 
+                PDP_UILibrary.Blur:Destroy()
             end 
 
-            getgenv().Library = nil 
+            getgenv().PDP_UILibrary = nil 
         end
     --
     
-    -- List Library 
-        function Library:StatusList(properties)
+    -- List PDP_UILibrary 
+        function PDP_UILibrary:StatusList(properties)
             local Cfg = {
                 Name = properties.Name or "List"; 
 
@@ -1202,17 +1202,17 @@
 
             local Items = Cfg.Items; do 
                 -- Top
-                    Items.List = Library:Create( "Frame", {
-                        Parent = Library.Elements;
+                    Items.List = PDP_UILibrary:Create( "Frame", {
+                        Parent = PDP_UILibrary.Elements;
                         Size = dim2(0, 0, 0, 20);
                         Name = "\0";
                         BorderColor3 = rgb(0, 0, 0);
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.List, "outline", "BackgroundColor3"); Library:Draggify(Items.List)
+                    });	PDP_UILibrary:Themify(Items.List, "outline", "BackgroundColor3"); PDP_UILibrary:Draggify(Items.List)
                     
-                    Items.Inline = Library:Create( "Frame", {
+                    Items.Inline = PDP_UILibrary:Create( "Frame", {
                         Parent = Items.List;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -1221,9 +1221,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.X;
                         BackgroundColor3 = themes.preset.inline
-                    }); Library:Themify(Items.Inline, "inline", "BackgroundColor3")
+                    }); PDP_UILibrary:Themify(Items.Inline, "inline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame", {
+                    Items.Background = PDP_UILibrary:Create( "Frame", {
                         Parent = Items.Inline;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -1232,9 +1232,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.X;
                         BackgroundColor3 = themes.preset.misc_1
-                    });	Library:Themify(Items.Background, "misc_1", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Background, "misc_1", "BackgroundColor3")
 
-                    Items.StatusList = Library:Create( "TextLabel", {
+                    Items.StatusList = PDP_UILibrary:Create( "TextLabel", {
                         FontFace = Fonts[themes.preset.font];
                         Parent = Items.Background;
                         TextColor3 = themes.preset.text_color;
@@ -1251,21 +1251,21 @@
                         ZIndex = 2;
                         TextSize = 12;
                         BackgroundColor3 = rgb(255, 255, 255)
-                    });	Library:Themify(Items.StatusList, "text_color", "TextColor3")
+                    });	PDP_UILibrary:Themify(Items.StatusList, "text_color", "TextColor3")
 
-                    Library:Create( "UIStroke", {
+                    PDP_UILibrary:Create( "UIStroke", {
                         Parent = Items.StatusList;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Library:Create( "UIPadding", {
+                    PDP_UILibrary:Create( "UIPadding", {
                         PaddingBottom = dim(0, 5);
                         Parent = Items.StatusList;
                         PaddingLeft = dim(0, 5);
                         PaddingRight = dim(0, 3)
                     });
 
-                    Items.Accent = Library:Create( "Frame", {
+                    Items.Accent = PDP_UILibrary:Create( "Frame", {
                         AnchorPoint = vec2(1, 0);
                         Parent = Items.Background;
                         Name = "\0";
@@ -1274,22 +1274,22 @@
                         Size = dim2(1, 0, 0, 1);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.accent
-                    }); Library:Themify(Items.Accent, "accent", "BackgroundColor3")
+                    }); PDP_UILibrary:Themify(Items.Accent, "accent", "BackgroundColor3")
 
-                    Library:Create( "UIPadding", {
+                    PDP_UILibrary:Create( "UIPadding", {
                         PaddingRight = dim(0, 2);
                         Parent = Items.Inline
                     });
 
-                    Library:Create( "UIPadding", {
+                    PDP_UILibrary:Create( "UIPadding", {
                         PaddingRight = dim(0, 2);
                         Parent = Items.List
                     });
                 --
 
                 -- Holder
-                    Items.Holder = Library:Create( "Frame", {
-                        Parent = Library.Elements;
+                    Items.Holder = PDP_UILibrary:Create( "Frame", {
+                        Parent = PDP_UILibrary.Elements;
                         Name = "\0";
                         ZIndex = 5;
                         Position = dim2(0, 300, 0, 100);
@@ -1299,7 +1299,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     }); 
 
-                    Library:Create( "UIListLayout", {
+                    PDP_UILibrary:Create( "UIListLayout", {
                         Parent = Items.Holder;
                         Padding = dim(0, -1);
                         SortOrder = Enum.SortOrder.LayoutOrder
@@ -1321,17 +1321,17 @@
                 Items.List.Position = dim2(0, 50, 0, 700);
             end)
             
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:ListElement(properties)
+        function PDP_UILibrary:ListElement(properties)
             local Cfg = {
                 Name = properties.Name or "Text"; 
                 Items = {}
             } 
 
             local Items = Cfg.Items; do     
-                Items.Outline = Library:Create( "Frame", {
+                Items.Outline = PDP_UILibrary:Create( "Frame", {
                     Parent = self.Items.Holder;
                     Size = dim2(1, 0, 0, 20);
                     Name = "\0";
@@ -1340,9 +1340,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.XY;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Inline = Library:Create( "Frame", {
+                Items.Inline = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.Outline;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -1351,9 +1351,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.inline 
-                }); Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                }); PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Background = Library:Create( "Frame", {
+                Items.Background = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.Inline;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -1362,9 +1362,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.misc_1
-                });	Library:Themify(Items.Background, "misc_1", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Background, "misc_1", "BackgroundColor3")
 
-                Items.Title = Library:Create( "TextLabel", {
+                Items.Title = PDP_UILibrary:Create( "TextLabel", {
                     FontFace = Fonts[themes.preset.font];
                     Parent = Items.Background;
                     TextColor3 = themes.preset.text_color;
@@ -1380,27 +1380,27 @@
                     ZIndex = 2;
                     TextSize = 12;
                     BackgroundColor3 = rgb(255, 255, 255)
-                });	Library:Themify(Items.Title, "text_color", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Title, "text_color", "BackgroundColor3")
 
-                Library:Create( "UIStroke", {
+                PDP_UILibrary:Create( "UIStroke", {
                     Parent = Items.Title;
                     LineJoinMode = Enum.LineJoinMode.Miter
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingBottom = dim(0, 5);
                     PaddingLeft = dim(0, 5);
                     Parent = Items.Title
                 });
 
-                Library:Create( "UIListLayout", {
+                PDP_UILibrary:Create( "UIListLayout", {
                     Parent = Items.Background;
                     Padding = dim(0, 15);
                     SortOrder = Enum.SortOrder.LayoutOrder;
                     FillDirection = Enum.FillDirection.Horizontal
                 });
                 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingTop = dim(0, 4);
                     PaddingBottom = dim(0, 2);
                     Parent = Items.Background;
@@ -1408,12 +1408,12 @@
                     PaddingLeft = dim(0, 2)
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingRight = dim(0, 2);
                     Parent = Items.Inline
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingRight = dim(0, 2);
                     Parent = Items.Outline
                 });
@@ -1427,24 +1427,24 @@
                 Items.Title.Text = string
             end 
         
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
     -- 
 
     -- Image Holders 
-        function Library:ImageHolder(properties) 
+        function PDP_UILibrary:ImageHolder(properties) 
             local Cfg = {
                 Name = properties.Name or "Viewer"; 
                 Items = {} 
             }
 
             local Items = Cfg.Items; do 
-                Items.Glow = Library:Create( "ImageLabel", {
+                Items.Glow = PDP_UILibrary:Create( "ImageLabel", {
                     ImageColor3 = themes.preset.accent;
                     ScaleType = Enum.ScaleType.Slice;
                     ImageTransparency = 0.65;
                     BorderColor3 = rgb(0, 0, 0);
-                    Parent = Library.Elements;
+                    Parent = PDP_UILibrary.Elements;
                     Name = "\0";
                     BorderSizePixel = 0;
                     Image = "rbxassetid://18245826428";
@@ -1452,9 +1452,9 @@
                     BackgroundColor3 = rgb(255, 255, 255);
                     AutomaticSize = Enum.AutomaticSize.XY;
                     SliceCenter = rect(vec2(21, 21), vec2(79, 79))
-                }); Library:Themify(Items.Glow, "accent", "ImageColor3"); Library:Draggify(Items.Glow)
+                }); PDP_UILibrary:Themify(Items.Glow, "accent", "ImageColor3"); PDP_UILibrary:Draggify(Items.Glow)
                 
-                Items.OutlineMenu = Library:Create( "Frame", {
+                Items.OutlineMenu = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.Glow;
                     Name = "\0";
                     Size = dim2(0, 0, 0, 101);
@@ -1462,9 +1462,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.OutlineMenu, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.OutlineMenu, "outline", "BackgroundColor3")
 
-                Items.AccentMenu = Library:Create( "Frame", {
+                Items.AccentMenu = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.OutlineMenu;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -1473,14 +1473,14 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.accent
-                }); Library:Themify(Items.AccentMenu, "accent", "BackgroundColor3")
+                }); PDP_UILibrary:Themify(Items.AccentMenu, "accent", "BackgroundColor3")
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingRight = dim(0, 2);
                     Parent = Items.AccentMenu
                 });
 
-                Items.InlineMenu = Library:Create( "Frame", {
+                Items.InlineMenu = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.AccentMenu;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -1489,9 +1489,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.background
-                });	Library:Themify(Items.InlineMenu, "background", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InlineMenu, "background", "BackgroundColor3")
 
-                Items.StatusList = Library:Create( "TextLabel", {
+                Items.StatusList = PDP_UILibrary:Create( "TextLabel", {
                     FontFace = Fonts[themes.preset.font];
                     Parent = Items.InlineMenu;
                     TextColor3 = themes.preset.text_color;
@@ -1507,21 +1507,21 @@
                     ZIndex = 2;
                     TextSize = 12;
                     BackgroundColor3 = rgb(255, 255, 255)
-                });	Library:Themify(Items.StatusList, "text_color", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.StatusList, "text_color", "BackgroundColor3")
 
-                Library:Create( "UIStroke", {
+                PDP_UILibrary:Create( "UIStroke", {
                     Parent = Items.StatusList;
                     LineJoinMode = Enum.LineJoinMode.Miter
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingBottom = dim(0, 5);
                     Parent = Items.StatusList;
                     PaddingLeft = dim(0, 5);
                     PaddingRight = dim(0, 3)
                 });
 
-                Items.InnerSection = Library:Create( "Frame", {
+                Items.InnerSection = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.InlineMenu;
                     Size = dim2(1, -8, 1, -22);
                     Name = "\0";
@@ -1530,9 +1530,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.InnerSection, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InnerSection, "outline", "BackgroundColor3")
 
-                Items.InnerInline = Library:Create( "Frame", {
+                Items.InnerInline = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.InnerSection;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -1543,7 +1543,7 @@
                     BackgroundColor3 = rgb(46, 46, 46)
                 });
 
-                Items.InnerBackground = Library:Create( "Frame", {
+                Items.InnerBackground = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.InnerInline;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -1552,16 +1552,16 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.InnerBackground, "misc_1", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InnerBackground, "misc_1", "BackgroundColor3")
 
-                Library:Create( "UIListLayout", {
+                PDP_UILibrary:Create( "UIListLayout", {
                     Parent = Items.InnerBackground;
                     Padding = dim(0, 4);
                     SortOrder = Enum.SortOrder.LayoutOrder;
                     FillDirection = Enum.FillDirection.Horizontal
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingTop = dim(0, 4);
                     PaddingBottom = dim(0, 4);
                     Parent = Items.InnerBackground;
@@ -1569,27 +1569,27 @@
                     PaddingLeft = dim(0, 4)
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingRight = dim(0, 2);
                     Parent = Items.InnerInline
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingRight = dim(0, 2);
                     Parent = Items.InnerSection
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingRight = dim(0, 8);
                     Parent = Items.InlineMenu
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingRight = dim(0, 2);
                     Parent = Items.OutlineMenu
                 });
 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingTop = dim(0, 20);
                     PaddingBottom = dim(0, 20);
                     Parent = Items.Glow;
@@ -1602,17 +1602,17 @@
                 Items.Glow.Visible = bool
             end 
             
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:AddImage(properties)
+        function PDP_UILibrary:AddImage(properties)
             local Cfg = {
                 Image = properties.Image or "rbxassetid://86659429043601"; 
                 Items = {} 
             }
 
             local Items = Cfg.Items; do 
-                Items.Outline = Library:Create( "Frame", {
+                Items.Outline = PDP_UILibrary:Create( "Frame", {
                     Parent = self.Items.InnerBackground;
                     Name = "\0";
                     Position = dim2(0, 4, 0, 18);
@@ -1620,9 +1620,9 @@
                     Size = dim2(0, 63, 0, 63);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Inline = Library:Create( "Frame", {
+                Items.Inline = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.Outline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -1630,9 +1630,9 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.inline
-                }); Library:Themify(Items.Inline, "inline", "BackgroundColor3") 
+                }); PDP_UILibrary:Themify(Items.Inline, "inline", "BackgroundColor3") 
                 
-                Items.Background = Library:Create( "Frame", {
+                Items.Background = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.Inline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -1640,9 +1640,9 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.misc_1
-                });	Library:Themify(Items.Background, "misc_1", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Background, "misc_1", "BackgroundColor3")
 
-                Items.Image = Library:Create( "ImageLabel", {
+                Items.Image = PDP_UILibrary:Create( "ImageLabel", {
                     Parent = Items.Background;
                     Name = "\0";
                     BackgroundTransparency = 1;
@@ -1657,12 +1657,12 @@
                 Items.Outline:Destroy()
             end 
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
     --  
         
-    -- Library element functions
-        function Library:Window(properties)
+    -- PDP_UILibrary element functions
+        function PDP_UILibrary:Window(properties)
             local Cfg = {
                 Name = properties.Name or "nebula";
                 Size = properties.Size or dim2(0, 455, 0, 605);
@@ -1672,7 +1672,7 @@
                 Fps = 0;
             }
 
-            Library.Items = Library:Create( "ScreenGui" , {
+            PDP_UILibrary.Items = PDP_UILibrary:Create( "ScreenGui" , {
                 Parent = CoreGui;
                 Name = "\0";
                 Enabled = true;
@@ -1681,7 +1681,7 @@
                 DisplayOrder = 100;
             });
             
-            Library.Other = Library:Create( "ScreenGui" , {
+            PDP_UILibrary.Other = PDP_UILibrary:Create( "ScreenGui" , {
                 Parent = CoreGui;
                 Name = "\0";
                 Enabled = false;
@@ -1689,7 +1689,7 @@
                 IgnoreGuiInset = true;
             }); 
 
-            Library.Elements = Library:Create( "ScreenGui" , {
+            PDP_UILibrary.Elements = PDP_UILibrary:Create( "ScreenGui" , {
                 Parent = gethui();
                 Name = "\0";
                 Enabled = true;
@@ -1698,18 +1698,18 @@
                 DisplayOrder = 100;
             }); 
 
-            Library.Blur = Library:Create( "BlurEffect" , {
+            PDP_UILibrary.Blur = PDP_UILibrary:Create( "BlurEffect" , {
                 Parent = Lighting;
                 Enabled = true;
                 Size = 0
             });
 
-            Library.KeybindList = Library:StatusList({Name = "Keybinds"})
+            PDP_UILibrary.KeybindList = PDP_UILibrary:StatusList({Name = "Keybinds"})
 
             local Items = Cfg.Items; do
                 -- Items 
-                    Items.Holder = Library:Create( "Frame" , {
-                        Parent = Library.Items;
+                    Items.Holder = PDP_UILibrary:Create( "Frame" , {
+                        Parent = PDP_UILibrary.Items;
                         BackgroundTransparency = 1;
                         Name = "\0";
                         Visible = true;
@@ -1719,7 +1719,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.FirstInline = Library:Create( "Frame" , {
+                    Items.FirstInline = PDP_UILibrary:Create( "Frame" , {
                         BorderColor3 = rgb(0, 0, 0);
                         Parent = Items.Holder;
                         Name = "\0";
@@ -1731,13 +1731,13 @@
                         BackgroundColor3 = rgb(0, 0, 0)
                     });
 
-                    local Stroke = Library:Create( "UIStroke" , {
+                    local Stroke = PDP_UILibrary:Create( "UIStroke" , {
                         Color = rgb(40, 40, 45);
                         LineJoinMode = Enum.LineJoinMode.Miter;
                         Parent = Items.FirstInline
-                    });	Library:Themify(Stroke, "inline", "Color")
+                    });	PDP_UILibrary:Themify(Stroke, "inline", "Color")
 
-                    Items.SecondInline = Library:Create( "Frame" , {
+                    Items.SecondInline = PDP_UILibrary:Create( "Frame" , {
                         BorderColor3 = rgb(0, 0, 0);
                         Parent = Items.FirstInline;
                         Name = "\0";
@@ -1749,22 +1749,22 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    local Stroke = Library:Create( "UIStroke" , {
+                    local Stroke = PDP_UILibrary:Create( "UIStroke" , {
                         Color = themes.preset.outline;
                         LineJoinMode = Enum.LineJoinMode.Miter;
                         Parent = Items.SecondInline
-                    });	Library:Themify(Stroke, "outline", "Color");
+                    });	PDP_UILibrary:Themify(Stroke, "outline", "Color");
 
-                    Items.Accent = Library:Create( "Frame" , {
+                    Items.Accent = PDP_UILibrary:Create( "Frame" , {
                         Name = "\0";
                         Parent = Items.SecondInline;
                         BorderColor3 = rgb(0, 0, 0);
                         Size = dim2(1, 0, 0, 1);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.accent
-                    });	Library:Themify(Items.Accent, "accent", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Accent, "accent", "BackgroundColor3")
 
-                    Items.ThirdInline = Library:Create( "Frame" , {
+                    Items.ThirdInline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.SecondInline;
                         Name = "\0";
                         Position = dim2(0, 0, 0, 1);
@@ -1772,9 +1772,9 @@
                         Size = dim2(1, 0, 0, 1);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.ThirdInline, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.ThirdInline, "inline", "BackgroundColor3")
 
-                    Items.Outline = Library:Create( "Frame" , {
+                    Items.Outline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.SecondInline;
                         Name = "\0";
                         Position = dim2(0, 0, 0, 2);
@@ -1782,9 +1782,9 @@
                         Size = dim2(1, 0, 0, 1);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                    Items.InnerOutline = Library:Create( "Frame" , {
+                    Items.InnerOutline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Holder;
                         Name = "\0";
                         BackgroundTransparency = 1;
@@ -1795,14 +1795,14 @@
                         BackgroundColor3 = rgb(0, 0, 0)
                     });
 
-                    local Stroke = Library:Create( "UIStroke" , {
+                    local Stroke = PDP_UILibrary:Create( "UIStroke" , {
                         Color = rgb(15, 15, 20);
                         LineJoinMode = Enum.LineJoinMode.Miter;
                         Parent = Items.InnerOutline;
                         Thickness = 10000
-                    }); Library:Themify(Stroke, "outline", "Color");
+                    }); PDP_UILibrary:Themify(Stroke, "outline", "Color");
 
-                    Items.Title = Library:Create( "TextLabel" , {
+                    Items.Title = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         TextColor3 = rgb(235, 235, 235);
                         TextStrokeColor3 = rgb(255, 255, 255);
@@ -1818,12 +1818,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Title;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Items.WindowButtonHolder = Library:Create( "Frame" , {
+                    Items.WindowButtonHolder = PDP_UILibrary:Create( "Frame" , {
                         BorderColor3 = rgb(0, 0, 0);
                         AnchorPoint = vec2(1, 1);
                         Parent = Items.InnerOutline;
@@ -1835,7 +1835,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         FillDirection = Enum.FillDirection.Horizontal;
                         HorizontalAlignment = Enum.HorizontalAlignment.Right;
                         Parent = Items.WindowButtonHolder;
@@ -1845,8 +1845,8 @@
                 -- 
 
                 -- Watermark
-                    Items.Watermark = Library:Create( "Frame" , {
-                        Parent = Library.Elements;
+                    Items.Watermark = PDP_UILibrary:Create( "Frame" , {
+                        Parent = PDP_UILibrary.Elements;
                         Name = "\0";
                         Visible = false;
                         Position = dim2(0.024000000208616257, 0, 0, 33);
@@ -1854,10 +1854,10 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Watermark, "outline", "BackgroundColor3")
-                    Library:Draggify(Items.Watermark)
+                    });	PDP_UILibrary:Themify(Items.Watermark, "outline", "BackgroundColor3")
+                    PDP_UILibrary:Draggify(Items.Watermark)
 
-                    Items.AccentLineFade = Library:Create( "Frame" , {
+                    Items.AccentLineFade = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Watermark;
                         Size = dim2(1, -3, 0, 1);
                         Name = "\0";
@@ -1866,15 +1866,15 @@
                         ZIndex = 3;
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.accent
-                    }); Library:Themify(Items.AccentLineFade, "accent", "BackgroundColor3")
+                    }); PDP_UILibrary:Themify(Items.AccentLineFade, "accent", "BackgroundColor3")
                     
-                    Items.FadingGradient = Library:Create( "UIGradient" , {
+                    Items.FadingGradient = PDP_UILibrary:Create( "UIGradient" , {
                         Offset = vec2(0, 0);
                         Transparency = numseq{numkey(0, 0), numkey(0.5, 1), numkey(1, 0)};
                         Parent = Items.AccentLineFade
                     });
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Watermark;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -1882,9 +1882,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.Inline, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Inline, "inline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -1894,7 +1894,7 @@
                         BackgroundColor3 = rgb(28, 28, 33)
                     });
 
-                    Items.Text = Library:Create( "TextLabel" , {
+                    Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                         RichText = true;
                         Parent = Items.Background;
                         TextColor3 = themes.preset.accent;
@@ -1910,14 +1910,14 @@
                         ZIndex = 2;
                         TextSize = 12;
                         BackgroundColor3 = themes.preset.accent
-                    });	Library:Themify(Items.Text, "accent", "TextColor3")
+                    });	PDP_UILibrary:Themify(Items.Text, "accent", "TextColor3")
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Text;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingTop = dim(0, 5);
                         PaddingBottom = dim(0, 6);
                         Parent = Items.Text;
@@ -1925,13 +1925,13 @@
                         PaddingLeft = dim(0, 6)
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingBottom = dim(0, 1);
                         PaddingRight = dim(0, 1);
                         Parent = Items.Inline
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingBottom = dim(0, 1);
                         PaddingRight = dim(0, 1);
                         Parent = Items.Watermark
@@ -1953,32 +1953,32 @@
             end
 
             function Cfg.SetVisible(bool)
-                if Library.Tweening then
+                if PDP_UILibrary.Tweening then
                     return 
                 end     
 
-                Library:Tween(Library.Blur, {Size = bool and (Flags["BlurSize"] or 15) or 0})
+                PDP_UILibrary:Tween(PDP_UILibrary.Blur, {Size = bool and (Flags["BlurSize"] or 15) or 0})
 
                 Cfg.Tween(bool)
             end 
 
             function Cfg.Tween(bool) 
-                if Library.Tweening then 
+                if PDP_UILibrary.Tweening then 
                     return 
                 end 
 
-                Library.Tweening = true 
+                PDP_UILibrary.Tweening = true 
 
                 if bool then 
-                    Library.Items.Enabled = true
+                    PDP_UILibrary.Items.Enabled = true
                 end
 
-                local Children = Library.Items:GetDescendants()
+                local Children = PDP_UILibrary.Items:GetDescendants()
                 table.insert(Children, Items.Holder)
 
                 local Tween;
                 for _,obj in Children do
-                    local Index = Library:GetTransparency(obj)
+                    local Index = PDP_UILibrary:GetTransparency(obj)
 
                     if not Index then 
                         continue 
@@ -1986,22 +1986,22 @@
 
                     if type(Index) == "table" then
                         for _,prop in Index do
-                            Tween = Library:Fade(obj, prop, bool)
+                            Tween = PDP_UILibrary:Fade(obj, prop, bool)
                         end
                     else
-                        Tween = Library:Fade(obj, Index, bool)
+                        Tween = PDP_UILibrary:Fade(obj, Index, bool)
                     end
                 end
 
-                Library:Connection(Tween.Completed, function()
-                    Library.Tweening = false
-                    Library.Items.Enabled = bool
+                PDP_UILibrary:Connection(Tween.Completed, function()
+                    PDP_UILibrary.Tweening = false
+                    PDP_UILibrary.Items.Enabled = bool
                 end)
             end 
             
             Cfg.SetVisible(true)
 
-            Library:Connection(RunService.RenderStepped, function()
+            PDP_UILibrary:Connection(RunService.RenderStepped, function()
                 if not Items.Watermark.Visible then 
                     return 
                 end 
@@ -2017,16 +2017,16 @@
                     local Uid = 1
                     local Status = "Developer"
                     local Ping = math.floor(Stats.PerformanceStats.Ping:GetValue())
-                    Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ %s / %s / %sfps / %sms</font>', Cfg.Name, Library:ConvertHex(themes.preset.text_color), os.date("%x / %X"), Cfg.Fps, Ping))
+                    Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ %s / %s / %sfps / %sms</font>', Cfg.Name, PDP_UILibrary:ConvertHex(themes.preset.text_color), os.date("%x / %X"), Cfg.Fps, Ping))
 
                     Cfg.Fps = 0
                 end 
             end)
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:Panel(properties) 
+        function PDP_UILibrary:Panel(properties) 
             local Cfg = {  
                 Name = properties.Name or "nebula";
                 ButtonName = properties.ButtonName or properties.Name or "Button";
@@ -2042,7 +2042,7 @@
 
             local Items = Cfg.Items; do
                 -- Button 
-                    Items.Button = Library:Create( "TextButton" , {
+                    Items.Button = PDP_UILibrary:Create( "TextButton" , {
                         Active = false;
                         BorderColor3 = rgb(0, 0, 0);
                         Parent = self.Items.WindowButtonHolder;
@@ -2052,9 +2052,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.X;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.Button, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Button, "inline", "BackgroundColor3")
 
-                    Items.ButtonTitle = Library:Create( "TextLabel" , {
+                    Items.ButtonTitle = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         Parent = Items.Button;
                         TextColor3 = themes.preset.text_color;
@@ -2070,20 +2070,20 @@
                         ZIndex = 2;
                         TextSize = 12;
                         BackgroundColor3 = rgb(255, 255, 255)
-                    }); Library:Themify(Items.ButtonTitle, "unselected", "TextColor3")
+                    }); PDP_UILibrary:Themify(Items.ButtonTitle, "unselected", "TextColor3")
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.ButtonTitle;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         Parent = Items.ButtonTitle;
                         PaddingRight = dim(0, 5);
                         PaddingLeft = dim(0, 7)
                     });
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Button;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -2092,9 +2092,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.X;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Inline, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Inline, "outline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -2103,14 +2103,14 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.X;
                         BackgroundColor3 = themes.preset.misc_1
-                    }); Library:Themify(Items.Background, "misc_1", "BackgroundColor3");
+                    }); PDP_UILibrary:Themify(Items.Background, "misc_1", "BackgroundColor3");
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingRight = dim(0, 2);
                         Parent = Items.Inline
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingRight = dim(0, 2);
                         Parent = Items.Button
                     });
@@ -2119,8 +2119,8 @@
                 -- 
 
                 -- Window 
-                    Items.Window = Library:Create( "Frame" , {
-                        Parent = Library.Items;
+                    Items.Window = PDP_UILibrary:Create( "Frame" , {
+                        Parent = PDP_UILibrary.Items;
                         Name = "\0";
                         ClipsDescendants = false;
                         BorderColor3 = rgb(0, 0, 0);
@@ -2130,9 +2130,9 @@
                         Size = Cfg.Size;
                         -- Rotation = 180;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Window, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Window, "outline", "BackgroundColor3")
 
-                    Items.Fading = Library:Create( "Frame", {
+                    Items.Fading = PDP_UILibrary:Create( "Frame", {
                         Parent = Items.Panel;
                         BackgroundTransparency = 1; -- 0.6499999761581421
                         Name = "\0";
@@ -2149,7 +2149,7 @@
                     --     end 
                     -- end)
 
-                    Items.Glow = Library:Create( "ImageLabel", {
+                    Items.Glow = PDP_UILibrary:Create( "ImageLabel", {
                         ImageColor3 = themes.preset.accent;
                         ScaleType = Enum.ScaleType.Slice;
                         Parent = Items.Window;
@@ -2165,9 +2165,9 @@
                         BackgroundColor3 = rgb(255, 255, 255);
                         AutomaticSize = Enum.AutomaticSize.XY;
                         SliceCenter = rect(vec2(21, 21), vec2(79, 79))
-                    }); Library:Themify(Items.Glow, "accent", "ImageColor3")
+                    }); PDP_UILibrary:Themify(Items.Glow, "accent", "ImageColor3")
 
-                    Library:Create( "UIPadding", {
+                    PDP_UILibrary:Create( "UIPadding", {
                         PaddingTop = dim(0, 20);
                         PaddingBottom = dim(0, 20);
                         Parent = Items.Glow;
@@ -2175,7 +2175,7 @@
                         PaddingLeft = dim(0, 20)
                     });
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Window;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -2184,9 +2184,9 @@
                         Position = dim2(0, 1, 0, 1);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.Inline, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Inline, "inline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -2195,9 +2195,9 @@
                         Position = dim2(0, 1, 0, 1);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.misc_1
-                    }); Library:Themify(Items.Background, "misc_1", "BackgroundColor3");
+                    }); PDP_UILibrary:Themify(Items.Background, "misc_1", "BackgroundColor3");
 
-                    Items.PageHolderBackground = Library:Create( "Frame" , {
+                    Items.PageHolderBackground = PDP_UILibrary:Create( "Frame" , {
                         ClipsDescendants = true;
                         BorderColor3 = rgb(0, 0, 0);
                         Parent = Items.Background;
@@ -2207,9 +2207,9 @@
                         ZIndex = 2;
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.PageHolderBackground, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.PageHolderBackground, "inline", "BackgroundColor3")
 
-                    Items.InlineSecond = Library:Create( "Frame" , {
+                    Items.InlineSecond = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.PageHolderBackground;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -2217,9 +2217,9 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.InlineSecond, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.InlineSecond, "outline", "BackgroundColor3")
 
-                    Items.BackgroundSecond = Library:Create( "Frame" , {
+                    Items.BackgroundSecond = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.InlineSecond;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -2229,7 +2229,7 @@
                         BackgroundColor3 = rgb(15, 15, 20)
                     });
 
-                    Items.Accent = Library:Create( "Frame" , {
+                    Items.Accent = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.BackgroundSecond;
                         Name = "\0";
                         Size = dim2(1, 0, 0, 1);
@@ -2237,9 +2237,9 @@
                         ZIndex = 2;
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.accent
-                    });	Library:Themify(Items.Accent, "accent", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Accent, "accent", "BackgroundColor3")
 
-                    Items.TabButtonHolder = Library:Create( "Frame" , {
+                    Items.TabButtonHolder = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.BackgroundSecond;
                         Size = dim2(1, -26, 0, 39);
                         Name = "\0";
@@ -2248,9 +2248,9 @@
                         ZIndex = 2;
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.TabButtonHolder, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.TabButtonHolder, "outline", "BackgroundColor3")
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         FillDirection = Enum.FillDirection.Horizontal;
                         HorizontalFlex = Enum.UIFlexAlignment.Fill;
                         Parent = Items.TabButtonHolder;
@@ -2259,7 +2259,7 @@
                         VerticalFlex = Enum.UIFlexAlignment.Fill
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingTop = dim(0, 1);
                         PaddingBottom = dim(0, 1);
                         Parent = Items.TabButtonHolder;
@@ -2267,7 +2267,7 @@
                         PaddingLeft = dim(0, 1)
                     });
 
-                    Items.PageHolder = Library:Create( "Frame" , {
+                    Items.PageHolder = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.BackgroundSecond;
                         Size = dim2(1, -26, 1, -71);
                         Name = "\0";
@@ -2276,9 +2276,9 @@
                         ZIndex = 2;
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.PageHolder, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.PageHolder, "outline", "BackgroundColor3")
 
-                    Items.InlineThird = Library:Create( "Frame" , {
+                    Items.InlineThird = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.PageHolder;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -2286,9 +2286,9 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.InlineThird, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.InlineThird, "inline", "BackgroundColor3")
 
-                    Items.PageHolder = Library:Create( "Frame" , {
+                    Items.PageHolder = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.InlineThird;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -2298,7 +2298,7 @@
                         BackgroundColor3 = rgb(28, 28, 33)
                     });
 
-                    Items.Title = Library:Create( "TextLabel" , {
+                    Items.Title = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         TextColor3 = themes.preset.text_color;
                         Text = Cfg.Name;
@@ -2314,12 +2314,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Title;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         Parent = Items.Title;
                         PaddingRight = dim(0, 5);
                         PaddingLeft = dim(0, 7)
@@ -2328,8 +2328,8 @@
             end 
 
             do -- Other
-                Library:Draggify(Items.Window)
-                Library:Resizify(Items.Window)
+                PDP_UILibrary:Draggify(Items.Window)
+                PDP_UILibrary:Resizify(Items.Window)
             end
 
             function Cfg.ChangeName(string)
@@ -2337,11 +2337,11 @@
             end 
 
             function Cfg.SetMenuVisible(bool)
-                if Cfg.Tweening or Library.Tweening then
+                if Cfg.Tweening or PDP_UILibrary.Tweening then
                     return
                 end 
 
-                Library:Tween(Items.ButtonTitle, {TextColor3 = bool and themes.preset.text_color or themes.preset.unselected})
+                PDP_UILibrary:Tween(Items.ButtonTitle, {TextColor3 = bool and themes.preset.text_color or themes.preset.unselected})
                 Cfg.ToggleMenu(bool)
             end 
 
@@ -2355,7 +2355,7 @@
             end)
 
             function Cfg.ToggleMenu(bool)
-                if Cfg.Tweening or Library.Tweening then 
+                if Cfg.Tweening or PDP_UILibrary.Tweening then 
                     return 
                 end 
 
@@ -2370,7 +2370,7 @@
 
                 local Tween;
                 for _,obj in Children do
-                    local Index = Library:GetTransparency(obj)
+                    local Index = PDP_UILibrary:GetTransparency(obj)
 
                     if not Index then 
                         continue 
@@ -2378,34 +2378,34 @@
 
                     if type(Index) == "table" then
                         for _,prop in Index do
-                            Tween = Library:Fade(obj, prop, bool)
+                            Tween = PDP_UILibrary:Fade(obj, prop, bool)
                         end
                     else
-                        Tween = Library:Fade(obj, Index, bool)
+                        Tween = PDP_UILibrary:Fade(obj, Index, bool)
                     end
                 end
 
-                Library:Connection(Tween.Completed, function()
+                PDP_UILibrary:Connection(Tween.Completed, function()
                     Cfg.Tweening = false
                     Items.Window.Visible = bool
                 end)
             end     
 
             Items.Window.MouseEnter:Connect(function()
-                Library:Tween(Items.Glow, {ImageTransparency = 0.6499999761581421})
+                PDP_UILibrary:Tween(Items.Glow, {ImageTransparency = 0.6499999761581421})
             end)
 
             Items.Window.MouseLeave:Connect(function()
-                Library:Tween(Items.Glow, {ImageTransparency = 1})
+                PDP_UILibrary:Tween(Items.Glow, {ImageTransparency = 1})
             end)
 
-            local Index = setmetatable(Cfg, Library)
-            Library.AvailablePanels[#Library.AvailablePanels + 1] = Index
+            local Index = setmetatable(Cfg, PDP_UILibrary)
+            PDP_UILibrary.AvailablePanels[#PDP_UILibrary.AvailablePanels + 1] = Index
 
             return Index
         end 
 
-        function Library:Tab(properties)
+        function PDP_UILibrary:Tab(properties)
             local Cfg = {
                 Name = properties.name or properties.Name or "tab"; 
                 Items = {};
@@ -2415,7 +2415,7 @@
             
             local Items = Cfg.Items; do 
                 -- Tab buttons 
-                    Items.Outline = Library:Create( "TextButton" , {
+                    Items.Outline = PDP_UILibrary:Create( "TextButton" , {
                         Parent = self.Items.TabButtonHolder;
                         Size = dim2(0, 100, 0, 100);
                         Name = "\0";
@@ -2424,9 +2424,9 @@
                         Selectable = false;
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.Outline, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Outline, "inline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Outline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -2436,13 +2436,13 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIGradient" , {
+                    PDP_UILibrary:Create( "UIGradient" , {
                         Rotation = 90;
                         Parent = Items.Background;
                         Color = rgbseq{rgbkey(0, rgb(27, 27, 32)), rgbkey(1, rgb(21, 21, 25))}
                     });
 
-                    Items.Title = Library:Create( "TextLabel" , {
+                    Items.Title = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         Parent = Items.Background;
                         TextColor3 = rgb(140, 140, 140);
@@ -2460,12 +2460,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Title;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         Parent = Items.Title;
                         PaddingRight = dim(0, 5);
                         PaddingLeft = dim(0, 7)
@@ -2473,9 +2473,9 @@
                 -- 
 
                 -- Page Directory
-                    Items.Page = Library:Create( "Frame" , {
+                    Items.Page = PDP_UILibrary:Create( "Frame" , {
                         BorderColor3 = rgb(0, 0, 0);
-                        Parent = Library.Other; -- self.Items.PageHolder
+                        Parent = PDP_UILibrary.Other; -- self.Items.PageHolder
                         Name = "\0";
                         Visible = false;
                         BackgroundTransparency = 1;
@@ -2486,7 +2486,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         FillDirection = Enum.FillDirection.Horizontal;
                         HorizontalFlex = Enum.UIFlexAlignment.Fill;
                         Parent = Items.Page;
@@ -2532,7 +2532,7 @@
 
                 local Tween;
                 for _,obj in Children do
-                    local Index = Library:GetTransparency(obj)
+                    local Index = PDP_UILibrary:GetTransparency(obj)
 
                     if not Index then 
                         continue 
@@ -2540,17 +2540,17 @@
 
                     if type(Index) == "table" then
                         for _,prop in Index do
-                            Tween = Library:Fade(obj, prop, bool, Library.TweeningSpeed)
+                            Tween = PDP_UILibrary:Fade(obj, prop, bool, PDP_UILibrary.TweeningSpeed)
                         end
                     else
-                        Tween = Library:Fade(obj, Index, bool, Library.TweeningSpeed)
+                        Tween = PDP_UILibrary:Fade(obj, Index, bool, PDP_UILibrary.TweeningSpeed)
                     end
                 end
                 
-                Library:Connection(Tween.Completed, function()
+                PDP_UILibrary:Connection(Tween.Completed, function()
                     Cfg.Tweening = false
                     Items.Page.Visible = bool
-                    Items.Page.Parent = bool and self.Items.PageHolder or Library.Other
+                    Items.Page.Parent = bool and self.Items.PageHolder or PDP_UILibrary.Other
                 end)
             end
 
@@ -2566,16 +2566,16 @@
                 Cfg.OpenTab()
             end
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end
 
-        function Library:Column(properties)
+        function PDP_UILibrary:Column(properties)
             local Cfg = {
                 Items = {}
             }
 
             local Items = Cfg.Items; do 
-                Items.Column = Library:Create( "Frame" , {
+                Items.Column = PDP_UILibrary:Create( "Frame" , {
                     Parent = self.Items.Page;
                     BackgroundTransparency = 1;
                     Name = "\0";
@@ -2585,7 +2585,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIListLayout" , {
+                PDP_UILibrary:Create( "UIListLayout" , {
                     Parent = Items.Column;
                     SortOrder = Enum.SortOrder.LayoutOrder;
                     HorizontalFlex = Enum.UIFlexAlignment.Fill;
@@ -2593,10 +2593,10 @@
                 });
             end 
 
-            return setmetatable(Cfg, Library) 
+            return setmetatable(Cfg, PDP_UILibrary) 
         end 
 
-        function Library:Section(properties)
+        function PDP_UILibrary:Section(properties)
             local Cfg = {
                 Name = properties.name or properties.Name or "Section"; 
                 Side = properties.side or properties.Side or "Left";
@@ -2609,7 +2609,7 @@
             };
             
             local Items = Cfg.Items; do
-                Items.Outline = Library:Create( "Frame" , {
+                Items.Outline = PDP_UILibrary:Create( "Frame" , {
                     Parent = self.Items.Column;
                     Name = "\0";
                     Size = dim2(0, 100, 0, 0);
@@ -2617,14 +2617,14 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = themes.preset.inline
-                });	Library:Themify(Items.Outline, "inline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "inline", "BackgroundColor3")
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingBottom = dim(0, 2);
                     Parent = Items.Outline
                 });
 
-                Items.TitleHolder = Library:Create( "Frame" , {
+                Items.TitleHolder = PDP_UILibrary:Create( "Frame" , {
                     BorderColor3 = rgb(0, 0, 0);
                     Parent = Items.Outline;
                     Size = dim2(0, 0, 0, 10);
@@ -2634,15 +2634,15 @@
                     ZIndex = 2;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.background
-                });	Library:Themify(Items.TitleHolder, "background", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.TitleHolder, "background", "BackgroundColor3")
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     Parent = Items.TitleHolder;
                     PaddingRight = dim(0, 2);
                     PaddingLeft = dim(0, 3)
                 });
 
-                Items.Title = Library:Create( "TextLabel" , {
+                Items.Title = PDP_UILibrary:Create( "TextLabel" , {
                     FontFace = Fonts[themes.preset.font];
                     Parent = Items.TitleHolder;
                     TextColor3 = themes.preset.text_color;
@@ -2660,7 +2660,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Items.Inline = Library:Create( "Frame" , {
+                Items.Inline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Outline;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -2669,14 +2669,14 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Inline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Inline, "outline", "BackgroundColor3")
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingBottom = dim(0, 2);
                     Parent = Items.Inline
                 });
 
-                Items.Background = Library:Create( "Frame" , {
+                Items.Background = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Inline;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -2685,18 +2685,18 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = themes.preset.background
-                });	Library:Themify(Items.Background, "background", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Background, "background", "BackgroundColor3")
 
-                Items.Accent = Library:Create( "Frame" , {
+                Items.Accent = PDP_UILibrary:Create( "Frame" , {
                     Name = "\0";
                     Parent = Items.Background;
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(1, 0, 0, 1);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.accent
-                });	Library:Themify(Items.Accent, "accent", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Accent, "accent", "BackgroundColor3")
 
-                Items.Elements = Library:Create( "Frame" , {
+                Items.Elements = PDP_UILibrary:Create( "Frame" , {
                     BorderColor3 = rgb(0, 0, 0);
                     Parent = Items.Background;
                     Name = "\0";
@@ -2708,22 +2708,22 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingBottom = dim(0, 5);
                     Parent = Items.Elements
                 });
 
-                Library:Create( "UIListLayout" , {
+                PDP_UILibrary:Create( "UIListLayout" , {
                     Parent = Items.Elements;
                     Padding = dim(0, 7);
                     SortOrder = Enum.SortOrder.LayoutOrder
                 });
             end 
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end  
 
-        function Library:Toggle(properties) 
+        function PDP_UILibrary:Toggle(properties) 
             local Cfg = {
                 Name = properties.Name or "Toggle";
                 Flag = properties.Flag or properties.Name or "Toggle";
@@ -2741,7 +2741,7 @@
             }
 
             local Items = Cfg.Items; do
-                Items.Toggle = Library:Create( "TextButton" , {
+                Items.Toggle = PDP_UILibrary:Create( "TextButton" , {
                     Active = false;
                     BorderColor3 = rgb(0, 0, 0);
                     Parent = self.Items.Elements;
@@ -2754,7 +2754,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Items.Components = Library:Create( "Frame" , {
+                Items.Components = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Toggle;
                     Name = "\0";
                     Position = dim2(1, 0, 0, 0);
@@ -2764,7 +2764,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIListLayout" , {
+                PDP_UILibrary:Create( "UIListLayout" , {
                     FillDirection = Enum.FillDirection.Horizontal;
                     HorizontalAlignment = Enum.HorizontalAlignment.Right;
                     Parent = Items.Components;
@@ -2772,16 +2772,16 @@
                     SortOrder = Enum.SortOrder.LayoutOrder
                 });
 
-                Items.Outline = Library:Create( "Frame" , {
+                Items.Outline = PDP_UILibrary:Create( "Frame" , {
                     Name = "\0";
                     Parent = Items.Toggle;
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(0, 12, 0, 12);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Title = Library:Create( "TextLabel" , {
+                Items.Title = PDP_UILibrary:Create( "TextLabel" , {
                     FontFace = Fonts[themes.preset.font];
                     TextStrokeColor3 = rgb(255, 255, 255);
                     ZIndex = 2;
@@ -2802,15 +2802,15 @@
                 });
 
                 if Cfg.Tooltip then 
-                    Library:Tooltip({Title = Cfg.Tooltip.Title, Text = Cfg.Tooltip.Text, Width = Cfg.Tooltip.Width, Path = Items.Title})
+                    PDP_UILibrary:Tooltip({Title = Cfg.Tooltip.Title, Text = Cfg.Tooltip.Text, Width = Cfg.Tooltip.Width, Path = Items.Title})
                 end 
 
-                Library:Create( "UIStroke" , {
+                PDP_UILibrary:Create( "UIStroke" , {
                     Parent = Items.Title;
                     LineJoinMode = Enum.LineJoinMode.Miter
                 });
 
-                Items.Inline = Library:Create( "Frame" , {
+                Items.Inline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Outline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -2819,9 +2819,9 @@
                     BorderSizePixel = 0;
                     ZIndex = 2;
                     BackgroundColor3 = rgb(45, 45, 50)
-                }); Library:Themify(Items.Inline, "accent", "BackgroundColor3")
+                }); PDP_UILibrary:Themify(Items.Inline, "accent", "BackgroundColor3")
 
-                Items.Accent2 = Library:Create( "Frame" , {
+                Items.Accent2 = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Outline;
                     Name = "\0";
                     BackgroundTransparency = 1;
@@ -2831,9 +2831,9 @@
                     BorderSizePixel = 0;
                     ZIndex = 1;
                     BackgroundColor3 = themes.preset.accent;
-                }); Library:Themify(Items.Accent2, "accent", "BackgroundColor3");
+                }); PDP_UILibrary:Themify(Items.Accent2, "accent", "BackgroundColor3");
 
-                Items.InlineInline = Library:Create( "Frame" , {
+                Items.InlineInline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Inline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -2841,9 +2841,9 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                Items.Background = Library:Create( "Frame" , {
+                Items.Background = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.InlineInline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -2851,9 +2851,9 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.misc_1
-                }); Library:Themify(Items.Background, "misc_1", "BackgroundColor3");
+                }); PDP_UILibrary:Themify(Items.Background, "misc_1", "BackgroundColor3");
                 
-                Items.Accent1 = Library:Create( "Frame" , {
+                Items.Accent1 = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.InlineInline;
                     Name = "\0";
                     BackgroundTransparency = 1;
@@ -2863,14 +2863,14 @@
                     BorderSizePixel = 0;
                     ZIndex = 1;
                     BackgroundColor3 = themes.preset.accent;
-                }); Library:Themify(Items.Accent1, "accent", "BackgroundColor3");
+                }); PDP_UILibrary:Themify(Items.Accent1, "accent", "BackgroundColor3");
             end 
             
             function Cfg.Set(bool)
-                Library:Tween(Items.Accent2, {BackgroundTransparency = bool and 0 or 1})
-                Library:Tween(Items.Inline, {BackgroundTransparency = bool and 1 or 0})
-                Library:Tween(Items.Accent1, {BackgroundTransparency = bool and 0 or 1})
-                Library:Tween(Items.Title, {TextColor3 = bool and themes.preset.text_color or themes.preset.unselected })
+                PDP_UILibrary:Tween(Items.Accent2, {BackgroundTransparency = bool and 0 or 1})
+                PDP_UILibrary:Tween(Items.Inline, {BackgroundTransparency = bool and 1 or 0})
+                PDP_UILibrary:Tween(Items.Accent1, {BackgroundTransparency = bool and 0 or 1})
+                PDP_UILibrary:Tween(Items.Title, {TextColor3 = bool and themes.preset.text_color or themes.preset.unselected })
 
                 Cfg.Callback(bool)                
                 Flags[Cfg.Flag] = bool
@@ -2885,10 +2885,10 @@
 
             ConfigFlags[Cfg.Flag] = Cfg.Set
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
         
-        function Library:Slider(properties) 
+        function PDP_UILibrary:Slider(properties) 
             local Cfg = {
                 Name = properties.Name or nil,
                 Suffix = properties.Suffix or "",
@@ -2907,7 +2907,7 @@
             } 
 
             local Items = Cfg.Items; do
-                Items.Slider = Library:Create( "Frame" , {
+                Items.Slider = PDP_UILibrary:Create( "Frame" , {
                     Parent = self.Items.Elements;
                     BackgroundTransparency = 1;
                     Name = "\0";
@@ -2918,7 +2918,7 @@
                 });
 
                 if Cfg.Name then 
-                    Items.Text = Library:Create( "TextLabel" , {
+                    Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         Parent = Items.Slider;
                         TextColor3 = rgb(145, 145, 145);
@@ -2937,12 +2937,12 @@
                     });
                 end
 
-                Library:Create( "UIStroke" , {
+                PDP_UILibrary:Create( "UIStroke" , {
                     Parent = Items.Text;
                     LineJoinMode = Enum.LineJoinMode.Miter
                 });
 
-                Items.Outline = Library:Create( "TextButton" , {
+                Items.Outline = PDP_UILibrary:Create( "TextButton" , {
                     Active = false;
                     BorderColor3 = rgb(0, 0, 0);
                     Parent = Items.Slider;
@@ -2952,9 +2952,9 @@
                     Size = dim2(1, -8, 0, 10);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Inline = Library:Create( "Frame" , {
+                Items.Inline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Outline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -2964,7 +2964,7 @@
                     BackgroundColor3 = rgb(45, 45, 50)
                 });
 
-                Items.InlineInline = Library:Create( "Frame" , {
+                Items.InlineInline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Inline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -2972,9 +2972,9 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                Items.Background = Library:Create( "Frame" , {
+                Items.Background = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.InlineInline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -2984,16 +2984,16 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Items.Accent = Library:Create( "Frame" , {
+                Items.Accent = PDP_UILibrary:Create( "Frame" , {
                     Name = "\0";
                     Parent = Items.Background;
                     BorderColor3 = rgb(0, 0, 0);
                     Size = dim2(0.5, 0, 1, 0);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.accent
-                });	Library:Themify(Items.Accent, "accent", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Accent, "accent", "BackgroundColor3")
 
-                Items.Value = Library:Create( "TextBox" , {
+                Items.Value = PDP_UILibrary:Create( "TextBox" , {
                     FontFace = Fonts[themes.preset.font];
                     Parent = Items.Accent;
                     TextColor3 = rgb(235, 235, 235);
@@ -3011,24 +3011,24 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIStroke" , {
+                PDP_UILibrary:Create( "UIStroke" , {
                     Parent = Items.Value;
                     LineJoinMode = Enum.LineJoinMode.Miter
                 });
 
-                Library:Create( "UIGradient" , {
+                PDP_UILibrary:Create( "UIGradient" , {
                     Rotation = 90;
                     Parent = Items.Accent;
                     Color = rgbseq{rgbkey(0, rgb(255, 255, 255)), rgbkey(1, rgb(42, 42, 42))}
                 });
 
-                local Gradient = Library:Create( "UIGradient" , {
+                local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                     Rotation = 90;
                     Parent = Items.Background;
                     Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                }); Library:SaveGradient(Gradient, "elements");
+                }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                Items.Minus = Library:Create( "TextButton" , {
+                Items.Minus = PDP_UILibrary:Create( "TextButton" , {
                     FontFace = Fonts[themes.preset.font];
                     Active = false;
                     AnchorPoint = vec2(1, 0.5);
@@ -3047,7 +3047,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 }); Items.Minus.Text = "-";
 
-                Items.Plus = Library:Create( "TextButton" , {
+                Items.Plus = PDP_UILibrary:Create( "TextButton" , {
                     FontFace = Fonts[themes.preset.font];
                     Active = false;
                     AnchorPoint = vec2(0, 0.5);
@@ -3067,13 +3067,13 @@
             end 
 
             function Cfg.Set(value)
-                Cfg.Value = math.clamp(Library:Round(value, Cfg.Intervals), Cfg.Min, Cfg.Max)
+                Cfg.Value = math.clamp(PDP_UILibrary:Round(value, Cfg.Intervals), Cfg.Min, Cfg.Max)
 
                 Items.Value.Text = tostring(Cfg.Value) .. Cfg.Suffix
 
-                Library:Tween(Items.Accent, 
+                PDP_UILibrary:Tween(Items.Accent, 
                     {Size = dim2((Cfg.Value - Cfg.Min) / (Cfg.Max - Cfg.Min), 0, 1, 0)
-                }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
 
                 Flags[Cfg.Flag] = Cfg.Value
                 Cfg.Callback(Flags[Cfg.Flag])
@@ -3095,33 +3095,33 @@
 
             Items.Value.Focused:Connect(function()
                 if Items.Text then 
-                    Library:Tween(Items.Text, 
+                    PDP_UILibrary:Tween(Items.Text, 
                         {TextColor3 = themes.preset.text_color,
-                    }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                    }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
                 end 
 
-                Library:Tween(Items.Value,
+                PDP_UILibrary:Tween(Items.Value,
                     {TextColor3 = themes.preset.accent,
-                }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
             end)
 
             Items.Value.FocusLost:Connect(function()
                 if Items.Text then 
-                    Library:Tween(Items.Text,
+                    PDP_UILibrary:Tween(Items.Text,
                         {TextColor3 = themes.preset.unselected,
-                    }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                    }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
                 end 
 
-                Library:Tween(Items.Value,
+                PDP_UILibrary:Tween(Items.Value,
                     {TextColor3 = themes.preset.text_color,
-                }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
 
                 pcall(function() -- me lazy ;(
                     Cfg.Set(Items.Value.Text)
                 end)
             end)
 
-            Library:Connection(InputService.InputChanged, function(input)
+            PDP_UILibrary:Connection(InputService.InputChanged, function(input)
                 if Cfg.Dragging and input.UserInputType == Enum.UserInputType.MouseMovement then 
                     local Size = (input.Position.X - Items.Outline.AbsolutePosition.X) / Items.Outline.AbsoluteSize.X
                     local Value = ((Cfg.Max - Cfg.Min) * Size) + Cfg.Min
@@ -3129,7 +3129,7 @@
                 end
             end)
 
-            Library:Connection(InputService.InputEnded, function(input)
+            PDP_UILibrary:Connection(InputService.InputEnded, function(input)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
                     Cfg.Dragging = false
                 end 
@@ -3138,10 +3138,10 @@
             Cfg.Set(Cfg.Value)
             ConfigFlags[Cfg.Flag] = Cfg.Set
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:Tooltip(properties)
+        function PDP_UILibrary:Tooltip(properties)
             local Cfg = {
                 Path = properties.Path;
                 Text = properties.Text;
@@ -3154,7 +3154,7 @@
 
             local Items = Cfg.Items; do 
                 -- Text
-                    Items.Tooltip = Library:Create( "TextLabel" , {
+                    Items.Tooltip = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         TextStrokeColor3 = rgb(255, 255, 255);
                         ZIndex = 2;
@@ -3172,17 +3172,17 @@
                         Position = dim2(1, 3, 0, 0);
                         BorderSizePixel = 0;
                         BackgroundColor3 = rgb(255, 255, 255)
-                    }); Library:Themify(Items.Tooltip, "tooltip", "TextColor3")
+                    }); PDP_UILibrary:Themify(Items.Tooltip, "tooltip", "TextColor3")
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Tooltip;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
                 -- 
 
                 -- Holder
-                    Items.Outline = Library:Create( "Frame" , {
-                        Parent = Library.Items;
+                    Items.Outline = PDP_UILibrary:Create( "Frame" , {
+                        Parent = PDP_UILibrary.Items;
                         Name = "\0";
                         Visible = false;
                         Position = dim2(0.024000000208616257, 0, 0, 140);
@@ -3191,9 +3191,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Outline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -3201,9 +3201,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.Inline, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Inline, "inline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -3211,9 +3211,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BackgroundColor3 = themes.preset.background;
-                    }); Library:Themify(Items.Background, "background", "BackgroundColor3")
+                    }); PDP_UILibrary:Themify(Items.Background, "background", "BackgroundColor3")
 
-                    Items.Text = Library:Create( "TextLabel" , {
+                    Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                         RichText = true;
                         Parent = Items.Background;
                         TextColor3 = rgb(235, 235, 235);
@@ -3232,7 +3232,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.Title = Library:Create( "TextLabel" , {
+                    Items.Title = PDP_UILibrary:Create( "TextLabel" , {
                         RichText = true;
                         Parent = Items.Background;
                         TextColor3 = themes.preset.accent;
@@ -3247,26 +3247,26 @@
                         FontFace = Fonts[themes.preset.font];
                         ZIndex = 2;
                         TextSize = 12;
-                    });	Library:Themify(Items.Title, "accent", "TextColor3")
+                    });	PDP_UILibrary:Themify(Items.Title, "accent", "TextColor3")
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Title;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         Parent = Items.Title;
                         PaddingTop = dim(0, 5);
                         PaddingRight = dim(0, 4);
                         PaddingLeft = dim(0, 6)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Text;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingTop = dim(0, 5);
                         PaddingBottom = dim(0, 6);
                         Parent = Items.Text;
@@ -3274,19 +3274,19 @@
                         PaddingLeft = dim(0, 6)
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingBottom = dim(0, 1);
                         PaddingRight = dim(0, 1);
                         Parent = Items.Inline
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingBottom = dim(0, 1);
                         PaddingRight = dim(0, 1);
                         Parent = Items.Outline
                     });
 
-                    Library:Create( "UIGradient" , {
+                    PDP_UILibrary:Create( "UIGradient" , {
                         Parent = Items.Outline
                     });
                 -- 
@@ -3308,7 +3308,7 @@
 
                 local Tween;
                 for _,obj in Children do
-                    local Index = Library:GetTransparency(obj)
+                    local Index = PDP_UILibrary:GetTransparency(obj)
 
                     if not Index then 
                         continue 
@@ -3316,14 +3316,14 @@
 
                     if type(Index) == "table" then
                         for _,prop in Index do
-                            Tween = Library:Fade(obj, prop, bool)
+                            Tween = PDP_UILibrary:Fade(obj, prop, bool)
                         end
                     else
-                        Tween = Library:Fade(obj, Index, bool)
+                        Tween = PDP_UILibrary:Fade(obj, Index, bool)
                     end
                 end
                 
-                Library:Connection(Tween.Completed, function()
+                PDP_UILibrary:Connection(Tween.Completed, function()
                     Cfg.Tweening = false
                     Items.Outline.Visible = bool
                 end)
@@ -3345,24 +3345,24 @@
                 Cfg.Tween(false)
             end)
 
-            Library:Connection(InputService.InputChanged, function(input)
-                if Items.Tooltip.Visible and input.UserInputType == Enum.UserInputType.MouseMovement and Library:Hovering(Items.Tooltip) then 
-                    Library:Tween(Items.Outline, {
+            PDP_UILibrary:Connection(InputService.InputChanged, function(input)
+                if Items.Tooltip.Visible and input.UserInputType == Enum.UserInputType.MouseMovement and PDP_UILibrary:Hovering(Items.Tooltip) then 
+                    PDP_UILibrary:Tween(Items.Outline, {
                         Position = dim_offset(input.Position.X, input.Position.Y + 86)
-                    }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                    }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
                 end
 
-                if (not Library:Hovering(Items.Tooltip)) and Cfg.Tweening == false and Items.Outline.Visible then 
+                if (not PDP_UILibrary:Hovering(Items.Tooltip)) and Cfg.Tweening == false and Items.Outline.Visible then 
                     Cfg.Tween(false)   
                 end 
             end)
 
             Cfg.Tween(false)
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:Dropdown(properties) 
+        function PDP_UILibrary:Dropdown(properties) 
             local Cfg = {
                 Name = properties.Name or nil;
                 Flag = properties.Flag or properties.Name or "Dropdown";
@@ -3388,7 +3388,7 @@
 
             local Items = Cfg.Items; do 
                 -- Element
-                    Items.Dropdown = Library:Create( "TextButton" , {
+                    Items.Dropdown = PDP_UILibrary:Create( "TextButton" , {
                         Active = false;
                         BorderColor3 = rgb(0, 0, 0);
                         Parent = self.Items.Elements;
@@ -3401,7 +3401,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.Outline = Library:Create( "TextButton" , {
+                    Items.Outline = PDP_UILibrary:Create( "TextButton" , {
                         Parent = Items.Dropdown;
                         Name = "\0";
                         Position = dim2(0, 0, 0, Cfg.Name and 18 or 0);
@@ -3409,9 +3409,9 @@
                         Size = dim2(1, 0, 0, 17);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Outline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -3421,7 +3421,7 @@
                         BackgroundColor3 = rgb(45, 45, 50)
                     });
 
-                    Items.InlineInline = Library:Create( "Frame" , {
+                    Items.InlineInline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -3429,9 +3429,9 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.InlineInline;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -3442,7 +3442,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.Plus = Library:Create( "TextLabel" , {
+                    Items.Plus = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         Parent = Items.Background;
                         TextColor3 = rgb(145, 145, 145);
@@ -3461,12 +3461,12 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Plus;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
 
-                    Items.Fading = Library:Create( "Frame" , {
+                    Items.Fading = PDP_UILibrary:Create( "Frame" , {
                         BorderColor3 = rgb(0, 0, 0);
                         AnchorPoint = vec2(1, 0);
                         Parent = Items.Background;
@@ -3478,19 +3478,19 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    local Gradient = Library:Create( "UIGradient" , {
+                    local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                         Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))};
                         Transparency = numseq{numkey(0, 1), numkey(0.82, 0), numkey(1, 0)};
                         Parent = Items.Fading
-                    }); Library:SaveGradient(Gradient, "elements");
+                    }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                    local Gradient = Library:Create( "UIGradient" , {
+                    local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                         Rotation = 90;
                         Parent = Items.Background;
                         Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                    }); Library:SaveGradient(Gradient, "elements");
+                    }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                    Items.Value = Library:Create( "TextLabel" , {
+                    Items.Value = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         TextColor3 = rgb(145, 145, 145);
                         TextStrokeColor3 = rgb(255, 255, 255);
@@ -3508,7 +3508,7 @@
                     });
 
                     if Cfg.Name then 
-                        Items.Text = Library:Create( "TextLabel" , {
+                        Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                             FontFace = Fonts[themes.preset.font];
                             Parent = Items.Dropdown;
                             TextColor3 = rgb(145, 145, 145);
@@ -3526,7 +3526,7 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Library:Create( "UIStroke" , {
+                        PDP_UILibrary:Create( "UIStroke" , {
                             Parent = Items.Text;
                             LineJoinMode = Enum.LineJoinMode.Miter
                         });
@@ -3534,8 +3534,8 @@
                 --  
                     
                 -- Element Holder
-                    Items.DropdownElements = Library:Create( "Frame" , {
-                        Parent = Library.Other;
+                    Items.DropdownElements = PDP_UILibrary:Create( "Frame" , {
+                        Parent = PDP_UILibrary.Other;
                         Visible = false;
                         Size = dim2(0, 213, 0, Cfg.Scrolling and Cfg.YSize or 18);
                         Name = "DropdownElements";
@@ -3544,24 +3544,24 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.Y;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.DropdownElements, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.DropdownElements, "outline", "BackgroundColor3")
                     
                     if Cfg.Search then 
-                        Library:Create( "UIPadding", {
+                        PDP_UILibrary:Create( "UIPadding", {
                             PaddingBottom = dim(0, 1);
                             Parent = Items.DropdownElements
                         });
 
-                        Items.TextboxOutline = Library:Create( "Frame", {
+                        Items.TextboxOutline = PDP_UILibrary:Create( "Frame", {
                             Name = "\0";
                             Parent = Items.DropdownElements;
                             BorderColor3 = rgb(0, 0, 0);
                             Size = dim2(1, 0, 0, 18);
                             BorderSizePixel = 0;
                             BackgroundColor3 = themes.preset.outline
-                        });	Library:Themify(Items.TextboxOutline, "outline", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Items.TextboxOutline, "outline", "BackgroundColor3")
 
-                        Items.Inline = Library:Create( "Frame", {
+                        Items.Inline = PDP_UILibrary:Create( "Frame", {
                             Parent = Items.TextboxOutline;
                             Name = "\0";
                             Position = dim2(0, 1, 0, 1);
@@ -3571,7 +3571,7 @@
                             BackgroundColor3 = rgb(45, 45, 50)
                         });
 
-                        Items.InlineInline = Library:Create( "Frame", {
+                        Items.InlineInline = PDP_UILibrary:Create( "Frame", {
                             Parent = Items.Inline;
                             Name = "\0";
                             Position = dim2(0, 1, 0, 1);
@@ -3579,9 +3579,9 @@
                             Size = dim2(1, -2, 1, -2);
                             BorderSizePixel = 0;
                             BackgroundColor3 = themes.preset.outline
-                        });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                        Items.Background = Library:Create( "Frame", {
+                        Items.Background = PDP_UILibrary:Create( "Frame", {
                             Parent = Items.InlineInline;
                             Size = dim2(1, -2, 1, -2);
                             Name = "\0";
@@ -3592,7 +3592,7 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Items.Fading = Library:Create( "Frame", {
+                        Items.Fading = PDP_UILibrary:Create( "Frame", {
                             BorderColor3 = rgb(0, 0, 0);
                             AnchorPoint = vec2(1, 0);
                             Parent = Items.Background;
@@ -3604,19 +3604,19 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Library:Create( "UIGradient", {
+                        PDP_UILibrary:Create( "UIGradient", {
                             Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))};
                             Transparency = numseq{numkey(0, 1), numkey(0.82, 0), numkey(1, 0)};
                             Parent = Items.Fading
-                        }); Library:SaveGradient(Gradient, "elements"); 
+                        }); PDP_UILibrary:SaveGradient(Gradient, "elements"); 
 
-                        Library:Create( "UIGradient", {
+                        PDP_UILibrary:Create( "UIGradient", {
                             Rotation = 90;
                             Parent = Items.Background;
                             Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                        }); Library:SaveGradient(Gradient, "elements");
+                        }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                        Items.Textbox = Library:Create( "TextBox", {
+                        Items.Textbox = PDP_UILibrary:Create( "TextBox", {
                             CursorPosition = -1;
                             Active = false;
                             Selectable = false;
@@ -3635,10 +3635,10 @@
                             BorderSizePixel = 0;
                             AutomaticSize = Enum.AutomaticSize.XY;
                             BackgroundColor3 = rgb(255, 255, 255)
-                        });	Library:Themify(Items.Textbox, "unselected", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Items.Textbox, "unselected", "BackgroundColor3")
                     end 
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.DropdownElements;
                         Name = "\0";
                         Position = dim2(0, 1, 0, Cfg.Search and 18 or 1);
@@ -3648,7 +3648,7 @@
                         BackgroundColor3 = rgb(45, 45, 50)
                     });
 
-                    Items.InlineInline = Library:Create( "Frame" , {
+                    Items.InlineInline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -3656,9 +3656,9 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.InlineInline;
                         Size = dim2(1, Cfg.Scrolling and -5 or -2, 1, -2);
                         Name = "\0";
@@ -3669,14 +3669,14 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    local Gradient = Library:Create( "UIGradient" , {
+                    local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                         Rotation = 90;
                         Parent = Items.Background;
                         Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                    }); Library:SaveGradient(Gradient, "elements");
+                    }); PDP_UILibrary:SaveGradient(Gradient, "elements");
                     
                     if Cfg.Scrolling then 
-                        Items.ScrollBar = Library:Create( "ScrollingFrame", {
+                        Items.ScrollBar = PDP_UILibrary:Create( "ScrollingFrame", {
                             ScrollBarImageColor3 = rgb(0, 0, 0);
                             Active = true;
                             ScrollBarThickness = 2;
@@ -3694,19 +3694,19 @@
                             ZIndex = 2;
                             BackgroundColor3 = rgb(255, 255, 255);
                             ScrollBarImageColor3 = themes.preset.accent
-                        }); Library:Themify(Items.ScrollBar, "accent", "ScrollBarImageColor3")
+                        }); PDP_UILibrary:Themify(Items.ScrollBar, "accent", "ScrollBarImageColor3")
                         
                     
                     end 
 
                     Parent = Cfg.Scrolling and Items.ScrollBar or Items.Background -- gay
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         Parent = Parent;
                         SortOrder = Enum.SortOrder.LayoutOrder
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingBottom = dim(0, 3);
                         Parent = Parent
                     });
@@ -3714,7 +3714,7 @@
             end 
 
             function Cfg.RenderOption(text)       
-                local Button = Library:Create( "TextButton" , {
+                local Button = PDP_UILibrary:Create( "TextButton" , {
                     FontFace = Fonts[themes.preset.font];
                     TextColor3 = themes.preset.unselected;
                     TextStrokeColor3 = rgb(255, 255, 255);
@@ -3731,9 +3731,9 @@
                     ZIndex = 2;
                     TextSize = 12;
                     BackgroundColor3 = rgb(255, 255, 255)
-                }); Library:Themify(Button, "unselected", "TextColor3"); Button.Text = text;
+                }); PDP_UILibrary:Themify(Button, "unselected", "TextColor3"); Button.Text = text;
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingTop = dim(0, 3);
                     PaddingBottom = dim(0, 3);
                     Parent = Button;
@@ -3751,8 +3751,8 @@
                     return 
                 end 
 
-                if Library.OpenElement ~= Cfg then 
-                    Library:CloseElement(Cfg)
+                if PDP_UILibrary.OpenElement ~= Cfg then 
+                    PDP_UILibrary:CloseElement(Cfg)
                 end
 
                 Items.DropdownElements.Position = dim2(0, Items.Outline.AbsolutePosition.X, 0, Items.Outline.AbsolutePosition.Y + 80)
@@ -3764,7 +3764,7 @@
 
                 Cfg.Tween(bool)
                 
-                Library.OpenElement = Cfg
+                PDP_UILibrary.OpenElement = Cfg
             end
             
             function Cfg.Set(value)
@@ -3829,7 +3829,7 @@
                 Cfg.Tweening = true 
 
                 if bool then 
-                    Items.DropdownElements.Parent = Library.Items
+                    Items.DropdownElements.Parent = PDP_UILibrary.Items
                     Items.DropdownElements.Visible = true 
                 end
 
@@ -3838,7 +3838,7 @@
 
                 local Tween;
                 for _,obj in Children do
-                    local Index = Library:GetTransparency(obj)
+                    local Index = PDP_UILibrary:GetTransparency(obj)
 
                     if not Index then 
                         continue 
@@ -3846,16 +3846,16 @@
 
                     if type(Index) == "table" then
                         for _,prop in Index do
-                            Tween = Library:Fade(obj, prop, bool, Library.TweeningSpeed)
+                            Tween = PDP_UILibrary:Fade(obj, prop, bool, PDP_UILibrary.TweeningSpeed)
                         end
                     else
-                        Tween = Library:Fade(obj, Index, bool, Library.TweeningSpeed)
+                        Tween = PDP_UILibrary:Fade(obj, Index, bool, PDP_UILibrary.TweeningSpeed)
                     end
                 end
 
-                Library:Connection(Tween.Completed, function()
+                PDP_UILibrary:Connection(Tween.Completed, function()
                     Cfg.Tweening = false
-                    Items.DropdownElements.Parent = bool and Library.Items or Library.Other
+                    Items.DropdownElements.Parent = bool and PDP_UILibrary.Items or PDP_UILibrary.Other
                     Items.DropdownElements.Visible = bool 
                 end)
             end
@@ -3876,9 +3876,9 @@
                 Cfg.SetVisible(Cfg.Open)
             end)
 
-            Library:Connection(InputService.InputBegan, function(input, game_event)
+            PDP_UILibrary:Connection(InputService.InputBegan, function(input, game_event)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    if not Library:Hovering({Items.DropdownElements, Items.Dropdown}) then
+                    if not PDP_UILibrary:Hovering({Items.DropdownElements, Items.Dropdown}) then
                         Cfg.SetVisible(false)
                         Cfg.Open = false
                     end 
@@ -3899,10 +3899,10 @@
             Cfg.RefreshOptions(Cfg.Options)
             Cfg.Set(Cfg.Default)
                 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end
 
-        function Library:Label(properties)
+        function PDP_UILibrary:Label(properties)
             local Cfg = {
                 Name = properties.Name or "Label",
 
@@ -3911,7 +3911,7 @@
             }
 
             local Items = Cfg.Items; do 
-                Items.Label = Library:Create( "Frame" , {
+                Items.Label = PDP_UILibrary:Create( "Frame" , {
                     Parent = self.Items.Elements;
                     Name = "\0";
                     BackgroundTransparency = 1;
@@ -3922,7 +3922,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Items.Components = Library:Create( "Frame" , {
+                Items.Components = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Label;
                     Name = "\0";
                     Position = dim2(1, 0, 0, 0);
@@ -3932,7 +3932,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIListLayout" , {
+                PDP_UILibrary:Create( "UIListLayout" , {
                     FillDirection = Enum.FillDirection.Horizontal;
                     HorizontalAlignment = Enum.HorizontalAlignment.Right;
                     Parent = Items.Components;
@@ -3940,7 +3940,7 @@
                     SortOrder = Enum.SortOrder.LayoutOrder
                 });
 
-                Items.Name = Library:Create( "TextLabel" , {
+                Items.Name = PDP_UILibrary:Create( "TextLabel" , {
                     Parent = Items.Label;
                     RichText = true;
                     Name = "\0";
@@ -3959,7 +3959,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIStroke" , {
+                PDP_UILibrary:Create( "UIStroke" , {
                     Parent = Items.Name;
                     LineJoinMode = Enum.LineJoinMode.Miter
                 });
@@ -3971,10 +3971,10 @@
 
             Cfg.Set(Cfg.Name)
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end
 
-        function Library:Textbox(properties) 
+        function PDP_UILibrary:Textbox(properties) 
             local Cfg = {
                 Name = properties.Name or nil;
                 PlaceHolder = properties.PlaceHolder or properties.PlaceHolderText or properties.Holder or properties.HolderText or "Type here...";
@@ -3990,7 +3990,7 @@
             Flags[Cfg.Flag] = Cfg.default
 
             local Items = Cfg.Items; do 
-                Items.Textbox = Library:Create( "TextButton" , {
+                Items.Textbox = PDP_UILibrary:Create( "TextButton" , {
                     Active = false;
                     BorderColor3 = rgb(0, 0, 0);
                     Parent = self.Items.Elements;
@@ -4004,7 +4004,7 @@
                 });
 
                 if Cfg.Name then 
-                    Items.Text = Library:Create( "TextLabel" , {
+                    Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         Parent = Items.Textbox;
                         TextColor3 = rgb(145, 145, 145);
@@ -4022,13 +4022,13 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Text;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
                 end 
 
-                Items.Outline = Library:Create( "Frame" , {
+                Items.Outline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Textbox;
                     Name = "\0";
                     Position = dim2(0, 0, 0, Cfg.Name and 17 or 0);
@@ -4036,9 +4036,9 @@
                     Size = dim2(1, 0, 0, 18);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Inline = Library:Create( "Frame" , {
+                Items.Inline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Outline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -4048,7 +4048,7 @@
                     BackgroundColor3 = rgb(45, 45, 50)
                 });
 
-                Items.InlineInline = Library:Create( "Frame" , {
+                Items.InlineInline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Inline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -4056,9 +4056,9 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                Items.Background = Library:Create( "Frame" , {
+                Items.Background = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.InlineInline;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -4069,7 +4069,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Items.Fading = Library:Create( "Frame" , {
+                Items.Fading = PDP_UILibrary:Create( "Frame" , {
                     BorderColor3 = rgb(0, 0, 0);
                     AnchorPoint = vec2(1, 0);
                     Parent = Items.Background;
@@ -4081,19 +4081,19 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                local Gradient = Library:Create( "UIGradient" , {
+                local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                     Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))};
                     Transparency = numseq{numkey(0, 1), numkey(0.82, 0), numkey(1, 0)};
                     Parent = Items.Fading
-                }); Library:SaveGradient(Gradient, "elements");
+                }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                local Gradient = Library:Create( "UIGradient" , {
+                local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                     Rotation = 90;
                     Parent = Items.Background;
                     Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                }); Library:SaveGradient(Gradient, "elements");
+                }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                Items.Input = Library:Create( "TextBox" , {
+                Items.Input = PDP_UILibrary:Create( "TextBox" , {
                     Parent = Items.Background;
                     FontFace = Fonts[themes.preset.font];
                     Name = "\0";
@@ -4142,10 +4142,10 @@
 
             ConfigFlags[Cfg.Flag] = Cfg.Set
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end
 
-        function Library:Keybind(properties) 
+        function PDP_UILibrary:Keybind(properties) 
             local Cfg = {
                 Flag = properties.Flag or properties.Name;
                 Callback = properties.Callback or function() end;
@@ -4171,11 +4171,11 @@
                 Active = Cfg.Active
             }
 
-            local KeybindElement = Library.KeybindList:ListElement({})
+            local KeybindElement = PDP_UILibrary.KeybindList:ListElement({})
 
             local Items = Cfg.Items; do 
                 -- Component
-                    Items.Keybind = Library:Create( "TextButton" , {
+                    Items.Keybind = PDP_UILibrary:Create( "TextButton" , {
                         Parent = self.Items.Components;
                         FontFace = Fonts[themes.preset.font];
                         Name = "\0";
@@ -4194,15 +4194,15 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Keybind;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
                 -- 
                 
                 -- Mode holder
-                    Items.Information = Library:Create( "Frame" , {
-                        Parent = Library.Other;
+                    Items.Information = PDP_UILibrary:Create( "Frame" , {
+                        Parent = PDP_UILibrary.Other;
                         Size = dim2(0, 213, 0, 71);
                         Name = "\0";
                         Visible = false;
@@ -4211,9 +4211,9 @@
                         ZIndex = 1;
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.Information, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Information, "outline", "BackgroundColor3")
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Information;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -4223,7 +4223,7 @@
                         BackgroundColor3 = rgb(45, 45, 50)
                     });
 
-                    Items.InlineInline = Library:Create( "Frame" , {
+                    Items.InlineInline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Inline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -4231,9 +4231,9 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.outline
-                    });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.InlineInline;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -4244,13 +4244,13 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    local Gradient = Library:Create( "UIGradient" , {
+                    local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                         Rotation = 90;
                         Parent = Items.Background;
                         Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                    }); Library:SaveGradient(Gradient, "elements");
+                    }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                    Items.Elements = Library:Create( "Frame" , {
+                    Items.Elements = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Background;
                         Name = "\0";
                         Position = dim2(0, 12, 0, 5);
@@ -4260,18 +4260,18 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         Parent = Items.Elements;
                         PaddingTop = dim(0, 15)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         Parent = Items.Elements;
                         Padding = dim(0, 7);
                         SortOrder = Enum.SortOrder.LayoutOrder
                     });
 
-                    local Section = setmetatable(Cfg, Library)
+                    local Section = setmetatable(Cfg, PDP_UILibrary)
                     Items.Dropdown = Section:Dropdown({Name = "Mode", Options = {"Toggle", "Hold", "Always"}, Callback = function(option)
                         if Cfg.Set then 
                             Cfg.Set(option)
@@ -4314,7 +4314,7 @@
                     Cfg.Mode = input
                     Cfg.SetMode(Cfg.Mode) 
                 elseif type(input) == "table" then
-                    input.Key = type(input.Key) == "string" and input.Key ~= "NONE" and Library:ConvertEnum(input.Key) or input.Key
+                    input.Key = type(input.Key) == "string" and input.Key ~= "NONE" and PDP_UILibrary:ConvertEnum(input.Key) or input.Key
                     input.Key = input.Key == Enum.KeyCode.Escape and "NONE" or input.Key
 
                     Cfg.Key = input.Key or "NONE"
@@ -4363,7 +4363,7 @@
 
                 if bool then 
                     Items.Information.Visible = true
-                    Items.Information.Parent = Library.Items
+                    Items.Information.Parent = PDP_UILibrary.Items
                 end
 
                 local Children = Items.Information:GetDescendants()
@@ -4371,7 +4371,7 @@
 
                 local Tween;
                 for _,obj in Children do
-                    local Index = Library:GetTransparency(obj)
+                    local Index = PDP_UILibrary:GetTransparency(obj)
 
                     if not Index then 
                         continue 
@@ -4379,14 +4379,14 @@
 
                     if type(Index) == "table" then
                         for _,prop in Index do
-                            Tween = Library:Fade(obj, prop, bool, Library.TweeningSpeed)
+                            Tween = PDP_UILibrary:Fade(obj, prop, bool, PDP_UILibrary.TweeningSpeed)
                         end
                     else
-                        Tween = Library:Fade(obj, Index, bool, Library.TweeningSpeed)
+                        Tween = PDP_UILibrary:Fade(obj, Index, bool, PDP_UILibrary.TweeningSpeed)
                     end
                 end
 
-                Library:Connection(Tween.Completed, function()
+                PDP_UILibrary:Connection(Tween.Completed, function()
                     Cfg.Tweening = false
                     Items.Information.Visible = bool
                 end)
@@ -4396,7 +4396,7 @@
                 task.wait()
                 Items.Keybind.Text = "..."	
 
-                Cfg.Binding = Library:Connection(InputService.InputBegan, function(keycode, game_event)  
+                Cfg.Binding = PDP_UILibrary:Connection(InputService.InputBegan, function(keycode, game_event)  
                     Cfg.Set(keycode.KeyCode ~= Enum.KeyCode.Unknown and keycode.KeyCode or keycode.UserInputType)
                     
                     Cfg.Binding:Disconnect() 
@@ -4410,9 +4410,9 @@
                 Cfg.SetVisible(Cfg.Open)
             end)
 
-            Library:Connection(InputService.InputBegan, function(input, game_event) 
+            PDP_UILibrary:Connection(InputService.InputBegan, function(input, game_event) 
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    if not (Library:Hovering(Items.Dropdown.Items.DropdownElements) or Library:Hovering(Items.Information)) and Items.Information.Visible then
+                    if not (PDP_UILibrary:Hovering(Items.Dropdown.Items.DropdownElements) or PDP_UILibrary:Hovering(Items.Information)) and Items.Information.Visible then
                         Cfg.SetVisible(false)
                         Cfg.Open = false;
                     end 
@@ -4432,7 +4432,7 @@
                 end
             end)    
 
-            Library:Connection(InputService.InputEnded, function(input, game_event) 
+            PDP_UILibrary:Connection(InputService.InputEnded, function(input, game_event) 
                 if game_event then 
                     return 
                 end 
@@ -4450,10 +4450,10 @@
             ConfigFlags[Cfg.Flag] = Cfg.Set
             Items.Dropdown.Set(Cfg.Mode)
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end
         
-        function Library:Button(properties) 
+        function PDP_UILibrary:Button(properties) 
             local Cfg = {
                 Name = properties.Name or "TextBox",
                 Callback = properties.Callback or function() end,
@@ -4463,7 +4463,7 @@
             }
 
             local Items = Cfg.Items; do
-                Items.Button = Library:Create( "TextButton" , {
+                Items.Button = PDP_UILibrary:Create( "TextButton" , {
                     Active = false;
                     BorderColor3 = rgb(0, 0, 0);
                     Parent = self.Items.Elements;
@@ -4476,7 +4476,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
                 
-                Items.Outline = Library:Create( "TextButton" , {
+                Items.Outline = PDP_UILibrary:Create( "TextButton" , {
                     Parent = Items.Button;
                     Size = dim2(1, 0, 0, 18);
                     Name = "\0";
@@ -4485,9 +4485,9 @@
                     Selectable = false;
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Inline = Library:Create( "Frame" , {
+                Items.Inline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Outline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -4497,7 +4497,7 @@
                     BackgroundColor3 = rgb(45, 45, 50)
                 });
 
-                Items.InlineInline = Library:Create( "Frame" , {
+                Items.InlineInline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Inline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -4505,9 +4505,9 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                Items.Background = Library:Create( "Frame" , {
+                Items.Background = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.InlineInline;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -4518,13 +4518,13 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                local Gradient = Library:Create( "UIGradient" , {
+                local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                     Rotation = 90;
                     Parent = Items.Background;
                     Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                }); Library:SaveGradient(Gradient, "elements");
+                }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                Items.Text = Library:Create( "TextLabel" , {
+                Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                     FontFace = Fonts[themes.preset.font];
                     Parent = Items.Background;
                     TextColor3 = rgb(145, 145, 145);
@@ -4542,7 +4542,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIStroke" , {
+                PDP_UILibrary:Create( "UIStroke" , {
                     Parent = Items.Text
                 });
             end 
@@ -4551,10 +4551,10 @@
                 Cfg.Callback()
             end)
             
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end
         
-        function Library:Colorpicker(properties) 
+        function PDP_UILibrary:Colorpicker(properties) 
             local Cfg = {
                 Name = properties.Name or self.Name or "Color", 
                 Flag = properties.Flag or properties.Name or self.Name or "Colorpicker",
@@ -4579,10 +4579,10 @@
             Cfg.Set(Cfg.Color, Cfg.Alpha)
             ConfigFlags[Cfg.Flag] = Cfg.Set
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:List(properties)
+        function PDP_UILibrary:List(properties)
             local Cfg = {
                 Flag = properties.Flag or properties.Name or "Dropdown";
                 Options = properties.Options or {""};
@@ -4599,7 +4599,7 @@
             } 
 
             local Items = Cfg.Items; do 
-                Items.List = Library:Create( "TextButton", {
+                Items.List = PDP_UILibrary:Create( "TextButton", {
                     Active = false;
                     TextTransparency = 1;
                     Parent = self.Items.Elements;
@@ -4614,7 +4614,7 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Items.Outline = Library:Create( "TextButton", {
+                Items.Outline = PDP_UILibrary:Create( "TextButton", {
                     Active = false;
                     BorderColor3 = rgb(0, 0, 0);
                     AutoButtonColor = false;
@@ -4624,9 +4624,9 @@
                     Size = dim2(1, 0, 1, 0);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Inline = Library:Create( "Frame", {
+                Items.Inline = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.Outline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -4636,7 +4636,7 @@
                     BackgroundColor3 = rgb(45, 45, 50)
                 });
 
-                Items.InlineInline = Library:Create( "Frame", {
+                Items.InlineInline = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.Inline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -4644,9 +4644,9 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                Items.TextHolder = Library:Create( "Frame", {
+                Items.TextHolder = PDP_UILibrary:Create( "Frame", {
                     Parent = Items.InlineInline;
                     Size = dim2(1, -2, 1, -2);
                     Name = "\0";
@@ -4657,15 +4657,15 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                local Gradient = Library:Create( "UIGradient", {
+                local Gradient = PDP_UILibrary:Create( "UIGradient", {
                     Rotation = 90;
                     Parent = Items.TextHolder;
                     Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                }); Library:SaveGradient(Gradient, "elements");
+                }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
                 if not Cfg.AutoSizing then 
                     local Old = Items.TextHolder
-                    Items.TextHolder = Library:Create( "ScrollingFrame", {
+                    Items.TextHolder = PDP_UILibrary:Create( "ScrollingFrame", {
                         ScrollBarImageColor3 = rgb(0, 0, 0);
                         Active = true;
                         BottomImage = "rbxassetid://102257413888451";
@@ -4683,16 +4683,16 @@
                         BorderSizePixel = 0;
                         CanvasSize = dim2(0, 0, 0, 0);
                         ScrollBarImageColor3 = themes.preset.accent
-                    }); Library:Themify(Items.TextHolder, "accent", "ScrollBarImageColor3")
+                    }); PDP_UILibrary:Themify(Items.TextHolder, "accent", "ScrollBarImageColor3")
                 end  
 
-                Library:Create( "UIListLayout", {
+                PDP_UILibrary:Create( "UIListLayout", {
                     Parent = Items.TextHolder;
                     SortOrder = Enum.SortOrder.LayoutOrder;
                     HorizontalFlex = Enum.UIFlexAlignment.Fill
                 });
                 
-                Library:Create( "UIPadding", {
+                PDP_UILibrary:Create( "UIPadding", {
                     PaddingBottom = dim(0, 4);
                     Parent = Items.TextHolder
                 });
@@ -4723,7 +4723,7 @@
                 end 
 
                 function Cfg.RenderOption(name)
-                    local Button = Library:Create( "TextButton", {
+                    local Button = PDP_UILibrary:Create( "TextButton", {
                         FontFace = Fonts[themes.preset.font];
                         Parent = Items.TextHolder;
                         TextColor3 = rgb(145, 145, 145);
@@ -4741,15 +4741,15 @@
                         ZIndex = 100;
                         TextSize = 12;
                         BackgroundColor3 = rgb(255, 255, 255)
-                    });	Library:Themify(Button, "unselected", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Button, "unselected", "BackgroundColor3")
 
                     Button.Text = name
 
-                    Library:Create( "UIStroke", {
+                    PDP_UILibrary:Create( "UIStroke", {
                         Parent = Button
                     });
 
-                    Library:Create( "UIPadding", {
+                    PDP_UILibrary:Create( "UIPadding", {
                         PaddingTop = dim(0, 3);
                         PaddingBottom = dim(0, 3);
                         Parent = Button;
@@ -4807,10 +4807,10 @@
                 Cfg.Set(Cfg.Default)
             end 
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:Configs(Window, Tab)
+        function PDP_UILibrary:Configs(Window, Tab)
             -- Settings
                 local ConfigText;
                 local Column = Tab:Column({})
@@ -4825,30 +4825,30 @@
                         end 
                     end, 
                 }); 
-                Library:UpdateConfigList();
+                PDP_UILibrary:UpdateConfigList();
 
                 Text = Section:Textbox({Name = "Config Name:", Flag = "config_Name_text", Callback = function(text)
                     ConfigText = text
                 end})
 
                 Section:Button({Name = "Save", Callback = function() 
-                    writefile(Library.Directory .. "/configs/" .. ConfigText .. ".cfg", Library:GetConfig())
-                    Library:Notification({Name = "Saved config.", Lifetime = 5})
-                    Library:UpdateConfigList()
+                    writefile(PDP_UILibrary.Directory .. "/configs/" .. ConfigText .. ".cfg", PDP_UILibrary:GetConfig())
+                    PDP_UILibrary:Notification({Name = "Saved config.", Lifetime = 5})
+                    PDP_UILibrary:UpdateConfigList()
                 end})
 
                 Section:Button({Name = "Load", Callback = function() 
                     Window.Tweening = true 
-                    Library:LoadConfig(readfile(Library.Directory .. "/configs/" .. ConfigText .. ".cfg"))  
-                    Library:Notification({Name = "Loaded config.", Lifetime = 5})
-                    Library:UpdateConfigList() 
+                    PDP_UILibrary:LoadConfig(readfile(PDP_UILibrary.Directory .. "/configs/" .. ConfigText .. ".cfg"))  
+                    PDP_UILibrary:Notification({Name = "Loaded config.", Lifetime = 5})
+                    PDP_UILibrary:UpdateConfigList() 
                     Window.Tweening = false 
                 end})
 
                 Section:Button({Name = "Delete", Callback = function() 
-                    delfile(Library.Directory .. "/configs/" .. ConfigText .. ".cfg")  
-                    Library:Notification({Name = "Deleted config.", Lifetime = 5})
-                    Library:UpdateConfigList() 
+                    delfile(PDP_UILibrary.Directory .. "/configs/" .. ConfigText .. ".cfg")  
+                    PDP_UILibrary:Notification({Name = "Deleted config.", Lifetime = 5})
+                    PDP_UILibrary:UpdateConfigList() 
                 end})
 
                 local Section = Column:Section({Name = "Server"})
@@ -4880,33 +4880,33 @@
                 local Column = Tab:Column({})
                 local Section = Column:Section({Name = "Other"})
                 Section:Label({Name = "Inline"}):Colorpicker({Color = themes.preset.inline, Callback = function(color, alpha)
-                    Library:RefreshTheme("inline", color)
+                    PDP_UILibrary:RefreshTheme("inline", color)
                 end})
                 Section:Label({Name = "Outline"}):Colorpicker({Color = themes.preset.outline, Callback = function(color, alpha)
-                    Library:RefreshTheme("outline", color)
+                    PDP_UILibrary:RefreshTheme("outline", color)
                 end})
                 Section:Label({Name = "Accent"}):Colorpicker({Color = themes.preset.accent, Callback = function(color, alpha)
-                    Library:RefreshTheme("accent", color)
+                    PDP_UILibrary:RefreshTheme("accent", color)
                 end})
                 local Label = Section:Label({Name = "Background"})
                 Label:Colorpicker({Color = themes.preset.background, Callback = function(color, alpha)
-                    Library:RefreshTheme("background", color)
+                    PDP_UILibrary:RefreshTheme("background", color)
                 end})
                 Label:Colorpicker({Color = themes.preset.misc_1, Callback = function(color, alpha)
-                    Library:RefreshTheme("misc_1", color)
+                    PDP_UILibrary:RefreshTheme("misc_1", color)
                 end})
                 Section:Label({Name = "Text Color"}):Colorpicker({Color = themes.preset.text_color, Callback = function(color, alpha)
-                    Library:RefreshTheme("text_color", color)
+                    PDP_UILibrary:RefreshTheme("text_color", color)
                 end})
                 Section:Label({Name = "Tooltip"}):Colorpicker({Color = themes.preset.tooltip, Callback = function(color, alpha)
-                    Library:RefreshTheme("tooltip", color)
+                    PDP_UILibrary:RefreshTheme("tooltip", color)
                 end})
                 Section:Label({Name = "Unselected"}):Colorpicker({Color = themes.preset.unselected, Callback = function(color, alpha)
-                    Library:RefreshTheme("unselected", color)
+                    PDP_UILibrary:RefreshTheme("unselected", color)
                 end})
                 local Label = Section:Label({Name = "Element Gradients"})
                 Label:Colorpicker({Color = themes.preset.misc_1, Callback = function(color, alpha)
-                    Library:RefreshTheme("misc_1", color)
+                    PDP_UILibrary:RefreshTheme("misc_1", color)
 
                     for _,seq in themes.gradients.elements do
                         seq.Color = rgbseq{rgbkey(0, themes.preset.misc_1), rgbkey(1, themes.preset.misc_2)}
@@ -4919,14 +4919,14 @@
                         seq.Color = rgbseq{rgbkey(0, themes.preset.misc_1), rgbkey(1, themes.preset.misc_2)}
                     end
                 end, Flag = "Element Gradient 2"})
-                Section:Slider({Name = "Tween Speed", Min = 0, Max = 3, Decimal = Library.DraggingSpeed, Default = .3, Callback = function(num)
-                    Library.TweeningSpeed = num
+                Section:Slider({Name = "Tween Speed", Min = 0, Max = 3, Decimal = PDP_UILibrary.DraggingSpeed, Default = .3, Callback = function(num)
+                    PDP_UILibrary.TweeningSpeed = num
                 end})
-                Section:Dropdown({Name = "Tweening Style", Options = {"Linear", "Sine", "Back", "Quad", "Quart", "Quint", "Bounce", "Elastic", "Exponential", "Circular", "Cubic"}, Flag = "LibraryEasingStyle", Default = "Quint", Callback = function(Option)
-                    Library.EasingStyle = Enum.EasingStyle[Option]
+                Section:Dropdown({Name = "Tweening Style", Options = {"Linear", "Sine", "Back", "Quad", "Quart", "Quint", "Bounce", "Elastic", "Exponential", "Circular", "Cubic"}, Flag = "PDP_UILibraryEasingStyle", Default = "Quint", Callback = function(Option)
+                    PDP_UILibrary.EasingStyle = Enum.EasingStyle[Option]
                 end});
                 Section:Slider({Name = "Dragging Speed", Min = 0, Max = 1, Decimal = .01, Default = .05, Callback = function(num)
-                    Library.DraggingSpeed = num
+                    PDP_UILibrary.DraggingSpeed = num
                 end})
                 Section:Label({Name = "Menu Bind"}):Keybind({Name = "Menu Bind", Key = Enum.KeyCode.Delete, Callback = function(bool) 
                     print(bool)
@@ -4937,11 +4937,11 @@
                     Window.SetWatermarkVisible(bool)
                 end})
                 Section:Toggle({Name = "Toggle Keybind List", Callback = function(bool)
-                    Library.KeybindList.Items.Holder.Visible = bool 
-                    Library.KeybindList.Items.List.Visible = bool 
+                    PDP_UILibrary.KeybindList.Items.Holder.Visible = bool 
+                    PDP_UILibrary.KeybindList.Items.List.Visible = bool 
                 end})
                 Section:Button({Name = "Unload", Callback = function()
-                    Library:Unload()
+                    PDP_UILibrary:Unload()
                     getgenv().pd_plus:Unload()
                 end})
                 Section:Dropdown({Name = "Font", Options = FontIndexes, Callback = function(option)
@@ -4958,11 +4958,11 @@
                 end})
                 Section:Slider({Name = "Blur Intensity", Default = 14, Decimal = 1, Min = 1, Max = 100, Flag = "BlurSize", Callback = function(int)
                     if Window.Items.Holder.Visible then 
-                        Library.Blur.Size = int
+                        PDP_UILibrary.Blur.Size = int
                     end 
                 end})
                 Section:Button({Name = "Test", Callback = function()
-                    local Notification = Library:Notification({Name = "Hello there!", Lifetime = 5})
+                    local Notification = PDP_UILibrary:Notification({Name = "Hello there!", Lifetime = 5})
                     Notification:NotificationButton({Name = "Discard", Callback = function()
                         Notification.DestroyNotif()
                     end})
@@ -4973,43 +4973,43 @@
         end
     --
         
-    -- Notification Library
-        local Notifications = Library.Notifications
+    -- Notification PDP_UILibrary
+        local Notifications = PDP_UILibrary.Notifications
 
-        function Library:FadeNotification(path, is_fading) -- Horrendous dogshit code from like 500 years ago
+        function PDP_UILibrary:FadeNotification(path, is_fading) -- Horrendous dogshit code from like 500 years ago
             local fading = is_fading and 1 or 0 
 
             for _, instance in path:GetDescendants() do 
                 if not instance:IsA("GuiObject") then 
                     if instance:IsA("UIStroke") then
-                        Library:Tween(instance, {Transparency = fading}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
+                        PDP_UILibrary:Tween(instance, {Transparency = fading}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
                     end
         
                     continue
                 end 
         
                 if instance:IsA("TextLabel") then
-                    Library:Tween(instance, {TextTransparency = fading}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
+                    PDP_UILibrary:Tween(instance, {TextTransparency = fading}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
                 elseif instance:IsA("Frame") then
-                    Library:Tween(instance, {BackgroundTransparency = instance.Transparency and 0 and is_fading and 1 or 0}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
+                    PDP_UILibrary:Tween(instance, {BackgroundTransparency = instance.Transparency and 0 and is_fading and 1 or 0}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
                 end
             end
         end 
 
-        function Library:ReorderNotifications()
+        function PDP_UILibrary:ReorderNotifications()
             local Offset = 50
             
             for _,notif in Notifications.Notifs do
                 local Position = vec2(20, Offset)
                 notif.Position = dim_offset(Position.X, Position.Y)
-                -- Library:Tween(notif, {Position =}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
+                -- PDP_UILibrary:Tween(notif, {Position =}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
                 Offset += (notif.AbsoluteSize.Y + 5)
             end
 
             return Offset
         end 
         
-        function Library:Notification(properties)
+        function PDP_UILibrary:Notification(properties)
             local Cfg = {
                 Name = properties.Name or "Notification",
                 Lifetime = properties.Lifetime or nil,
@@ -5021,8 +5021,8 @@
             local Index = #Notifications.Notifs + 1
 
             local Items = Cfg.Items; do
-                Items.Holder = Library:Create( "Frame" , {
-                    Parent = Library.Elements;
+                Items.Holder = PDP_UILibrary:Create( "Frame" , {
+                    Parent = PDP_UILibrary.Elements;
                     Name = "\0";
                     BackgroundTransparency = 1;
                     Position = dim2(0, 18, 0, 70);
@@ -5033,7 +5033,7 @@
                     BorderSizePixel = 0;
                 });	
 
-                Items.ButtonHolder = Library:Create( "Frame" , {
+                Items.ButtonHolder = PDP_UILibrary:Create( "Frame" , {
                     Name = "\0";
                     Position = dim2(0, 0, 1, 5);
                     BorderColor3 = rgb(0, 0, 0);
@@ -5044,14 +5044,14 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIListLayout" , {
+                PDP_UILibrary:Create( "UIListLayout" , {
                     Parent = Items.ButtonHolder;
                     Padding = dim(0, 5);
                     SortOrder = Enum.SortOrder.LayoutOrder;
                     FillDirection = Enum.FillDirection.Horizontal
                 }); 
 
-                Items.Notification = Library:Create( "Frame" , {
+                Items.Notification = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Holder;
                     Name = "\0";
                     BackgroundTransparency = 1;
@@ -5060,9 +5060,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.XY;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Notification, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Notification, "outline", "BackgroundColor3")
 
-                Items.Accent = Library:Create( "Frame" , {
+                Items.Accent = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Notification;
                     Size = dim2(0, 1, 1, -4);
                     BackgroundTransparency = 1;
@@ -5072,9 +5072,9 @@
                     ZIndex = 3;
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.accent 
-                }); Library:Themify(Items.Accent, "accent", "BackgroundColor3")
+                }); PDP_UILibrary:Themify(Items.Accent, "accent", "BackgroundColor3")
 
-                Items.Background = Library:Create( "Frame" , {
+                Items.Background = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Notification;
                     Size = dim2(1, -4, 1, -4);
                     Name = "\0";
@@ -5086,7 +5086,7 @@
                     BackgroundColor3 = rgb(15, 15, 20)
                 });
 
-                Items.FadingLine = Library:Create( "Frame" , {
+                Items.FadingLine = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Notification;
                     Size = dim2(1, -4, 0, 1);
                     Name = "\0";
@@ -5096,9 +5096,9 @@
                     BackgroundTransparency = 1;
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.accent
-                }); Library:Themify(Items.FadingLine, "accent", "BackgroundColor3")
+                }); PDP_UILibrary:Themify(Items.FadingLine, "accent", "BackgroundColor3")
 
-                Items.Title = Library:Create( "TextLabel" , {
+                Items.Title = PDP_UILibrary:Create( "TextLabel" , {
                     FontFace = Fonts[themes.preset.font];
                     Parent = Items.Notification;
                     TextColor3 = rgb(235, 235, 235);
@@ -5117,18 +5117,18 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIStroke" , {
+                PDP_UILibrary:Create( "UIStroke" , {
                     Parent = Items.Title;
                     LineJoinMode = Enum.LineJoinMode.Miter
                 });
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     Parent = Items.Title;
                     PaddingRight = dim(0, 7);
                     PaddingLeft = dim(0, 9)
                 });
 
-                Items.Inline = Library:Create( "Frame" , {
+                Items.Inline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Notification;
                     Name = "\0";
                     BackgroundTransparency = 1;
@@ -5141,21 +5141,21 @@
             end     
 
             function Cfg.DestroyNotif() 
-                local Tween = Library:Tween(Items.Holder, {AnchorPoint = vec2(1, 0)}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
-                Library:FadeNotification(Items.Holder, true)
+                local Tween = PDP_UILibrary:Tween(Items.Holder, {AnchorPoint = vec2(1, 0)}, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
+                PDP_UILibrary:FadeNotification(Items.Holder, true)
 
                 Tween.Completed:Connect(function()
                     Items.Holder:Destroy()
                     Notifications.Notifs[Index] = nil
-                    Library:ReorderNotifications()
+                    PDP_UILibrary:ReorderNotifications()
                 end)
             end
 
-            local Offset = Library:ReorderNotifications()
+            local Offset = PDP_UILibrary:ReorderNotifications()
             Notifications.Notifs[Index] = Items.Holder
-            Library:FadeNotification(Items.Holder, false)
+            PDP_UILibrary:FadeNotification(Items.Holder, false)
 
-            Library:Tween(Items.Holder, {
+            PDP_UILibrary:Tween(Items.Holder, {
                 AnchorPoint = vec2(0, 0), 
                 BackgroundTransparency = 1,
             }, TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut, 0, false, 0))
@@ -5169,10 +5169,10 @@
                 end)            
             end 
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:NotificationButton(properties)
+        function PDP_UILibrary:NotificationButton(properties)
             local Cfg = {
                 Name = properties.Name or "Name"; 
                 Callback = properties.Callback or self.NotificationFade;
@@ -5181,7 +5181,7 @@
             }   
 
             local Items = Cfg.Items; do 
-                Items.Outline = Library:Create( "TextButton" , {
+                Items.Outline = PDP_UILibrary:Create( "TextButton" , {
                     Active = false;
                     BorderColor3 = rgb(0, 0, 0);
                     Parent = self.Items.ButtonHolder;
@@ -5191,9 +5191,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.Outline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "outline", "BackgroundColor3")
 
-                Items.Inline = Library:Create( "Frame" , {
+                Items.Inline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Outline;
                     Size = dim2(0, -2, 1, -2);
                     Name = "\0";
@@ -5202,9 +5202,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.inline 
-                }); Library:Themify(Items.Inline, "inline", "BackgroundColor3")
+                }); PDP_UILibrary:Themify(Items.Inline, "inline", "BackgroundColor3")
 
-                Items.InlineInline = Library:Create( "Frame" , {
+                Items.InlineInline = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Inline;
                     Size = dim2(0, -2, 1, -2);
                     Name = "\0";
@@ -5213,9 +5213,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.X;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.InlineInline, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.InlineInline, "outline", "BackgroundColor3")
 
-                Items.Background = Library:Create( "Frame" , {
+                Items.Background = PDP_UILibrary:Create( "Frame" , {
                     ClipsDescendants = true;
                     BorderColor3 = rgb(0, 0, 0);
                     Parent = Items.InlineInline;
@@ -5227,13 +5227,13 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                local Gradient = Library:Create( "UIGradient" , {
+                local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                     Rotation = 90;
                     Parent = Items.Background;
                     Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                }); Library:SaveGradient(Gradient, "elements");
+                }); PDP_UILibrary:SaveGradient(Gradient, "elements");
 
-                Items.Text = Library:Create( "TextLabel" , {
+                Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                     FontFace = Fonts[themes.preset.font];
                     Parent = Items.Background;
                     TextColor3 = rgb(145, 145, 145);
@@ -5251,26 +5251,26 @@
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
 
-                Library:Create( "UIStroke" , {
+                PDP_UILibrary:Create( "UIStroke" , {
                     Parent = Items.Text
                 });
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingRight = dim(0, 2);
                     Parent = Items.Text
                 });
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingRight = dim(0, 3);
                     Parent = Items.InlineInline
                 });
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingRight = dim(0, 1);
                     Parent = Items.Inline
                 });
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingRight = dim(0, 1);
                     Parent = Items.Outline
                 });
@@ -5278,11 +5278,11 @@
 
             Items.Outline.MouseButton1Click:Connect(Cfg.Callback)
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
     -- 
 
-    -- Esp Library Section  
+    -- Esp PDP_UILibrary Section  
         local MiscOptions = {
             ["Enabled"] = false;
             ["Render Distance"] = 10000; 
@@ -5334,7 +5334,7 @@
 
         local Options = setmetatable({}, {__index = MiscOptions, __newindex = function(self, key, value) MiscOptions[key] = value Esp.RefreshElements(key, value) end});
 
-        function Library:EspPreview(properties)
+        function PDP_UILibrary:EspPreview(properties)
             local Cfg = {
                 Items = {};
                 CurrentTab;
@@ -5342,7 +5342,7 @@
             } 
 
             local Items = Cfg.Items; do 
-                Items.ESPHolder = Library:Create( "TextButton" , {
+                Items.ESPHolder = PDP_UILibrary:Create( "TextButton" , {
                     Parent = self.Items.Elements;
                     Name = "\0";
                     Size = dim2(1, 0, 0, 0);
@@ -5350,9 +5350,9 @@
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.Y;
                     BackgroundColor3 = themes.preset.outline
-                });	Library:Themify(Items.ESPHolder, "outline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.ESPHolder, "outline", "BackgroundColor3")
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingTop = dim(0, 1);
                     PaddingBottom = dim(0, 1);
                     Parent = Items.ESPHolder;
@@ -5360,14 +5360,14 @@
                     PaddingLeft = dim(0, 1)
                 });
 
-                Library:Create( "UIListLayout" , {
+                PDP_UILibrary:Create( "UIListLayout" , {
                     Parent = Items.ESPHolder;
                     Padding = dim(0, -1);
                     SortOrder = Enum.SortOrder.LayoutOrder;
                     HorizontalFlex = Enum.UIFlexAlignment.Fill
                 });
 
-                Items.Outline = Library:Create( "Frame" , {
+                Items.Outline = PDP_UILibrary:Create( "Frame" , {
                     LayoutOrder = -1;
                     Name = "\0";
                     Parent = Items.ESPHolder;
@@ -5375,9 +5375,9 @@
                     Size = dim2(1, 0, 0, 18);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.inline
-                });	Library:Themify(Items.Outline, "inline", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.Outline, "inline", "BackgroundColor3")
 
-                Items.TabHolder = Library:Create( "Frame" , {
+                Items.TabHolder = PDP_UILibrary:Create( "Frame" , {
                     Parent = Items.Outline;
                     Name = "\0";
                     Position = dim2(0, 1, 0, 1);
@@ -5385,16 +5385,16 @@
                     Size = dim2(1, -2, 1, -2);
                     BorderSizePixel = 0;
                     BackgroundColor3 = themes.preset.misc_1
-                });	Library:Themify(Items.TabHolder, "misc_1", "BackgroundColor3")
+                });	PDP_UILibrary:Themify(Items.TabHolder, "misc_1", "BackgroundColor3")
 
-                Library:Create( "UIListLayout" , {
+                PDP_UILibrary:Create( "UIListLayout" , {
                     Parent = Items.TabHolder;
                     Padding = dim(0, -1);
                     SortOrder = Enum.SortOrder.LayoutOrder;
                     FillDirection = Enum.FillDirection.Horizontal
                 });
 
-                Library:Create( "UIPadding" , {
+                PDP_UILibrary:Create( "UIPadding" , {
                     PaddingTop = dim(0, -1);
                     PaddingBottom = dim(0, -1);
                     Parent = Items.TabHolder;
@@ -5403,10 +5403,10 @@
                 });
             end    
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end 
 
-        function Library:AddTab(properties)
+        function PDP_UILibrary:AddTab(properties)
             local Cfg = {
                 Name = properties.Name;
                 Items = {};
@@ -5421,7 +5421,7 @@
 
             local Items = Cfg.Items; do 
                 -- Top Page
-                    Items.Outline = Library:Create( "TextButton" , {
+                    Items.Outline = PDP_UILibrary:Create( "TextButton" , {
                         Parent = self.Items.TabHolder;
                         Name = "\0";
                         Size = dim2(0, 0, 1, 0);
@@ -5429,9 +5429,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.X;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.Outline, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Outline, "inline", "BackgroundColor3")
 
-                    Items.Inline = Library:Create( "Frame" , {
+                    Items.Inline = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Outline;
                         Name = "\0";
                         Position = dim2(0, 1, 0, 1);
@@ -5439,10 +5439,10 @@
                         Size = dim2(1, -2, 1, -2);
                         BorderSizePixel = 0;
                         BackgroundColor3 = themes.preset.misc_1
-                    }); Library:Themify(Items.Inline, "misc_2", "BackgroundColor3")
-                    Library:Themify(Items.Inline, "misc_1", "BackgroundColor3")
+                    }); PDP_UILibrary:Themify(Items.Inline, "misc_2", "BackgroundColor3")
+                    PDP_UILibrary:Themify(Items.Inline, "misc_1", "BackgroundColor3")
 
-                    Items.Title = Library:Create( "TextLabel" , {
+                    Items.Title = PDP_UILibrary:Create( "TextLabel" , {
                         FontFace = Fonts[themes.preset.font];
                         Parent = Items.Inline;
                         TextColor3 = themes.preset.unselected;
@@ -5460,21 +5460,21 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         Parent = Items.Title;
                         PaddingRight = dim(0, 5);
                         PaddingLeft = dim(0, 7)
                     });
 
-                    Library:Create( "UIStroke" , {
+                    PDP_UILibrary:Create( "UIStroke" , {
                         Parent = Items.Title;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
                 --
 
                 -- Middle page
-                    Items.Holder = Library:Create( "Frame" , {
-                        Parent = Library.Other;
+                    Items.Holder = PDP_UILibrary:Create( "Frame" , {
+                        Parent = PDP_UILibrary.Other;
                         Name = "\0";
                         Visible = false;
                         Size = dim2(0, 100, 0, 100);
@@ -5485,7 +5485,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.CharacterHolder = Library:Create( "Frame" , {
+                    Items.CharacterHolder = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Holder;
                         Name = "\0";
                         Size = dim2(1, 0, 0, 18);
@@ -5493,15 +5493,15 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.Y;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.CharacterHolder, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.CharacterHolder, "inline", "BackgroundColor3")
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingBottom = dim(0, 2);
                         Parent = Items.CharacterHolder
                     });
 
                     -- Fix here for studio? i think studio breaks it idk it worked before on pts
-                    Items.Background = Library:Create( "Frame" , {
+                    Items.Background = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.CharacterHolder;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -5510,22 +5510,22 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.Y;
                         BackgroundColor3 = themes.preset.misc_1
-                    });	Library:Themify(Items.Background, "misc_1", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.Background, "misc_1", "BackgroundColor3")
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         Parent = Items.Background
                     });
 
-                    Items.ViewportFrame = Library:Create( "ViewportFrame" , {
+                    Items.ViewportFrame = PDP_UILibrary:Create( "ViewportFrame" , {
                         Parent = Items.Background;
                         BorderColor3 = rgb(0, 0, 0);
                         Size = dim2(0, 200, 0, 200);
                         BorderSizePixel = 0;
                         ClipsDescendants = true;
                         BackgroundColor3 = themes.preset.misc_1
-                    });	Library:Themify(Items.ViewportFrame, "misc_1", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.ViewportFrame, "misc_1", "BackgroundColor3")
 
-                    -- Library:Create( "Frame" , {
+                    -- PDP_UILibrary:Create( "Frame" , {
                     --     Parent = Items.ViewportFrame;
                     --     BorderColor3 = rgb(0, 0, 0);
                     --     Size = dim2(0, 100, 0, 100);
@@ -5533,14 +5533,14 @@
                     --     BackgroundColor3 = rgb(255, 255, 255)
                     -- }); why do u even exist
                     
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         Parent = Items.Holder;
                         Padding = dim(0, -1);
                         SortOrder = Enum.SortOrder.LayoutOrder;
                         HorizontalFlex = Enum.UIFlexAlignment.Fill
                     });
 
-                    Items.ElementSelector = Library:Create( "Frame" , {
+                    Items.ElementSelector = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Holder;
                         Name = "\0";
                         Size = dim2(1, 0, 0, 18);
@@ -5548,9 +5548,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.Y;
                         BackgroundColor3 = themes.preset.inline
-                    });	Library:Themify(Items.ElementSelector, "inline", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.ElementSelector, "inline", "BackgroundColor3")
 
-                    Items.ElementHolder = Library:Create( "Frame" , {
+                    Items.ElementHolder = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.ElementSelector;
                         Size = dim2(1, -2, 1, -2);
                         Name = "\0";
@@ -5559,9 +5559,9 @@
                         BorderSizePixel = 0;
                         AutomaticSize = Enum.AutomaticSize.Y;
                         BackgroundColor3 = themes.preset.misc_1
-                    });	Library:Themify(Items.ElementHolder, "misc_1", "BackgroundColor3")
+                    });	PDP_UILibrary:Themify(Items.ElementHolder, "misc_1", "BackgroundColor3")
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingTop = dim(0, 5);
                         PaddingBottom = dim(0, 5);
                         Parent = Items.ElementHolder;
@@ -5569,14 +5569,14 @@
                         PaddingLeft = dim(0, 5)
                     });
 
-                    Library:Create( "UIGridLayout" , {
+                    PDP_UILibrary:Create( "UIGridLayout" , {
                         Parent = Items.ElementHolder;
                         SortOrder = Enum.SortOrder.LayoutOrder;
                         CellSize = dim2(0, 5, 0, 15)
                     });
 
                     -- for i = 1, 30 do testing haha lol
-                    --     Items.Text = Library:Create( "TextLabel" , {
+                    --     Items.Text = PDP_UILibrary:Create( "TextLabel" , {
                     --         FontFace = Fonts[themes.preset.font];
                     --         Parent = Items.ElementHolder;
                     --         TextColor3 = rgb(145, 145, 145);
@@ -5592,9 +5592,9 @@
                     --         ZIndex = 2;
                     --         TextSize = 12;
                     --         BackgroundColor3 = themes.preset.unselected
-                    --     });	Library:Themify(Items.Text, "unselected", "BackgroundColor3")
+                    --     });	PDP_UILibrary:Themify(Items.Text, "unselected", "BackgroundColor3")
 
-                    --     local Constraint = Library:Create( "UISizeConstraint" , {
+                    --     local Constraint = PDP_UILibrary:Create( "UISizeConstraint" , {
                     --         MinSize = vec2(Items.Text.TextBounds.X, 0);
                     --         Parent = Items.Text
                     --     });
@@ -5604,14 +5604,14 @@
                     --     end)
                     -- end 
 
-                    Library:Create( "UIPadding" , {
+                    PDP_UILibrary:Create( "UIPadding" , {
                         PaddingBottom = dim(0, 2);
                         Parent = Items.ElementSelector
                     });
                 -- 
 
                 -- Box
-                    Items.Box = Library:Create( "Frame" , {
+                    Items.Box = PDP_UILibrary:Create( "Frame" , {
                         BackgroundTransparency = 1;
                         Parent = Items.ViewportFrame;
                         BorderColor3 = rgb(0, 0, 0);
@@ -5620,7 +5620,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.Left = Library:Create( "Frame" , {
+                    Items.Left = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Box;
                         Size = dim2(0, 100, 1, 0);
                         BackgroundTransparency = 1;
@@ -5633,7 +5633,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.LeftTexts = Library:Create( "Frame" , {
+                    Items.LeftTexts = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Left;
                         Size = dim2(0, 0, 1, 0);
                         Name = "\0";
@@ -5647,14 +5647,14 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         FillDirection = Enum.FillDirection.Vertical;
                         Parent = Items.LeftTexts;
                         Padding = dim(0, 1);
                         SortOrder = Enum.SortOrder.LayoutOrder
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         FillDirection = Enum.FillDirection.Horizontal;
                         HorizontalAlignment = Enum.HorizontalAlignment.Right;
                         VerticalFlex = Enum.UIFlexAlignment.Fill;
@@ -5663,7 +5663,7 @@
                         SortOrder = Enum.SortOrder.LayoutOrder
                     });
 
-                    Items.Bottom = Library:Create( "Frame" , {
+                    Items.Bottom = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Box;
                         Size = dim2(1, 0, 0, 100);
                         Name = "\0";
@@ -5693,7 +5693,7 @@
                         SortOrder = Enum.SortOrder.LayoutOrder
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         SortOrder = Enum.SortOrder.LayoutOrder;
                         HorizontalAlignment = Enum.HorizontalAlignment.Center;
                         HorizontalFlex = Enum.UIFlexAlignment.Fill;
@@ -5701,7 +5701,7 @@
                         Padding = dim(0, 1)
                     });
 
-                    Items.Top = Library:Create( "Frame" , {
+                    Items.Top = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Box;
                         Size = dim2(1, 0, 0, 100);
                         BackgroundTransparency = 1;
@@ -5714,7 +5714,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         VerticalAlignment = Enum.VerticalAlignment.Bottom;
                         SortOrder = Enum.SortOrder.LayoutOrder;
                         HorizontalAlignment = Enum.HorizontalAlignment.Center;
@@ -5734,7 +5734,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.Right = Library:Create( "Frame" , {
+                    Items.Right = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Box;
                         Size = dim2(0, 100, 1, 0);
                         Name = "\0";
@@ -5746,7 +5746,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         FillDirection = Enum.FillDirection.Horizontal;
                         VerticalFlex = Enum.UIFlexAlignment.Fill;
                         Parent = Items.Right;
@@ -5754,7 +5754,7 @@
                         SortOrder = Enum.SortOrder.LayoutOrder
                     });
 
-                    Items.RightTexts = Library:Create( "Frame" , {
+                    Items.RightTexts = PDP_UILibrary:Create( "Frame" , {
                         Parent = Items.Right;
                         Size = dim2(0, 0, 1, 0);
                         Name = "\0";
@@ -5768,14 +5768,14 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Library:Create( "UIListLayout" , {
+                    PDP_UILibrary:Create( "UIListLayout" , {
                         Parent = Items.RightTexts;
                         Padding = dim(0, 1);
                         SortOrder = Enum.SortOrder.LayoutOrder
                     });
                 -- 
 
-                Items.Camera = Library:Create( "Camera" , {
+                Items.Camera = PDP_UILibrary:Create( "Camera" , {
                     CameraType = Enum.CameraType.Track;
                     Focus = CFrame.new(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1);
                     Parent = Workspace;
@@ -5923,7 +5923,7 @@
 
                 local Elements = Config.Items; do -- Useless ahh
                     -- Esp Preview
-                        Elements.Type = Library:Create( "Frame" , {
+                        Elements.Type = PDP_UILibrary:Create( "Frame" , {
                             Name = "\0";
                             Parent = Items.Left;
                             BorderColor3 = rgb(0, 0, 0);
@@ -5932,7 +5932,7 @@
                             BackgroundColor3 = rgb(0, 0, 0)
                         });
 
-                        Elements.Bar = Library:Create( "Frame" , {
+                        Elements.Bar = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Type;
                             Name = "\0";
                             Position = dim2(0, 1, 0.5, 1);
@@ -5942,7 +5942,7 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Elements.BarGradient = Library:Create( "UIGradient" , {
+                        Elements.BarGradient = PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = 90;
                             Parent = Elements.Bar;
                             Color = rgbseq{rgbkey(0, rgb(0, 255, 0)), rgbkey(0.5, rgb(255, 125, 0)), rgbkey(1, rgb(255, 0, 0))}
@@ -5950,8 +5950,8 @@
                     -- 
                     
                     -- Healthbar Section
-                        Elements.Information = Library:Create( "TextButton" , {
-                            Parent = Library.Other;
+                        Elements.Information = PDP_UILibrary:Create( "TextButton" , {
+                            Parent = PDP_UILibrary.Other;
                             Size = dim2(0, 213, 0, 71);
                             Name = "\0";
                             Visible = false;
@@ -5961,9 +5961,9 @@
                             BorderSizePixel = 0;
                             AutomaticSize = Enum.AutomaticSize.Y;
                             BackgroundColor3 = themes.preset.outline
-                        });	Library:Themify(Elements.Information, "outline", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.Information, "outline", "BackgroundColor3")
 
-                        Elements.Inline = Library:Create( "Frame" , {
+                        Elements.Inline = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Information;
                             Name = "\0";
                             Position = dim2(0, 1, 0, 1);
@@ -5973,7 +5973,7 @@
                             BackgroundColor3 = rgb(45, 45, 50)
                         });
 
-                        Elements.InlineInline = Library:Create( "Frame" , {
+                        Elements.InlineInline = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Inline;
                             Name = "\0";
                             Position = dim2(0, 1, 0, 1);
@@ -5981,9 +5981,9 @@
                             Size = dim2(1, -2, 1, -2);
                             BorderSizePixel = 0;
                             BackgroundColor3 = themes.preset.outline
-                        });	Library:Themify(Elements.InlineInline, "outline", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.InlineInline, "outline", "BackgroundColor3")
 
-                        Elements.Background = Library:Create( "Frame" , {
+                        Elements.Background = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.InlineInline;
                             Size = dim2(1, -2, 1, -2);
                             Name = "\0";
@@ -5994,13 +5994,13 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        local Gradient = Library:Create( "UIGradient" , {
+                        local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = 90;
                             Parent = Elements.Background;
                             Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                        }); Library:SaveGradient(Gradient, "elements");
+                        }); PDP_UILibrary:SaveGradient(Gradient, "elements");
                         
-                        Elements.Elements = Library:Create( "Frame" , {
+                        Elements.Elements = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Background;
                             Name = "\0";
                             BackgroundTransparency = 1;
@@ -6012,13 +6012,13 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Library:Create( "UIPadding" , {
+                        PDP_UILibrary:Create( "UIPadding" , {
                             Parent = Elements.Elements;
                             PaddingTop = dim(0, 0);
                             PaddingBottom = dim(0, 8)
                         });
 
-                        Library:Create( "UIListLayout" , {
+                        PDP_UILibrary:Create( "UIListLayout" , {
                             Parent = Elements.Elements;
                             Padding = dim(0, 7);
                             SortOrder = Enum.SortOrder.LayoutOrder
@@ -6027,7 +6027,7 @@
                         -- Caching elements so that I can make a funny open check so that it dont close when a colorpicker is open
                         Elements.Options = {} 
 
-                        local Section = setmetatable(Config, Library)
+                        local Section = setmetatable(Config, PDP_UILibrary)
                         Elements.Options.Low = Section:Label({Name = "Low"}):Colorpicker({Callback = function(color)
                             Elements.BarGradient.Color = rgbseq{
                                 rgbkey(0, Flags[Config.Flag .. "_COLOR1"].Color), 
@@ -6096,7 +6096,7 @@
                     -- 
                     
                     -- TextLabel
-                        Elements.Text = Library:Create( "TextLabel" , {
+                        Elements.Text = PDP_UILibrary:Create( "TextLabel" , {
                             FontFace = Fonts[themes.preset.font];
                             Parent = Items.ElementHolder;
                             TextColor3 = rgb(145, 145, 145);
@@ -6112,9 +6112,9 @@
                             ZIndex = 2;
                             TextSize = 12;
                             BackgroundColor3 = themes.preset.unselected
-                        });	Library:Themify(Elements.Text, "unselected", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.Text, "unselected", "BackgroundColor3")
 
-                        local Constraint = Library:Create( "UISizeConstraint" , {
+                        local Constraint = PDP_UILibrary:Create( "UISizeConstraint" , {
                             MinSize = vec2(Elements.Text.TextBounds.X, Elements.Text.TextBounds.Y);
                             Parent = Elements.Text
                         }); 
@@ -6143,8 +6143,8 @@
                     local Enabled = Info.Enabled 
                     local Position = Info.Position 
 
-                    Elements.Text.Parent = Enabled and Library.Other or Items.ElementHolder
-                    Elements.Type.Parent = Enabled and Items[Position] or Library.Other
+                    Elements.Text.Parent = Enabled and PDP_UILibrary.Other or Items.ElementHolder
+                    Elements.Type.Parent = Enabled and Items[Position] or PDP_UILibrary.Other
 
                     Options[Config.Prefix] = Enabled
                     Options[Config.Prefix .. "_Position"] = Position
@@ -6173,7 +6173,7 @@
 
                     local Tween;
                     for _,obj in Children do
-                        local Index = Library:GetTransparency(obj)
+                        local Index = PDP_UILibrary:GetTransparency(obj)
 
                         if not Index then 
                             continue 
@@ -6181,16 +6181,16 @@
 
                         if type(Index) == "table" then
                             for _,prop in Index do
-                                Tween = Library:Fade(obj, prop, bool, Library.TweeningSpeed)
+                                Tween = PDP_UILibrary:Fade(obj, prop, bool, PDP_UILibrary.TweeningSpeed)
                             end
                         else
-                            Tween = Library:Fade(obj, Index, bool, Library.TweeningSpeed)
+                            Tween = PDP_UILibrary:Fade(obj, Index, bool, PDP_UILibrary.TweeningSpeed)
                         end
                     end
 
-                    Library:Connection(Tween.Completed, function()
+                    PDP_UILibrary:Connection(Tween.Completed, function()
                         Config.Tweening = false
-                        Elements.Information.Parent = bool and Library.Items or Library.Other
+                        Elements.Information.Parent = bool and PDP_UILibrary.Items or PDP_UILibrary.Other
                         Elements.Information.Visible = bool
                     end)
                 end
@@ -6199,14 +6199,14 @@
                     for _,element in Elements.Options do
                         local Holder = element.Items.DropdownElements
                         if Holder then 
-                            if Holder.Visible and Library:Hovering({Holder}) then 
+                            if Holder.Visible and PDP_UILibrary:Hovering({Holder}) then 
                                 return true 
                             end 
                         end 
 
                         local Holder = element.Items.Colorpicker
                         if Holder then 
-                            if Holder.Visible and Library:Hovering({Holder}) then 
+                            if Holder.Visible and PDP_UILibrary:Hovering({Holder}) then 
                                 return true 
                             end 
                         end     
@@ -6217,7 +6217,7 @@
 
                 Elements.Text.InputBegan:Connect(function(input)
                     if input.UserInputType == Enum.UserInputType.MouseButton1 then 
-                        Elements.Text.Parent = Library.Items 
+                        Elements.Text.Parent = PDP_UILibrary.Items 
 
                         TextDragging = true
                     end
@@ -6236,8 +6236,8 @@
 
                 Elements.Type.InputBegan:Connect(function(input)
                     if input.UserInputType == Enum.UserInputType.MouseButton1 then 
-                        Elements.Text.Parent = Library.Items 
-                        Elements.Type.Parent = Library.Other 
+                        Elements.Text.Parent = PDP_UILibrary.Items 
+                        Elements.Type.Parent = PDP_UILibrary.Other 
 
                         BarDragging = true
                     end
@@ -6264,16 +6264,16 @@
                     end
                 end)
                 
-                Library:Connection(InputService.InputChanged, function(input, game_event) 
+                PDP_UILibrary:Connection(InputService.InputChanged, function(input, game_event) 
                     if (TextDragging or BarDragging) and input.UserInputType == Enum.UserInputType.MouseMovement then            
-                        Library:Tween(Elements.Text, {
+                        PDP_UILibrary:Tween(Elements.Text, {
                             Position = dim_offset(input.Position.X, input.Position.Y + 36 + Elements.Text.AbsoluteSize.Y)
-                        }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                        }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
                     end
                 end)    
 
-                Library:Connection(InputService.InputEnded, function(input, game_event) 
-                    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2) and Elements.Information.Visible and not (Library:Hovering({Elements.Information}) or Config.DetermineClosing()) then 
+                PDP_UILibrary:Connection(InputService.InputEnded, function(input, game_event) 
+                    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2) and Elements.Information.Visible and not (PDP_UILibrary:Hovering({Elements.Information}) or Config.DetermineClosing()) then 
                         Config.Tween(false)
                         Config.Open = false
                     end 
@@ -6284,7 +6284,7 @@
                 ConfigFlags[Config.Flag] = Config.Set
                 Config.Set({Enabled = Config.Enabled, Position = Config.Position})
                 
-                return setmetatable(Config, Library)
+                return setmetatable(Config, PDP_UILibrary)
             end 
 
             function Cfg.AddText(props) 
@@ -6309,7 +6309,7 @@
 
                 local Elements = Config.Items; do -- Useless ahh
                     -- Esp Preview
-                        Elements.Name = Library:Create( "TextLabel" , {
+                        Elements.Name = PDP_UILibrary:Create( "TextLabel" , {
                             FontFace = Fonts[themes.preset.font];
                             TextColor3 = rgb(255, 255, 255);
                             BorderColor3 = rgb(0, 0, 0);
@@ -6323,17 +6323,17 @@
                             TextSize = 9;
                             TextXAlignment = Enum.TextXAlignment.Left;
                             BackgroundColor3 = rgb(255, 255, 255)
-                        });	Library:Themify(Elements.Text, "unselected", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.Text, "unselected", "BackgroundColor3")
 
-                        Elements.Stroke = Library:Create( "UIStroke" , {
+                        Elements.Stroke = PDP_UILibrary:Create( "UIStroke" , {
                             Parent = Elements.Name;
                             LineJoinMode = Enum.LineJoinMode.Miter
                         });
                     -- 
                     
                     -- Text Section
-                        Elements.Information = Library:Create( "TextButton" , {
-                            Parent = Library.Other;
+                        Elements.Information = PDP_UILibrary:Create( "TextButton" , {
+                            Parent = PDP_UILibrary.Other;
                             Size = dim2(0, 213, 0, 71);
                             Name = "\0";
                             Visible = false;
@@ -6343,9 +6343,9 @@
                             BorderSizePixel = 0;
                             AutomaticSize = Enum.AutomaticSize.Y;
                             BackgroundColor3 = themes.preset.outline
-                        });	Library:Themify(Elements.Information, "outline", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.Information, "outline", "BackgroundColor3")
 
-                        Elements.Inline = Library:Create( "Frame" , {
+                        Elements.Inline = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Information;
                             Name = "\0";
                             Position = dim2(0, 1, 0, 1);
@@ -6355,7 +6355,7 @@
                             BackgroundColor3 = rgb(45, 45, 50)
                         });
 
-                        Elements.InlineInline = Library:Create( "Frame" , {
+                        Elements.InlineInline = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Inline;
                             Name = "\0";
                             Position = dim2(0, 1, 0, 1);
@@ -6363,9 +6363,9 @@
                             Size = dim2(1, -2, 1, -2);
                             BorderSizePixel = 0;
                             BackgroundColor3 = themes.preset.outline
-                        });	Library:Themify(Elements.InlineInline, "outline", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.InlineInline, "outline", "BackgroundColor3")
 
-                        Elements.Background = Library:Create( "Frame" , {
+                        Elements.Background = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.InlineInline;
                             Size = dim2(1, -2, 1, -2);
                             Name = "\0";
@@ -6376,13 +6376,13 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        local Gradient = Library:Create( "UIGradient" , {
+                        local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = 90;
                             Parent = Elements.Background;
                             Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                        }); Library:SaveGradient(Gradient, "elements");
+                        }); PDP_UILibrary:SaveGradient(Gradient, "elements");
                         
-                        Elements.Elements = Library:Create( "Frame" , {
+                        Elements.Elements = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Background;
                             Name = "\0";
                             BackgroundTransparency = 1;
@@ -6394,13 +6394,13 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Library:Create( "UIPadding" , {
+                        PDP_UILibrary:Create( "UIPadding" , {
                             Parent = Elements.Elements;
                             PaddingTop = dim(0, 0);
                             PaddingBottom = dim(0, 8)
                         });
 
-                        Library:Create( "UIListLayout" , {
+                        PDP_UILibrary:Create( "UIListLayout" , {
                             Parent = Elements.Elements;
                             Padding = dim(0, 7);
                             SortOrder = Enum.SortOrder.LayoutOrder
@@ -6409,7 +6409,7 @@
                         -- Caching elements so that I can make a funny open check so that it dont close when a colorpicker is open
                         Elements.Options = {} 
 
-                        local Section = setmetatable(Config, Library)
+                        local Section = setmetatable(Config, PDP_UILibrary)
                         local Label = Section:Label({Name = "Color"})
                         Elements.Options.Text = Label:Colorpicker({Callback = function(value)
                             Elements.Name.TextColor3 = Flags[Config.Flag .. "_COLOR1"].Color
@@ -6431,7 +6431,7 @@
                     -- 
                     
                     -- TextLabel
-                        Elements.Text = Library:Create( "TextLabel" , {
+                        Elements.Text = PDP_UILibrary:Create( "TextLabel" , {
                             FontFace = Fonts[themes.preset.font];
                             Parent = Items.ElementHolder;
                             TextColor3 = rgb(145, 145, 145);
@@ -6447,9 +6447,9 @@
                             ZIndex = 2;
                             TextSize = 12;
                             BackgroundColor3 = themes.preset.unselected
-                        });	Library:Themify(Elements.Text, "unselected", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.Text, "unselected", "BackgroundColor3")
 
-                        local Constraint = Library:Create( "UISizeConstraint" , {
+                        local Constraint = PDP_UILibrary:Create( "UISizeConstraint" , {
                             MinSize = vec2(Elements.Text.TextBounds.X, Elements.Text.TextBounds.Y);
                             Parent = Elements.Text
                         });
@@ -6478,8 +6478,8 @@
                     local Enabled = Info.Enabled 
                     local Position = Info.Position
 
-                    Elements.Text.Parent = Enabled and Library.Other or Items.ElementHolder
-                    Elements.Name.Parent = Enabled and Items[Position] or Library.Other
+                    Elements.Text.Parent = Enabled and PDP_UILibrary.Other or Items.ElementHolder
+                    Elements.Name.Parent = Enabled and Items[Position] or PDP_UILibrary.Other
 
                     Options[Config.Prefix .. "_Text"] = Enabled
                     Options[Config.Prefix .. "_Text_Position"] = Position:gsub("Texts", "")
@@ -6499,7 +6499,7 @@
 
                     if bool then 
                         Elements.Information.Visible = true
-                        Elements.Information.Parent = Library.Items
+                        Elements.Information.Parent = PDP_UILibrary.Items
                     end
 
                     local Children = Elements.Information:GetDescendants()
@@ -6507,7 +6507,7 @@
 
                     local Tween;
                     for _,obj in Children do
-                        local Index = Library:GetTransparency(obj)
+                        local Index = PDP_UILibrary:GetTransparency(obj)
 
                         if not Index then 
                             continue 
@@ -6515,16 +6515,16 @@
 
                         if type(Index) == "table" then
                             for _,prop in Index do
-                                Tween = Library:Fade(obj, prop, bool, Library.TweeningSpeed)
+                                Tween = PDP_UILibrary:Fade(obj, prop, bool, PDP_UILibrary.TweeningSpeed)
                             end
                         else
-                            Tween = Library:Fade(obj, Index, bool, Library.TweeningSpeed)
+                            Tween = PDP_UILibrary:Fade(obj, Index, bool, PDP_UILibrary.TweeningSpeed)
                         end
                     end
 
-                    Library:Connection(Tween.Completed, function()
+                    PDP_UILibrary:Connection(Tween.Completed, function()
                         Config.Tweening = false
-                        Elements.Information.Parent = bool and Library.Items or Library.Other
+                        Elements.Information.Parent = bool and PDP_UILibrary.Items or PDP_UILibrary.Other
                         Elements.Information.Visible = bool
                     end)
                 end
@@ -6533,14 +6533,14 @@
                     for _,element in Elements.Options do
                         local Holder = element.Items.DropdownElements
                         if Holder then 
-                            if Holder.Visible and Library:Hovering({Holder}) then 
+                            if Holder.Visible and PDP_UILibrary:Hovering({Holder}) then 
                                 return true 
                             end 
                         end 
 
                         local Holder = element.Items.Colorpicker
                         if Holder then 
-                            if Holder.Visible and Library:Hovering({Holder}) then 
+                            if Holder.Visible and PDP_UILibrary:Hovering({Holder}) then 
                                 return true 
                             end 
                         end     
@@ -6551,7 +6551,7 @@
 
                 Elements.Text.InputBegan:Connect(function(input)
                     if input.UserInputType == Enum.UserInputType.MouseButton1 then 
-                        Elements.Text.Parent = Library.Items 
+                        Elements.Text.Parent = PDP_UILibrary.Items 
 
                         TextDragging = true
                     end
@@ -6570,8 +6570,8 @@
 
                 Elements.Name.InputBegan:Connect(function(input)
                     if input.UserInputType == Enum.UserInputType.MouseButton1 then 
-                        Elements.Text.Parent = Library.Items 
-                        Elements.Name.Parent = Library.Other 
+                        Elements.Text.Parent = PDP_UILibrary.Items 
+                        Elements.Name.Parent = PDP_UILibrary.Other 
 
                         BarDragging = true
                     end
@@ -6597,16 +6597,16 @@
                     end
                 end)
                 
-                Library:Connection(InputService.InputChanged, function(input, game_event) 
+                PDP_UILibrary:Connection(InputService.InputChanged, function(input, game_event) 
                     if (TextDragging or BarDragging) and input.UserInputType == Enum.UserInputType.MouseMovement then            
-                        Library:Tween(Elements.Text, {
+                        PDP_UILibrary:Tween(Elements.Text, {
                             Position = dim_offset(input.Position.X, input.Position.Y + 36 + Elements.Text.AbsoluteSize.Y)
-                        }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                        }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
                     end
                 end)    
 
-                Library:Connection(InputService.InputEnded, function(input, game_event) 
-                    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2) and Elements.Information.Visible and not (Library:Hovering({Elements.Information}) or Config.DetermineClosing()) then 
+                PDP_UILibrary:Connection(InputService.InputEnded, function(input, game_event) 
+                    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2) and Elements.Information.Visible and not (PDP_UILibrary:Hovering({Elements.Information}) or Config.DetermineClosing()) then 
                         Config.Tween(false)
                         Config.Open = false
                     end 
@@ -6617,7 +6617,7 @@
                 ConfigFlags[Config.Flag] = Config.Set
                 Config.Set({Enabled = Config.Enabled, Position = Config.Position})
 
-                return setmetatable(Config, Library)
+                return setmetatable(Config, PDP_UILibrary)
             end
 
             function Cfg.AddBox(props) 
@@ -6640,11 +6640,11 @@
 
                 local Elements = Config.Items; do
                     -- Esp Preview
-                        Elements.BoxHolder = Library:Create( "Frame" , {
+                        Elements.BoxHolder = PDP_UILibrary:Create( "Frame" , {
                             Visible = true;
                             Size = dim2(1, -2, 1, -2);
                             BorderColor3 = rgb(0, 0, 0);
-                            Parent = Library.Other;
+                            Parent = PDP_UILibrary.Other;
                             BackgroundTransparency = 0.8500000238418579;
                             Position = dim2(0, 1, 0, 1);
                             Name = "\0";
@@ -6652,7 +6652,7 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Elements.BoxHolderGradient = Library:Create( "UIGradient" , {
+                        Elements.BoxHolderGradient = PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = 0;
                             Name = "\0";
                             Color = rgbseq{rgbkey(0, rgb(255, 255, 255)), rgbkey(1, rgb(255, 255, 255))};
@@ -6660,12 +6660,12 @@
                             Enabled = true
                         }); 
 
-                        Library:Create( "UIStroke" , {
+                        PDP_UILibrary:Create( "UIStroke" , {
                             Parent = Elements.BoxHolder;
                             LineJoinMode = Enum.LineJoinMode.Miter
                         });
                         
-                        Elements.Inner = Library:Create( "Frame" , {
+                        Elements.Inner = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.BoxHolder;
                             Name = "\0";
                             BackgroundTransparency = 1;
@@ -6676,13 +6676,13 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Elements.UIStroke = Library:Create( "UIStroke" , {
+                        Elements.UIStroke = PDP_UILibrary:Create( "UIStroke" , {
                             Color = rgb(255, 255, 255);
                             LineJoinMode = Enum.LineJoinMode.Miter;
                             Parent = Elements.Inner
                         });
                         
-                        Elements.Gradient = Library:Create( "UIGradient" , {
+                        Elements.Gradient = PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = 0;
                             Name = "\0";
                             Color = rgbseq{rgbkey(0, rgb(255, 255, 255)), rgbkey(1, rgb(255, 255, 255))};
@@ -6690,7 +6690,7 @@
                             Enabled = true
                         });
                         
-                        Elements.Inner2 = Library:Create( "Frame" , {
+                        Elements.Inner2 = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.BoxHolder;
                             Name = "\0";
                             BackgroundTransparency = 1;
@@ -6701,15 +6701,15 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Library:Create( "UIStroke" , {
+                        PDP_UILibrary:Create( "UIStroke" , {
                             Parent = Elements.Inner2;
                             LineJoinMode = Enum.LineJoinMode.Miter
                         });
                     -- 
 
                     -- Cornerboxes
-                        Elements.Corners = Library:Create( "Frame" , {
-                            Parent = Library.Other;
+                        Elements.Corners = PDP_UILibrary:Create( "Frame" , {
+                            Parent = PDP_UILibrary.Other;
                             Name = "\0";
                             ClipsDescendants = true;
                             BorderColor3 = rgb(0, 0, 0);
@@ -6718,11 +6718,11 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Elements.CornersGradient = Library:Create( "UIGradient" , {
+                        Elements.CornersGradient = PDP_UILibrary:Create( "UIGradient" , {
                             Parent = Elements.Corners;
                         });
 
-                        Elements.BottomLeftX = Library:Create( "ImageLabel" , {
+                        Elements.BottomLeftX = PDP_UILibrary:Create( "ImageLabel" , {
                             ScaleType = Enum.ScaleType.Slice;
                             Parent = Elements.Corners;
                             BorderColor3 = rgb(0, 0, 0);
@@ -6738,11 +6738,11 @@
                             SliceCenter = rect(vec2(1, 1), vec2(99, 2))
                         });
 
-                        Library:Create( "UIGradient" , {
+                        PDP_UILibrary:Create( "UIGradient" , {
                             Parent = Elements.BottomLeftX
                         });
 
-                        Elements.BottomLeftY = Library:Create( "ImageLabel" , {
+                        Elements.BottomLeftY = PDP_UILibrary:Create( "ImageLabel" , {
                             ScaleType = Enum.ScaleType.Slice;
                             Parent = Elements.Corners;
                             BorderColor3 = rgb(0, 0, 0);
@@ -6758,12 +6758,12 @@
                             SliceCenter = rect(vec2(1, 0), vec2(2, 96))
                         });
 
-                        Library:Create( "UIGradient" , {
+                        PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = -90;
                             Parent = Elements.BottomLeftY
                         });
 
-                        Elements.BottomLeftX = Library:Create( "ImageLabel" , {
+                        Elements.BottomLeftX = PDP_UILibrary:Create( "ImageLabel" , {
                             ScaleType = Enum.ScaleType.Slice;
                             Parent = Elements.Corners;
                             BorderColor3 = rgb(0, 0, 0);
@@ -6779,11 +6779,11 @@
                             SliceCenter = rect(vec2(1, 1), vec2(99, 2))
                         });
 
-                        Library:Create( "UIGradient" , {
+                        PDP_UILibrary:Create( "UIGradient" , {
                             Parent = Elements.BottomLeftX
                         });
 
-                        Elements.BottomLeftY = Library:Create( "ImageLabel" , {
+                        Elements.BottomLeftY = PDP_UILibrary:Create( "ImageLabel" , {
                             ScaleType = Enum.ScaleType.Slice;
                             Parent = Elements.Corners;
                             BorderColor3 = rgb(0, 0, 0);
@@ -6799,12 +6799,12 @@
                             SliceCenter = rect(vec2(1, 0), vec2(2, 96))
                         });
 
-                        Library:Create( "UIGradient" , {
+                        PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = 90;
                             Parent = Elements.BottomLeftY
                         });
 
-                        Elements.TopLeftY = Library:Create( "ImageLabel" , {
+                        Elements.TopLeftY = PDP_UILibrary:Create( "ImageLabel" , {
                             ScaleType = Enum.ScaleType.Slice;
                             BorderColor3 = rgb(0, 0, 0);
                             Parent = Elements.Corners;
@@ -6819,12 +6819,12 @@
                             SliceCenter = rect(vec2(1, 0), vec2(2, 98))
                         });
 
-                        Library:Create( "UIGradient" , {
+                        PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = 90;
                             Parent = Elements.TopLeftY
                         });
 
-                        Elements.TopRightY = Library:Create( "ImageLabel" , {
+                        Elements.TopRightY = PDP_UILibrary:Create( "ImageLabel" , {
                             ScaleType = Enum.ScaleType.Slice;
                             Parent = Elements.Corners;
                             BorderColor3 = rgb(0, 0, 0);
@@ -6840,12 +6840,12 @@
                             SliceCenter = rect(vec2(1, 0), vec2(2, 98))
                         });
 
-                        Library:Create( "UIGradient" , {
+                        PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = -90;
                             Parent = Elements.TopRightY
                         });
 
-                        Elements.TopRightX = Library:Create( "ImageLabel" , {
+                        Elements.TopRightX = PDP_UILibrary:Create( "ImageLabel" , {
                             ScaleType = Enum.ScaleType.Slice;
                             Parent = Elements.Corners;
                             BorderColor3 = rgb(0, 0, 0);
@@ -6861,11 +6861,11 @@
                             SliceCenter = rect(vec2(1, 1), vec2(99, 2))
                         });
 
-                        Library:Create( "UIGradient" , {
+                        PDP_UILibrary:Create( "UIGradient" , {
                             Parent = Elements.TopRightX
                         });
 
-                        Elements.TopLeftX = Library:Create( "ImageLabel" , {
+                        Elements.TopLeftX = PDP_UILibrary:Create( "ImageLabel" , {
                             ScaleType = Enum.ScaleType.Slice;
                             BorderColor3 = rgb(0, 0, 0);
                             Parent = Elements.Corners;
@@ -6879,14 +6879,14 @@
                             SliceCenter = rect(vec2(1, 1), vec2(99, 2))
                         });
 
-                        Library:Create( "UIGradient" , {
+                        PDP_UILibrary:Create( "UIGradient" , {
                             Parent = Elements.TopLeftX
                         });
                     -- 
 
                     -- Box Section
-                        Elements.Information = Library:Create( "TextButton" , {
-                            Parent = Library.Other;
+                        Elements.Information = PDP_UILibrary:Create( "TextButton" , {
+                            Parent = PDP_UILibrary.Other;
                             Size = dim2(0, 213, 0, 71);
                             Name = "\0";
                             Visible = false;
@@ -6896,9 +6896,9 @@
                             BorderSizePixel = 0;
                             AutomaticSize = Enum.AutomaticSize.Y;
                             BackgroundColor3 = themes.preset.outline
-                        });	Library:Themify(Elements.Information, "outline", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.Information, "outline", "BackgroundColor3")
 
-                        Elements.Inline = Library:Create( "Frame" , {
+                        Elements.Inline = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Information;
                             Name = "\0";
                             Position = dim2(0, 1, 0, 1);
@@ -6908,7 +6908,7 @@
                             BackgroundColor3 = rgb(45, 45, 50)
                         });
 
-                        Elements.InlineInline = Library:Create( "Frame" , {
+                        Elements.InlineInline = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Inline;
                             Name = "\0";
                             Position = dim2(0, 1, 0, 1);
@@ -6916,9 +6916,9 @@
                             Size = dim2(1, -2, 1, -2);
                             BorderSizePixel = 0;
                             BackgroundColor3 = themes.preset.outline
-                        });	Library:Themify(Elements.InlineInline, "outline", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.InlineInline, "outline", "BackgroundColor3")
 
-                        Elements.Background = Library:Create( "Frame" , {
+                        Elements.Background = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.InlineInline;
                             Size = dim2(1, -2, 1, -2);
                             Name = "\0";
@@ -6929,13 +6929,13 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        local Gradient = Library:Create( "UIGradient" , {
+                        local Gradient = PDP_UILibrary:Create( "UIGradient" , {
                             Rotation = 90;
                             Parent = Elements.Background;
                             Color = rgbseq{rgbkey(0, rgb(30, 30, 35)), rgbkey(1, rgb(23, 23, 28))}
-                        }); Library:SaveGradient(Gradient, "elements");
+                        }); PDP_UILibrary:SaveGradient(Gradient, "elements");
                         
-                        Elements.Elements = Library:Create( "Frame" , {
+                        Elements.Elements = PDP_UILibrary:Create( "Frame" , {
                             Parent = Elements.Background;
                             Name = "\0";
                             BackgroundTransparency = 1;
@@ -6947,13 +6947,13 @@
                             BackgroundColor3 = rgb(255, 255, 255)
                         });
 
-                        Library:Create( "UIPadding" , {
+                        PDP_UILibrary:Create( "UIPadding" , {
                             Parent = Elements.Elements;
                             PaddingTop = dim(0, 0);
                             PaddingBottom = dim(0, 8)
                         });
 
-                        Library:Create( "UIListLayout" , {
+                        PDP_UILibrary:Create( "UIListLayout" , {
                             Parent = Elements.Elements;
                             Padding = dim(0, 7);
                             SortOrder = Enum.SortOrder.LayoutOrder
@@ -6962,7 +6962,7 @@
                         -- Caching elements so that I can make a funny open check so that it dont close when a colorpicker is open
                         Elements.Options = {} 
 
-                        local Section = setmetatable(Config, Library)
+                        local Section = setmetatable(Config, PDP_UILibrary)
                         Elements.Options.Type = Section:Dropdown({
                             Name = "Type",
                             Options = { "Corner", "Box"},
@@ -6970,8 +6970,8 @@
                             Flag = Config.Flag .. "_CORNERS_ENABLED",
                             Callback = function(option)
                                 local isCorner = Flags[Config.Flag .. "_CORNERS_ENABLED"] == "Corner"
-                                Elements.Corners.Parent = isCorner and Items.Box or Library.Other
-                                Elements.BoxHolder.Parent = isCorner and Library.Other or Items.Box
+                                Elements.Corners.Parent = isCorner and Items.Box or PDP_UILibrary.Other
+                                Elements.BoxHolder.Parent = isCorner and PDP_UILibrary.Other or Items.Box
 
                                 Items.ViewportFrame.AutomaticSize = Enum.AutomaticSize.Y 
                                 task.wait()
@@ -7103,7 +7103,7 @@
                     -- 
                     
                     -- TextLabel
-                        Elements.Text = Library:Create( "TextLabel" , {
+                        Elements.Text = PDP_UILibrary:Create( "TextLabel" , {
                             FontFace = Fonts[themes.preset.font];
                             Parent = Items.ElementHolder;
                             TextColor3 = rgb(145, 145, 145);
@@ -7119,9 +7119,9 @@
                             ZIndex = 2;
                             TextSize = 12;
                             BackgroundColor3 = themes.preset.unselected
-                        });	Library:Themify(Elements.Text, "unselected", "BackgroundColor3")
+                        });	PDP_UILibrary:Themify(Elements.Text, "unselected", "BackgroundColor3")
 
-                        local Constraint = Library:Create( "UISizeConstraint" , {
+                        local Constraint = PDP_UILibrary:Create( "UISizeConstraint" , {
                             MinSize = vec2(Elements.Text.TextBounds.X, Elements.Text.TextBounds.Y);
                             Parent = Elements.Text
                         });
@@ -7136,8 +7136,8 @@
                     local Enabled = Info.Enabled 
                     local Position = Info.Position 
 
-                    Elements.Text.Parent = Enabled and Library.Other or Items.ElementHolder
-                    Elements.BoxHolder.Parent = Enabled and Items[Position] or Library.Other
+                    Elements.Text.Parent = Enabled and PDP_UILibrary.Other or Items.ElementHolder
+                    Elements.BoxHolder.Parent = Enabled and Items[Position] or PDP_UILibrary.Other
 
                     Items.ViewportFrame.AutomaticSize = Enum.AutomaticSize.Y 
                     task.wait()
@@ -7177,7 +7177,7 @@
 
                     local Tween;
                     for _,obj in Children do
-                        local Index = Library:GetTransparency(obj)
+                        local Index = PDP_UILibrary:GetTransparency(obj)
 
                         if not Index then 
                             continue 
@@ -7185,16 +7185,16 @@
 
                         if type(Index) == "table" then
                             for _,prop in Index do
-                                Tween = Library:Fade(obj, prop, bool, Library.TweeningSpeed)
+                                Tween = PDP_UILibrary:Fade(obj, prop, bool, PDP_UILibrary.TweeningSpeed)
                             end
                         else
-                            Tween = Library:Fade(obj, Index, bool, Library.TweeningSpeed)
+                            Tween = PDP_UILibrary:Fade(obj, Index, bool, PDP_UILibrary.TweeningSpeed)
                         end
                     end
 
-                    Library:Connection(Tween.Completed, function()
+                    PDP_UILibrary:Connection(Tween.Completed, function()
                         Config.Tweening = false
-                        Elements.Information.Parent = bool and Library.Items or Library.Other
+                        Elements.Information.Parent = bool and PDP_UILibrary.Items or PDP_UILibrary.Other
                         Elements.Information.Visible = bool
                     end)
                 end
@@ -7203,14 +7203,14 @@
                     for _,element in Elements.Options do
                         local Holder = element.Items.DropdownElements
                         if Holder then 
-                            if Holder.Visible and Library:Hovering({Holder}) then 
+                            if Holder.Visible and PDP_UILibrary:Hovering({Holder}) then 
                                 return true 
                             end 
                         end 
 
                         local Holder = element.Items.Colorpicker
                         if Holder then 
-                            if Holder.Visible and Library:Hovering({Holder}) then 
+                            if Holder.Visible and PDP_UILibrary:Hovering({Holder}) then 
                                 return true 
                             end 
                         end     
@@ -7221,7 +7221,7 @@
 
                 Elements.Text.InputBegan:Connect(function(input)
                     if input.UserInputType == Enum.UserInputType.MouseButton1 then 
-                        Elements.Text.Parent = Library.Items 
+                        Elements.Text.Parent = PDP_UILibrary.Items 
 
                         TextDragging = true
                     end
@@ -7240,9 +7240,9 @@
                 for _,box in {Elements.Corners, Elements.BoxHolder} do 
                     box.InputBegan:Connect(function(input)
                         if input.UserInputType == Enum.UserInputType.MouseButton1 then 
-                            Elements.Text.Parent = Library.Items 
-                            Elements.BoxHolder.Parent = Library.Other 
-                            Elements.Corners.Parent = Library.Other 
+                            Elements.Text.Parent = PDP_UILibrary.Items 
+                            Elements.BoxHolder.Parent = PDP_UILibrary.Other 
+                            Elements.Corners.Parent = PDP_UILibrary.Other 
 
                             BarDragging = true
                         end
@@ -7269,16 +7269,16 @@
                     end)
                 end 
 
-                Library:Connection(InputService.InputChanged, function(input, game_event) 
+                PDP_UILibrary:Connection(InputService.InputChanged, function(input, game_event) 
                     if (TextDragging or BarDragging) and input.UserInputType == Enum.UserInputType.MouseMovement then            
-                        Library:Tween(Elements.Text, {
+                        PDP_UILibrary:Tween(Elements.Text, {
                             Position = dim_offset(input.Position.X, input.Position.Y + 36 + Elements.Text.AbsoluteSize.Y)
-                        }, TweenInfo.new(Library.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
+                        }, TweenInfo.new(PDP_UILibrary.DraggingSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0))
                     end
                 end)    
 
-                Library:Connection(InputService.InputEnded, function(input, game_event) 
-                    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2) and Elements.Information.Visible and not (Library:Hovering({Elements.Information}) or Config.DetermineClosing()) then 
+                PDP_UILibrary:Connection(InputService.InputEnded, function(input, game_event) 
+                    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2) and Elements.Information.Visible and not (PDP_UILibrary:Hovering({Elements.Information}) or Config.DetermineClosing()) then 
                         Config.Tween(false)
                         Config.Open = false
                     end 
@@ -7287,7 +7287,7 @@
                 ConfigFlags[Config.Flag] = Config.Set
                 Config.Set({Enabled = Config.Enabled, Position = Config.Position})
 
-                return setmetatable(Config, Library)
+                return setmetatable(Config, PDP_UILibrary)
             end
 
             function Cfg.FlipPage()
@@ -7295,13 +7295,13 @@
 
                 if OldItems then 
                     OldItems.Holder.Visible = false
-                    OldItems.Holder.Parent = Library.Other
-                    Library:Tween(OldItems.Title, {TextColor3 = themes.preset.unselected})
+                    OldItems.Holder.Parent = PDP_UILibrary.Other
+                    PDP_UILibrary:Tween(OldItems.Title, {TextColor3 = themes.preset.unselected})
                 end 
 
                 Items.Holder.Visible = true 
                 Items.Holder.Parent = self.Items.ESPHolder
-                Library:Tween(Items.Title, {TextColor3 = themes.preset.text_color})
+                PDP_UILibrary:Tween(Items.Title, {TextColor3 = themes.preset.text_color})
 
                 self.CurrentTab = Cfg.Items
             end
@@ -7352,7 +7352,7 @@
 
                 Items.Outline.MouseButton1Click:Connect(Cfg.FlipPage)
 
-                Library:Connection(RunService.RenderStepped, function()	
+                PDP_UILibrary:Connection(RunService.RenderStepped, function()	
                     local Pos, Size = Math:Solve(Cfg.VisualizedModel, Items.ViewportFrame, Items.Camera)
                     Items.Box.Position = Pos
                     Items.Box.Size = Size
@@ -7394,7 +7394,7 @@
                 end, Flag = Cfg.Name .. "_OUTLINE_CHAMS"})
             end
 
-            return setmetatable(Cfg, Library)
+            return setmetatable(Cfg, PDP_UILibrary)
         end
     -- 
 -- 
@@ -7511,7 +7511,7 @@
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
 
-                    Items.HolderGradient = Library:Create( "UIGradient" , {
+                    Items.HolderGradient = PDP_UILibrary:Create( "UIGradient" , {
                         Rotation = 0;
                         Name = "\0";
                         Color = rgbseq{rgbkey(0, rgb(255, 255, 255)), rgbkey(1, rgb(255, 255, 255))};
@@ -8670,4 +8670,4 @@
     Esp.Loop = RunService:BindToRenderStep("Run Loop", 400, Esp.Update)
 -- 
 
-return Library, Esp, MiscOptions, Options 
+return PDP_UILibrary, Esp, MiscOptions, Options 
