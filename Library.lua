@@ -24,8 +24,8 @@
 -- 
 
 -- Library init
-    getgenv().Library = {
-        Directory = "octo",
+    getgenv().PDP_UILibrary = {
+        Directory = "pdplus",
         Folders = {
             "/fonts",
             "/configs",
@@ -1899,7 +1899,7 @@
                         Parent = Items.Background;
                         TextColor3 = themes.preset.accent;
                         TextStrokeColor3 = rgb(255, 255, 255);
-                        Text = 'octohook.xyz <font color = "rgb(235, 235, 235)">@placeholder / UID @ / Developer / 00/00/0000 / 00:00:00 / 0fps / Oms</font>';
+                        Text = 'PD+ <font color = "rgb(235, 235, 235)">@placeholder / 00/00/0000 / 00:00:00 / 0fps / Oms</font>';
                         Name = "\0";
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BorderSizePixel = 0;
@@ -2017,7 +2017,7 @@
                     local Uid = 1
                     local Status = "Developer"
                     local Ping = math.floor(Stats.PerformanceStats.Ping:GetValue())
-                    Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ UID %s / %s / %s / %sfps / %sms</font>', Cfg.Name, Library:ConvertHex(themes.preset.text_color), Uid, Status, os.date("%x / %X"), Cfg.Fps, Ping))
+                    Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ %s / %s / %sfps / %sms</font>', Cfg.Name, Library:ConvertHex(themes.preset.text_color), os.date("%x / %X"), Cfg.Fps, Ping))
 
                     Cfg.Fps = 0
                 end 
@@ -4940,8 +4940,9 @@
                     Library.KeybindList.Items.Holder.Visible = bool 
                     Library.KeybindList.Items.List.Visible = bool 
                 end})
-                Section:Textbox({Name = "Custom Menu Name", Default = Window.Name, Callback = function(text)
-                    Window.Name = text
+                Section:Button({Name = "Unload", Callback = function()
+                    Library:Unload()
+                    getgenv().pd_plus:Unload()
                 end})
                 Section:Dropdown({Name = "Font", Options = FontIndexes, Callback = function(option)
                     for _,text in themes.utility.text_color.TextColor3 do 
