@@ -542,7 +542,7 @@
                     Items.Text = Library:Create( "TextLabel" , {
                         Parent = Items.Background;
                         FontFace = Fonts[themes.preset.font];
-                        Name = "\0";
+                        Name = "v.0.1";
                         TextColor3 = rgb(235, 235, 235);
                         TextStrokeColor3 = rgb(255, 255, 255);
                         Text = Cfg.Name;
