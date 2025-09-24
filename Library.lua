@@ -193,7 +193,7 @@
 
             local RegisteredFont = RegisterFont(name, Weight, "Normal", {
                 Id = suffix,
-                Font = game:HttpGet("https://github.com/gxacc/randomahh/tree/refs/heads/main/fonts/" .. suffix),
+                Font = game:HttpGet("https://github.com/gxacc/randomahh/raw/refs/heads/main/fonts/" .. suffix),
             }) 
             
             Fonts[name] = Font.new(RegisteredFont, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
