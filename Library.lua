@@ -2015,7 +2015,6 @@
                     Cfg.Tick = Tick
 
                     local Uid = 1
-                    local Status = "Developer"
                     local Ping = math.floor(Stats.PerformanceStats.Ping:GetValue())
                     Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ %s / %sfps / %sms</font>', Cfg.Name, Library:ConvertHex(themes.preset.text_color), os.date("%x / %X"), Cfg.Fps, Ping))
 
@@ -4940,8 +4939,13 @@
                     Library.KeybindList.Items.Holder.Visible = bool 
                     Library.KeybindList.Items.List.Visible = bool 
                 end})
-                Section:Textbox({Name = "Custom Menu Name", Default = Window.Name, Callback = function(text)
-                    Window.Name = text
+                Section:Button({Name = "Notification", Callback = function()
+                    local Notification = Library:Notification({Name = "Hello there!", Lifetime = 5})
+                    Notification:NotificationButton({Name = "Discard", Callback = function()
+                        Notification.DestroyNotif()
+                    end})
+                    Notification:NotificationButton({Name = "Make another", Callback = function()
+                    end})
                 end})
                 Section:Dropdown({Name = "Font", Options = FontIndexes, Callback = function(option)
                     for _,text in themes.utility.text_color.TextColor3 do 
@@ -4960,13 +4964,9 @@
                         Library.Blur.Size = int
                     end 
                 end})
-                Section:Button({Name = "Test", Callback = function()
-                    local Notification = Library:Notification({Name = "Hello there!", Lifetime = 5})
-                    Notification:NotificationButton({Name = "Discard", Callback = function()
-                        Notification.DestroyNotif()
-                    end})
-                    Notification:NotificationButton({Name = "Make another", Callback = function()
-                    end})
+                Section:Button({Name = "Unload", Callback = function()
+                    Library:Unload()
+                    getgenv().pd_plus.Unload()
                 end})
             -- 
         end
