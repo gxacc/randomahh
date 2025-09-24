@@ -2304,7 +2304,7 @@
                         TextColor3 = themes.preset.text_color;
                         Text = Cfg.Name;
                         Parent = Items.Background;
-                        Name = "\0";
+                        Name = "v.0.1";
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BorderSizePixel = 0;
                         BackgroundTransparency = 1;
