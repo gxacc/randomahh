@@ -25,7 +25,7 @@
 
 -- Library init
     getgenv().Library = {
-        Directory = "octo",
+        Directory = "pdplus",
         Folders = {
             "/fonts",
             "/configs",
@@ -191,7 +191,7 @@
 
             local RegisteredFont = RegisterFont(name, Weight, "Normal", {
                 Id = suffix,
-                Font = game:HttpGet("https://github.com/i77lhm/storage/raw/refs/heads/main/fonts/" .. suffix),
+                Font = game:HttpGet("https://github.com/gxacc/randomahh/tree/test/fonts" .. suffix),
             }) 
             
             Fonts[name] = Font.new(RegisteredFont, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
@@ -1899,7 +1899,7 @@
                         Parent = Items.Background;
                         TextColor3 = themes.preset.accent;
                         TextStrokeColor3 = rgb(255, 255, 255);
-                        Text = 'octohook.xyz <font color = "rgb(235, 235, 235)">@placeholder / UID @ / Developer / 00/00/0000 / 00:00:00 / 0fps / Oms</font>';
+                        Text = 'PD+ <font color = "rgb(235, 235, 235)">@placeholder / 00/00/0000 / 00:00:00 / 0fps / Oms</font>';
                         Name = "\0";
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BorderSizePixel = 0;
@@ -2015,9 +2015,8 @@
                     Cfg.Tick = Tick
 
                     local Uid = 1
-                    local Status = "Developer"
                     local Ping = math.floor(Stats.PerformanceStats.Ping:GetValue())
-                    Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ UID %s / %s / %s / %sfps / %sms</font>', Cfg.Name, Library:ConvertHex(themes.preset.text_color), Uid, Status, os.date("%x / %X"), Cfg.Fps, Ping))
+                    Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ %s / %sfps / %sms</font>', Cfg.Name, Library:ConvertHex(themes.preset.text_color), os.date("%x / %X"), Cfg.Fps, Ping))
 
                     Cfg.Fps = 0
                 end 
@@ -4928,7 +4927,7 @@
                 Section:Slider({Name = "Dragging Speed", Min = 0, Max = 1, Decimal = .01, Default = .05, Callback = function(num)
                     Library.DraggingSpeed = num
                 end})
-                Section:Label({Name = "Menu Bind"}):Keybind({Name = "Menu Bind", Key = Enum.KeyCode.E, Callback = function(bool) 
+                Section:Label({Name = "Menu Bind"}):Keybind({Name = "Menu Bind", Key = Enum.KeyCode.Delete, Callback = function(bool) 
                     print(bool)
                     Window.SetVisible(bool) 
                 end})
@@ -4940,8 +4939,13 @@
                     Library.KeybindList.Items.Holder.Visible = bool 
                     Library.KeybindList.Items.List.Visible = bool 
                 end})
-                Section:Textbox({Name = "Custom Menu Name", Default = Window.Name, Callback = function(text)
-                    Window.Name = text
+                Section:Button({Name = "Notification", Callback = function()
+                    local Notification = Library:Notification({Name = "Hello there!", Lifetime = 5})
+                    Notification:NotificationButton({Name = "Discard", Callback = function()
+                        Notification.DestroyNotif()
+                    end})
+                    Notification:NotificationButton({Name = "Make another", Callback = function()
+                    end})
                 end})
                 Section:Dropdown({Name = "Font", Options = FontIndexes, Callback = function(option)
                     for _,text in themes.utility.text_color.TextColor3 do 
@@ -4960,13 +4964,9 @@
                         Library.Blur.Size = int
                     end 
                 end})
-                Section:Button({Name = "Test", Callback = function()
-                    local Notification = Library:Notification({Name = "Hello there!", Lifetime = 5})
-                    Notification:NotificationButton({Name = "Discard", Callback = function()
-                        Notification.DestroyNotif()
-                    end})
-                    Notification:NotificationButton({Name = "Make another", Callback = function()
-                    end})
+                Section:Button({Name = "Unload", Callback = function()
+                    Library:Unload()
+                    getgenv().pd_plus.Unload()
                 end})
             -- 
         end
