@@ -2017,7 +2017,7 @@
                     local Uid = 1
                     local Status = "Developer"
                     local Ping = math.floor(Stats.PerformanceStats.Ping:GetValue())
-                    Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ %s / %s / %sfps / %sms</font>', Cfg.Name, Library:ConvertHex(themes.preset.text_color), os.date("%x / %X"), Cfg.Fps, Ping))
+                    Cfg.ChangeWatermarkTitle(string.format('%s <font color = "%s">/ %s / %sfps / %sms</font>', Cfg.Name, Library:ConvertHex(themes.preset.text_color), os.date("%x / %X"), Cfg.Fps, Ping))
 
                     Cfg.Fps = 0
                 end 
