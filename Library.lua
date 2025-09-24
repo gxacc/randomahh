@@ -542,7 +542,7 @@
                     Items.Text = Library:Create( "TextLabel" , {
                         Parent = Items.Background;
                         FontFace = Fonts[themes.preset.font];
-                        Name = "v.0.1";
+                        Name = "\0";
                         TextColor3 = rgb(235, 235, 235);
                         TextStrokeColor3 = rgb(255, 255, 255);
                         Text = Cfg.Name;
@@ -1809,7 +1809,7 @@
                         TextColor3 = rgb(235, 235, 235);
                         TextStrokeColor3 = rgb(255, 255, 255);
                         Parent = Items.InnerOutline;
-                        Name = "\0";
+                        Name = "v0.0.1";
                         AnchorPoint = vec2(0, 1);
                         BorderSizePixel = 0;
                         BackgroundTransparency = 1;
@@ -2304,7 +2304,7 @@
                         TextColor3 = themes.preset.text_color;
                         Text = Cfg.Name;
                         Parent = Items.Background;
-                        Name = "v.0.1";
+                        Name = "\0";
                         AutomaticSize = Enum.AutomaticSize.XY;
                         BorderSizePixel = 0;
                         BackgroundTransparency = 1;
@@ -3905,7 +3905,7 @@
 
         function Library:Label(properties)
             local Cfg = {
-                Name = properties.Name or "Test",
+                Name = properties.Name or "Label",
 
                 -- Other
                 Items = {};
