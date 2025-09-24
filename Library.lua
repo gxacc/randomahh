@@ -3905,7 +3905,7 @@
 
         function Library:Label(properties)
             local Cfg = {
-                Name = properties.Name or "Label",
+                Name = properties.Name or "Test",
 
                 -- Other
                 Items = {};
