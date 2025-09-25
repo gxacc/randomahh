@@ -1498,7 +1498,7 @@
                     Parent = Items.InlineMenu;
                     TextColor3 = themes.preset.text_color;
                     BorderColor3 = rgb(0, 0, 0);
-                    Text = "Test";
+                    Text = Cfg.Name;
                     Name = "\0";
                     AutomaticSize = Enum.AutomaticSize.XY;
                     Position = dim2(0, 0, 0, 3);
@@ -4853,82 +4853,84 @@
                 end})
 
                 local Section = Column:Section({Name = "Server"})
-                Section:Button({Name = "Copy JobId", Callback = function()
-                    setclipboard(game.JobId)
-                end})
-                Section:Button({Name = "Copy GameID", Callback = function()
-                    setclipboard(game.GameId)
-                end})
+                -- Section:Button({Name = "Copy JobId", Callback = function()
+                --     setclipboard(game.JobId)
+                -- end})
+                -- Section:Button({Name = "Copy GameID", Callback = function()
+                --     setclipboard(game.GameId)
+                -- end})
                 Section:Button({Name = "Copy Join Script", Callback = function()
                     setclipboard('game:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '", game.Players.LocalPlayer)')
                 end})
                 Section:Button({Name = "Rejoin", Callback = function()
                     game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
                 end})
-                Section:Button({Name = "Join New Server", Callback = function()
-                    local apiRequest = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"))
-                    local data = apiRequest.data[math.random(1, #apiRequest.data)]
+                -- Section:Button({Name = "Join New Server", Callback = function()
+                --     local apiRequest = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"))
+                --     local data = apiRequest.data[math.random(1, #apiRequest.data)]
 
-                    if data.playing <= Flags["MaxPlayers"] then 
-                        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, data.id)
-                    end 
-                end})
-                Section:Slider({Name = "Max Players", Min = 0, Max = 40, Default = 10, Decimal = 1, Flag = "MaxPlayers"})
+                --     if data.playing <= Flags["MaxPlayers"] then 
+                --         game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, data.id)
+                --     end 
+                -- end})
+                -- Section:Slider({Name = "Max Players", Min = 0, Max = 40, Default = 10, Decimal = 1, Flag = "MaxPlayers"})
 
             -- 
 
             -- Theming 
                 local Column = Tab:Column({})
                 local Section = Column:Section({Name = "Other"})
-                Section:Label({Name = "Inline"}):Colorpicker({Color = themes.preset.inline, Callback = function(color, alpha)
-                    Library:RefreshTheme("inline", color)
-                end})
-                Section:Label({Name = "Outline"}):Colorpicker({Color = themes.preset.outline, Callback = function(color, alpha)
-                    Library:RefreshTheme("outline", color)
-                end})
-                Section:Label({Name = "Accent"}):Colorpicker({Color = themes.preset.accent, Callback = function(color, alpha)
-                    Library:RefreshTheme("accent", color)
-                end})
-                local Label = Section:Label({Name = "Background"})
-                Label:Colorpicker({Color = themes.preset.background, Callback = function(color, alpha)
-                    Library:RefreshTheme("background", color)
-                end})
-                Label:Colorpicker({Color = themes.preset.misc_1, Callback = function(color, alpha)
-                    Library:RefreshTheme("misc_1", color)
-                end})
-                Section:Label({Name = "Text Color"}):Colorpicker({Color = themes.preset.text_color, Callback = function(color, alpha)
-                    Library:RefreshTheme("text_color", color)
-                end})
-                Section:Label({Name = "Tooltip"}):Colorpicker({Color = themes.preset.tooltip, Callback = function(color, alpha)
-                    Library:RefreshTheme("tooltip", color)
-                end})
-                Section:Label({Name = "Unselected"}):Colorpicker({Color = themes.preset.unselected, Callback = function(color, alpha)
-                    Library:RefreshTheme("unselected", color)
-                end})
-                local Label = Section:Label({Name = "Element Gradients"})
-                Label:Colorpicker({Color = themes.preset.misc_1, Callback = function(color, alpha)
-                    Library:RefreshTheme("misc_1", color)
 
-                    for _,seq in themes.gradients.elements do
-                        seq.Color = rgbseq{rgbkey(0, themes.preset.misc_1), rgbkey(1, themes.preset.misc_2)}
-                    end
-                end, Flag = "Element Gradient 1"})
-                Label:Colorpicker({Color = themes.preset.misc_2, Callback = function(color, alpha)
-                    themes.preset.misc_2 = color 
+                -- Section:Label({Name = "Inline"}):Colorpicker({Color = themes.preset.inline, Callback = function(color, alpha)
+                --     Library:RefreshTheme("inline", color)
+                -- end})
+                -- Section:Label({Name = "Outline"}):Colorpicker({Color = themes.preset.outline, Callback = function(color, alpha)
+                --     Library:RefreshTheme("outline", color)
+                -- end})
+                -- Section:Label({Name = "Accent"}):Colorpicker({Color = themes.preset.accent, Callback = function(color, alpha)
+                --     Library:RefreshTheme("accent", color)
+                -- end})
+                -- local Label = Section:Label({Name = "Background"})
+                -- Label:Colorpicker({Color = themes.preset.background, Callback = function(color, alpha)
+                --     Library:RefreshTheme("background", color)
+                -- end})
+                -- Label:Colorpicker({Color = themes.preset.misc_1, Callback = function(color, alpha)
+                --     Library:RefreshTheme("misc_1", color)
+                -- end})
+                -- Section:Label({Name = "Text Color"}):Colorpicker({Color = themes.preset.text_color, Callback = function(color, alpha)
+                --     Library:RefreshTheme("text_color", color)
+                -- end})
+                -- Section:Label({Name = "Tooltip"}):Colorpicker({Color = themes.preset.tooltip, Callback = function(color, alpha)
+                --     Library:RefreshTheme("tooltip", color)
+                -- end})
+                -- Section:Label({Name = "Unselected"}):Colorpicker({Color = themes.preset.unselected, Callback = function(color, alpha)
+                --     Library:RefreshTheme("unselected", color)
+                -- end})
+                -- local Label = Section:Label({Name = "Element Gradients"})
+                -- Label:Colorpicker({Color = themes.preset.misc_1, Callback = function(color, alpha)
+                --     Library:RefreshTheme("misc_1", color)
 
-                    for _,seq in themes.gradients.elements do
-                        seq.Color = rgbseq{rgbkey(0, themes.preset.misc_1), rgbkey(1, themes.preset.misc_2)}
-                    end
-                end, Flag = "Element Gradient 2"})
-                Section:Slider({Name = "Tween Speed", Min = 0, Max = 3, Decimal = Library.DraggingSpeed, Default = .3, Callback = function(num)
-                    Library.TweeningSpeed = num
-                end})
-                Section:Dropdown({Name = "Tweening Style", Options = {"Linear", "Sine", "Back", "Quad", "Quart", "Quint", "Bounce", "Elastic", "Exponential", "Circular", "Cubic"}, Flag = "LibraryEasingStyle", Default = "Quint", Callback = function(Option)
-                    Library.EasingStyle = Enum.EasingStyle[Option]
-                end});
-                Section:Slider({Name = "Dragging Speed", Min = 0, Max = 1, Decimal = .01, Default = .05, Callback = function(num)
-                    Library.DraggingSpeed = num
-                end})
+                --     for _,seq in themes.gradients.elements do
+                --         seq.Color = rgbseq{rgbkey(0, themes.preset.misc_1), rgbkey(1, themes.preset.misc_2)}
+                --     end
+                -- end, Flag = "Element Gradient 1"})
+                -- Label:Colorpicker({Color = themes.preset.misc_2, Callback = function(color, alpha)
+                --     themes.preset.misc_2 = color 
+
+                --     for _,seq in themes.gradients.elements do
+                --         seq.Color = rgbseq{rgbkey(0, themes.preset.misc_1), rgbkey(1, themes.preset.misc_2)}
+                --     end
+                -- end, Flag = "Element Gradient 2"})
+                -- Section:Slider({Name = "Tween Speed", Min = 0, Max = 3, Decimal = Library.DraggingSpeed, Default = .3, Callback = function(num)
+                --     Library.TweeningSpeed = num
+                -- end})
+                -- Section:Dropdown({Name = "Tweening Style", Options = {"Linear", "Sine", "Back", "Quad", "Quart", "Quint", "Bounce", "Elastic", "Exponential", "Circular", "Cubic"}, Flag = "LibraryEasingStyle", Default = "Quint", Callback = function(Option)
+                --     Library.EasingStyle = Enum.EasingStyle[Option]
+                -- end});
+                -- Section:Slider({Name = "Dragging Speed", Min = 0, Max = 1, Decimal = .01, Default = .05, Callback = function(num)
+                --     Library.DraggingSpeed = num
+                -- end})
+
                 Section:Label({Name = "Menu Bind"}):Keybind({Name = "Menu Bind", Key = Enum.KeyCode.Delete, Callback = function(bool) 
                     print(bool)
                     Window.SetVisible(bool) 
